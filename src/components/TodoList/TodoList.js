@@ -6,19 +6,6 @@ function handleClick() {
 }
 
 class TodoList extends React.Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      list: [
-        { id: 1, name: 'Fumer des cannes', active: true },
-        { id: 2, name: 'Coder cette shit', active: true },
-        { id: 3, name: 'Nager avec des baleines', active: true },
-        { id: 4, name: 'Rouler des cannes pour demain', active: true }
-      ],
-      newTaskName: "",
-    };
-    this.handleClick = handleClick.bind(this)
-  }
 
   // state = {
   //   list: [
