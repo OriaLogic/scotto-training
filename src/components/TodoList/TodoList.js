@@ -1,10 +1,6 @@
 import React from 'react';
 import './TodoList.css';
 
-function handleClick() {
-  console.log(this)
-}
-
 class TodoList extends React.Component {
 
   state = {
@@ -15,10 +11,6 @@ class TodoList extends React.Component {
       { id: 4, name: 'Rouler des cannes pour demain', active: true, editing: false }
     ],
     newTaskName: "",
-  }
-
-  handleClick = () => {
-    console.log(this)
   }
 
   deleteTodo(itemToDeleteId) {
