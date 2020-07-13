@@ -9,10 +9,10 @@ class TodoList extends React.Component {
 
   state = {
     list: [
-      { id: 1, name: 'Fumer des cannes', active: true },
-      { id: 2, name: 'Coder cette shit', active: true },
-      { id: 3, name: 'Nager avec des baleines', active: true },
-      { id: 4, name: 'Rouler des cannes pour demain', active: true }
+      { id: 1, name: 'Fumer des cannes', active: true, editing: false },
+      { id: 2, name: 'Coder cette shit', active: true, editing: false },
+      { id: 3, name: 'Nager avec des baleines', active: true, editing: false },
+      { id: 4, name: 'Rouler des cannes pour demain', active: true, editing: false }
     ],
     newTaskName: "",
   }
