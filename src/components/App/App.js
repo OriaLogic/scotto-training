@@ -6,6 +6,8 @@ import SearchBar from '../SearchBar/SearchBar'
 import Yelp from '../../util/Yelp'
 import TodoList from '../TodoList/TodoList'
 
+// I added this comment
+
 class App extends React.Component {
 	constructor(props) {
 		super(props);
