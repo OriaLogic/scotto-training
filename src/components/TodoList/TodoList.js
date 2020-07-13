@@ -7,19 +7,19 @@ function handleClick() {
 
 class TodoList extends React.Component {
 
-  // state = {
-  //   list: [
-  //     { id: 1, name: 'Fumer des cannes', active: true },
-  //     { id: 2, name: 'Coder cette shit', active: true },
-  //     { id: 3, name: 'Nager avec des baleines', active: true },
-  //     { id: 4, name: 'Rouler des cannes pour demain', active: true }
-  //   ],
-  //   newTaskName: "",
-  // // }
-  //
-  // handleClick = () => {
-  //   console.log(this)
-  // }
+  state = {
+    list: [
+      { id: 1, name: 'Fumer des cannes', active: true },
+      { id: 2, name: 'Coder cette shit', active: true },
+      { id: 3, name: 'Nager avec des baleines', active: true },
+      { id: 4, name: 'Rouler des cannes pour demain', active: true }
+    ],
+    newTaskName: "",
+  }
+
+  handleClick = () => {
+    console.log(this)
+  }
 
   deleteTodo(itemToDeleteId) {
     const newList = this.state.list.filter((item) => item.id !== itemToDeleteId)
@@ -53,8 +53,6 @@ class TodoList extends React.Component {
   }
 
   render() {
-    handleClick();
-    this.handleClick();
     return (
       <div style={{
         height: 500
