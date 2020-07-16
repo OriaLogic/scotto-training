@@ -4,7 +4,7 @@ import './TodoList.css';
 class TodoList extends React.Component {
 
   state = {
-    list: [ ],
+    list: [],
     newTaskName: "",
     editTaskName: ""
   }
