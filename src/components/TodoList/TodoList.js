@@ -37,11 +37,13 @@ class TodoList extends React.Component {
     const task = list[taskIndex]
 
     this.setState({list: [{
+      ...list.slice(0, taskIndex),
       id: task.id,
       name: task.name,
       active: task.active,
       editing: !task.editing
-    }
+    },
+    ...list.slice(taskIndex + 1, list.length)
     ]})
 
   }
@@ -80,11 +82,11 @@ class TodoList extends React.Component {
                   {item.name}
                 </span>
                 <button onClick={() => this.deleteTodo(item.id)}>delete</button>
-                <button
-                  style={{ display: item.editing ? 'none' : 'inline-block' }}
-                  onClick={() => this.editTodo(item.id)}>edit</button>
+                <span>
+                <button>edit</button>
                   <input/>
                   <button>Ok</button>
+                </span>
               </li>
             )
           })}
