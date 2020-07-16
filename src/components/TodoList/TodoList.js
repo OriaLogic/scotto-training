@@ -95,11 +95,11 @@ class TodoList extends React.Component {
                   {item.name}
                 </span>
                 <button onClick={() => this.deleteTodo(item.id)}>delete</button>
-                  <button onClick={() => this.editTask(item.id)}>edit</button>
-                  <span style={{ display: item.editing ? 'inline' : 'none' }}>
+                <button onClick={() => this.editTask(item.id)}>edit</button>
+                <span style={{ display: item.editing ? 'inline' : 'none' }}>
                   <input value={this.state.editTaskName} onChange={e => this.setState({ editTaskName: e.target.value })} />
                   <button onClick={() => this.updateTask(item.id)}>Ok</button>
-                  </span>
+                </span>
               </li>
             )
           })}
