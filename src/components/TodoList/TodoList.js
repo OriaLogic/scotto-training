@@ -48,7 +48,7 @@ class TodoList extends React.Component {
     ]})
   }
 
-  editTask(taskId) {
+  updateTask(taskId) {
     const { list } = this.state;
     const taskIndex = list.findIndex(task => task.id == taskId)
     const task = list[taskIndex]
@@ -100,7 +100,7 @@ class TodoList extends React.Component {
                   <button onClick={() => this.displayEdit(item.id)}>edit</button>
                   <span style={{ display: item.editing ? 'inline' : 'none' }}>
                   <input value={this.state.editTaskName} onChange={e => this.setState({ editTaskName: e.target.value })} />
-                  <button onClick={() => this.editTask(item.id)}>Ok</button>
+                  <button onClick={() => this.updateTask(item.id)}>Ok</button>
                   </span>
               </li>
             )
