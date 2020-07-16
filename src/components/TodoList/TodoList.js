@@ -6,6 +6,7 @@ class TodoList extends React.Component {
   state = {
     list: [ ],
     newTaskName: "",
+    editTaskName: ""
   }
 
   deleteTodo(itemToDeleteId) {
@@ -27,7 +28,8 @@ class TodoList extends React.Component {
         ...this.state.list,
         { id: this.state.list[this.state.list.length - 1].id + 1, name: this.state.newTaskName, active: true, editing: false}
       ],
-      newTaskName: ""
+      newTaskName: "",
+      editTaskName: ""
     })
   }
 
@@ -85,7 +87,7 @@ class TodoList extends React.Component {
                 <button onClick={() => this.deleteTodo(item.id)}>delete</button>
                   <button onClick={() => this.editTodo(item.id)}>edit</button>
                   <span style={{ display: item.editing ? 'inline' : 'none' }}>
-                  <input/>
+                  <input value={this.state.editTaskName} onChange={e => this.setState({ editTaskName: e.target.value })} />
                   <button>Ok</button>
                   </span>
               </li>
