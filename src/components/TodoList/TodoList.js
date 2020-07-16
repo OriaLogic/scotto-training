@@ -4,12 +4,7 @@ import './TodoList.css';
 class TodoList extends React.Component {
 
   state = {
-    list: [
-      { id: 1, name: 'Fumer des cannes', active: true, editing: false },
-      { id: 2, name: 'Coder cette shit', active: true, editing: false },
-      { id: 3, name: 'Nager avec des baleines', active: true, editing: false },
-      { id: 4, name: 'Rouler des cannes pour demain', active: true, editing: false }
-    ],
+    list: [ ],
     newTaskName: "",
   }
 
@@ -19,10 +14,18 @@ class TodoList extends React.Component {
   }
 
   createNewTask() {
+    if (this.state.list.length === 0) {
+      this.setState({
+        list: [{ id: 1, name: this.state.newTaskName, active: true, editing: false }],
+        newTaskName: ""
+      })
+      return;
+    }
+
     this.setState({
       list: [
         ...this.state.list,
-        { id: this.state.list[this.state.list.length - 1].id + 1, name: this.state.newTaskName, active: true }
+        { id: this.state.list[this.state.list.length - 1].id + 1, name: this.state.newTaskName, active: true, editing: false}
       ],
       newTaskName: ""
     })
