@@ -1,115 +1,138 @@
-import React from 'react';
-import './TodoList.css';
+import React from "react";
+import { updateObjectInList } from "../../util/arrays";
+import "./TodoList.css";
+
+let currentTaskId = 0;
+const getNextTaskId = () => {
+  currentTaskId += 1;
+  return currentTaskId;
+};
 
 class TodoList extends React.Component {
-
   state = {
-    list: [ ],
+    list: [],
     newTaskName: "",
-    editTaskName: ""
-  }
-
-  deleteTodo(itemToDeleteId) {
-    const newList = this.state.list.filter((item) => item.id !== itemToDeleteId)
-    this.setState({ list: newList })
-  }
+    editTaskName: "",
+    editedTaskId: null
+  };
 
   createNewTask() {
-    if (this.state.list.length === 0) {
-      this.setState({
-        list: [{ id: 1, name: this.state.newTaskName, active: true, editing: false }],
-        newTaskName: ""
-      })
-      return;
-    }
+    const { list, newTaskName } = this.state;
+
+    if (!newTaskName) return;
+
+    const newTask = {
+      id: getNextTaskId(),
+      name: newTaskName,
+      active: true
+    };
 
     this.setState({
-      list: [
-        ...this.state.list,
-        { id: this.state.list[this.state.list.length - 1].id + 1, name: this.state.newTaskName, active: true, editing: false}
-      ],
-      newTaskName: "",
+      list: [...list, newTask],
+      newTaskName: ""
+    });
+  }
+
+  deleteTask(taskToDeleteId) {
+    const newList = this.state.list.filter(task => task.id !== taskToDeleteId);
+    this.setState({ list: newList });
+  }
+
+  editTask(task) {
+    this.setState({
+      editedTaskId: task.id,
+      editTaskName: task.name
+    });
+  }
+
+  cancelEditTask(taskId) {
+    this.setState({
+      editedTaskId: null,
       editTaskName: ""
-    })
+    });
   }
 
-  displayEdit(taskId) {
-    const { list } = this.state;
-    const taskIndex = list.findIndex(task => task.id == taskId)
-    const task = list[taskIndex]
-
-    this.setState({ list: [
-      ...list.slice(0, taskIndex),
-    {
-      id: task.id,
-      name: task.name,
-      active: task.active,
-      editing: !task.editing
-    },
-    ...list.slice(taskIndex + 1, list.length)
-    ]})
+  updateTask(taskId) {
+    const newList = updateObjectInList(this.state.list, taskId, {
+      name: this.state.editTaskName
+    });
+    this.setState({
+      list: newList,
+      editTaskName: "",
+      editedTaskId: null
+    });
   }
 
-  editTask(taskId) {
-    const { list } = this.state;
-    const taskIndex = list.findIndex(task => task.id == taskId)
-    const task = list[taskIndex]
-
-    this.setState({ list: [
-      ...list.slice(0, taskIndex),
-    { id: this.state.list[this.state.list.length - 1].id + 1, name: this.state.editTaskName, active: true, editing: false },
-    ...list.slice(taskIndex + 1, list.length)
-  ],
-  editTaskName: ""
-})
-  }
-
-  toggleTask(taskId) {
-    const { list } = this.state;
-    const taskIndex = list.findIndex(task => task.id == taskId)
-    const task = list[taskIndex]
-
-    this.setState({ list: [
-      ...list.slice(0, taskIndex),
-      {
-        id: task.id,
-        name: task.name,
-        active: !task.active,
-        editing: task.editing
-      },
-      ...list.slice(taskIndex + 1, list.length)
-    ]})
+  toggleTaskActivation(task) {
+    const newList = updateObjectInList(this.state.list, task.id, {
+      active: !task.active
+    });
+    this.setState({ list: newList });
   }
 
   render() {
+    const { list, editedTaskId, editTaskName } = this.state;
+
     return (
-      <div style={{
-        height: 500
-      }}>
-        <h2>To Do List ({this.state.list.length}):</h2>
-        <input value={this.state.newTaskName} onChange={e => this.setState({ newTaskName: e.target.value })}/>
-        <button onClick={() => this.createNewTask()}>Submit</button>
+      <div style={{ marginBottom: 500 }}>
+        <h2>To Do List ({list.filter(task => task.active).length}):</h2>
+
+        <form
+          onSubmit={e => {
+            e.preventDefault();
+            this.createNewTask();
+          }}
+        >
+          <input
+            value={this.state.newTaskName}
+            onChange={e => this.setState({ newTaskName: e.target.value })}
+          />
+          <button type="submit">Submit</button>
+        </form>
+
         <ul>
-          {this.state.list.map((item) => {
-            return (
-              <li>
-                <span
-                  style={{ textDecoration: item.active ? 'none' : 'line-through' }}
-                  onClick={() => this.toggleTask(item.id)}>
-                  {item.name}
-                </span>
-                <button onClick={() => this.deleteTodo(item.id)}>delete</button>
-                  <button onClick={() => this.displayEdit(item.id)}>edit</button>
-                  <span style={{ display: item.editing ? 'inline' : 'none' }}>
-                  <input value={this.state.editTaskName} onChange={e => this.setState({ editTaskName: e.target.value })} />
-                  <button onClick={() => this.editTask(item.id)}>Ok</button>
+          {this.state.list.map(task => (
+            <li key={task.id}>
+              {task.id === editedTaskId ? (
+                <form
+                  onSubmit={e => {
+                    e.preventDefault();
+                    this.updateTask(task.id);
+                  }}
+                >
+                  <input
+                    style={{ margin: 0 }}
+                    value={editTaskName}
+                    onChange={e =>
+                      this.setState({ editTaskName: e.target.value })
+                    }
+                  />
+                  <button onClick={() => this.cancelEditTask(task.id)}>
+                    Cancel
+                  </button>
+                  <button type="submit">Save</button>
+                </form>
+              ) : (
+                <div>
+                  <span
+                    style={{
+                      textDecoration: task.active ? "none" : "line-through"
+                    }}
+                    onClick={() => this.toggleTaskActivation(task)}
+                  >
+                    {task.name}
                   </span>
-              </li>
-            )
-          })}
+                  <button onClick={() => this.editTask(task)}>edit</button>
+                  <button onClick={() => this.deleteTask(task.id)}>
+                    delete
+                  </button>
+                </div>
+              )}
+            </li>
+          ))}
         </ul>
       </div>
-    )
+    );
   }
 }
 
