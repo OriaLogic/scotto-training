@@ -55,11 +55,14 @@ class TodoList extends React.Component {
 
     this.setState({ list: [
       ...list.slice(0, taskIndex),
-    { id: this.state.list[this.state.list.length - 1].id + 1, name: this.state.editTaskName, active: true, editing: false },
-    ...list.slice(taskIndex + 1, list.length)
+    {
+      ...task,
+      name: this.state.editTaskName
+    },
+      ...list.slice(taskIndex + 1, list.length)
   ],
-  editTaskName: ""
-})
+      editTaskName: ""
+    })
   }
 
   toggleTask(taskId) {
