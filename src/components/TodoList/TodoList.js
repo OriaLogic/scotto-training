@@ -31,6 +31,21 @@ class TodoList extends React.Component {
     })
   }
 
+  editTodo(taskId) {
+    const { list } = this.state;
+    const taskIndex = list.findIndex(task => task.id == taskId)
+    const task = list[taskIndex]
+
+    this.setState({list: [{
+      id: task.id,
+      name: task.name,
+      active: task.active,
+      editing: !task.editing
+    }
+    ]})
+
+  }
+
   toggleTask(taskId) {
     const { list } = this.state;
     const taskIndex = list.findIndex(task => task.id == taskId)
@@ -65,7 +80,9 @@ class TodoList extends React.Component {
                   {item.name}
                 </span>
                 <button onClick={() => this.deleteTodo(item.id)}>delete</button>
-                <button>edit</button>
+                <button
+                  style={{ display: item.editing ? 'none' : 'inline-block' }}
+                  onClick={() => this.editTodo(item.id)}>edit</button>
                   <input/>
                   <button>Ok</button>
               </li>
