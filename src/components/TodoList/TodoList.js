@@ -83,10 +83,8 @@ class TodoList extends React.Component {
                 </span>
                 <button onClick={() => this.deleteTodo(item.id)}>delete</button>
                 <button onClick={() => this.editTodo(item.id)}>edit</button>
-                <span style={{ display: item.editing ? 'none' : 'inline-block' }}>
-                  <input/>
-                  <button>Ok</button>
-                </span>
+                  <input style={{ display: item.editing ? 'inline' : 'none' }}/>
+                  <button style={{ display: item.editing ? 'inline' : 'none' }}>Ok</button>
               </li>
             )
           })}
