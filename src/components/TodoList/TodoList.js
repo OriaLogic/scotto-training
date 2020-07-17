@@ -43,7 +43,9 @@ class TodoList extends React.Component {
         editing: !task.editing
       },
       ...list.slice(taskIndex + 1, list.length)
-    ]})
+    ],
+      editTaskName: task.name
+  })
   }
 
   updateTask(taskId) {
