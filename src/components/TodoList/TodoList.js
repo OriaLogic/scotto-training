@@ -5,7 +5,9 @@ class TodoList extends React.Component {
 
   state = {
     list: [],
-    newTaskName: ""
+    newTaskName: "",
+    editTaskName: "",
+    editingTaskId: null
   }
 
   deleteTodo(itemToDeleteId) {
@@ -16,7 +18,7 @@ class TodoList extends React.Component {
   createNewTask() {
     if (this.state.list.length === 0) {
       this.setState({
-        list: [{ id: 1, name: this.state.newTaskName, active: true, editing: false }],
+        list: [{ id: 1, name: this.state.newTaskName, active: true }],
         newTaskName: ""
       })
       return;
@@ -25,27 +27,17 @@ class TodoList extends React.Component {
     this.setState({
       list: [
         ...this.state.list,
-        { id: this.state.list[this.state.list.length - 1].id + 1, name: this.state.newTaskName, active: true, editing: false}
+        { id: this.state.list[this.state.list.length - 1].id + 1, name: this.state.newTaskName, active: true }
       ],
       newTaskName: ""
     })
   }
 
-  editTask (taskId) {
-    const { list } = this.state;
-    const taskIndex = list.findIndex(task => task.id == taskId)
-    const task = list[taskIndex]
-
-    this.setState({ list: [
-      ...list.slice(0, taskIndex),
-      {
-        ...task,
-        editing: !task.editing
-      },
-      ...list.slice(taskIndex + 1, list.length)
-    ],
+  editTask (task) {
+    this.setState({
+      editingTaskId: task.id,
       editTaskName: task.name
-  })
+    })
   }
 
   updateTask(taskId) {
@@ -57,11 +49,11 @@ class TodoList extends React.Component {
       ...list.slice(0, taskIndex),
     {
       ...task,
-      name: this.state.editTaskName,
-      editing: false
+      name: this.state.editTaskName
     },
       ...list.slice(taskIndex + 1, list.length)
-  ]
+  ],
+    editingTaskId: null
     })
   }
 
@@ -98,8 +90,8 @@ class TodoList extends React.Component {
                   {item.name}
                 </span>
                 <button onClick={() => this.deleteTodo(item.id)}>delete</button>
-                <button onClick={() => this.editTask(item.id)}>edit</button>
-                <span style={{ display: item.editing ? 'inline' : 'none' }}>
+                <button onClick={() => this.editTask(item)}>edit</button>
+                <span style={{ display: this.state.editingTaskId === item.id ? 'inline' : 'none' }}>
                   <input value={this.state.editTaskName} onChange={e => this.setState({ editTaskName: e.target.value })} />
                   <button onClick={() => this.updateTask(item.id)}>Ok</button>
                 </span>
