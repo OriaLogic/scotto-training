@@ -5,8 +5,7 @@ class TodoList extends React.Component {
 
   state = {
     list: [],
-    newTaskName: "",
-    editTaskName: ""
+    newTaskName: ""
   }
 
   deleteTodo(itemToDeleteId) {
@@ -28,8 +27,7 @@ class TodoList extends React.Component {
         ...this.state.list,
         { id: this.state.list[this.state.list.length - 1].id + 1, name: this.state.newTaskName, active: true, editing: false}
       ],
-      newTaskName: "",
-      editTaskName: ""
+      newTaskName: ""
     })
   }
 
@@ -60,8 +58,7 @@ class TodoList extends React.Component {
       name: this.state.editTaskName
     },
       ...list.slice(taskIndex + 1, list.length)
-  ],
-      editTaskName: ""
+  ]
     })
   }
 
