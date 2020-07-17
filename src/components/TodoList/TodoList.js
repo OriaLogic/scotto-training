@@ -40,36 +40,30 @@ class TodoList extends React.Component {
     })
   }
 
-  updateTask(taskId) {
+  updateTaskInList(taskId, taskUpdateObject) {
     const { list } = this.state;
     const taskIndex = list.findIndex(task => task.id == taskId)
     const task = list[taskIndex]
 
-    this.setState({ list: [
+    return [
       ...list.slice(0, taskIndex),
-    {
-      ...task,
-      name: this.state.editTaskName
-    },
+      { ...task, ...taskUpdateObject },
       ...list.slice(taskIndex + 1, list.length)
-  ],
-    editingTaskId: null
+    ]
+  }
+
+  updateTask(taskId) {
+    this.setState({
+      list: this.updateTaskInList(taskId, { name: this.state.editTaskName }),
+      editingTaskId: null
     })
   }
 
-  toggleTask(taskId) {
-    const { list } = this.state;
-    const taskIndex = list.findIndex(task => task.id == taskId)
-    const task = list[taskIndex]
-
-    this.setState({ list: [
-      ...list.slice(0, taskIndex),
-      {
-        ...task,
-        active: !task.active
-      },
-      ...list.slice(taskIndex + 1, list.length)
-    ]})
+  toggleTask(task) {
+    this.setState({
+      list: this.updateTaskInList(task.id, { active: !task.active }),
+      editingTaskId: null
+    })
   }
 
   render() {
@@ -88,7 +82,7 @@ class TodoList extends React.Component {
                   <span>
                     <span
                       style={{ textDecoration: task.active ? 'none' : 'line-through' }}
-                      onClick={() => this.toggleTask(task.id)}>
+                      onClick={() => this.toggleTask(task)}>
                       {task.name}
                     </span>
                     <button onClick={() => this.deleteTodo(task.id)}>delete</button>
