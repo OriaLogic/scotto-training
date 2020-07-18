@@ -1,0 +1,17 @@
+// Import a Google Font
+@import url('https://fonts.googleapis.com/css?family=Nunito:400,700')
+
+// Variable override here
+$family-sans-serif: "Nunito", sans-serif
+
+// Import the rest of Bulma
+@import "../../node_modules/bulma/bulma.sass"
+
+.main-title
+  @extend .title.is-2
+  background-color: $primary
+  color: $white
+  text-align: center
+  margin-bottom: 50px
+
+@import "./TodoList.sass"
