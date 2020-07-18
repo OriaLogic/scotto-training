@@ -1,32 +1,29 @@
 import React from 'react';
 import './TodoList.css';
 
-function handleClick() {
-  console.log(this)
-}
-
 class TodoList extends React.Component {
 
-  // state = {
-  //   list: [
-  //     { id: 1, name: 'Fumer des cannes', active: true },
-  //     { id: 2, name: 'Coder cette shit', active: true },
-  //     { id: 3, name: 'Nager avec des baleines', active: true },
-  //     { id: 4, name: 'Rouler des cannes pour demain', active: true }
-  //   ],
-  //   newTaskName: "",
-  // // }
-  //
-  // handleClick = () => {
-  //   console.log(this)
-  // }
+  state = {
+    list: [],
+    newTaskName: "",
+    editTaskName: "",
+    editingTaskId: null
+  }
 
-  deleteTodo(itemToDeleteId) {
-    const newList = this.state.list.filter((item) => item.id !== itemToDeleteId)
+  deleteTodo(taskToDeleteId) {
+    const newList = this.state.list.filter((task) => task.id !== taskToDeleteId)
     this.setState({ list: newList })
   }
 
   createNewTask() {
+    if (this.state.list.length === 0) {
+      this.setState({
+        list: [{ id: 1, name: this.state.newTaskName, active: true }],
+        newTaskName: ""
+      })
+      return;
+    }
+
     this.setState({
       list: [
         ...this.state.list,
@@ -36,45 +33,68 @@ class TodoList extends React.Component {
     })
   }
 
-  toggleTask(taskId) {
+  editTask (task) {
+    this.setState({
+      editingTaskId: task.id,
+      editTaskName: task.name
+    })
+  }
+
+  updateTaskInList(taskId, taskUpdateObject) {
     const { list } = this.state;
     const taskIndex = list.findIndex(task => task.id == taskId)
     const task = list[taskIndex]
 
-    this.setState({ list: [
+    return [
       ...list.slice(0, taskIndex),
-      {
-        id: task.id,
-        name: task.name,
-        active: !task.active
-      },
+      { ...task, ...taskUpdateObject },
       ...list.slice(taskIndex + 1, list.length)
-    ]})
+    ]
+  }
+
+  updateTask(taskId) {
+    this.setState({
+      list: this.updateTaskInList(taskId, { name: this.state.editTaskName }),
+      editingTaskId: null
+    })
+  }
+
+  toggleTask(task) {
+    this.setState({
+      list: this.updateTaskInList(task.id, { active: !task.active }),
+      editingTaskId: null
+    })
   }
 
   render() {
-    handleClick();
-    this.handleClick();
     return (
       <div style={{
         height: 500
       }}>
         <h2>To Do List ({this.state.list.length}):</h2>
-        <input value={this.state.newTaskName} onChange={e => this.setState({ newTaskName: e.target.value })}/>
+        <input style={{marginLeft: 20}} value={this.state.newTaskName} onChange={e => this.setState({ newTaskName: e.target.value })}/>
         <button onClick={() => this.createNewTask()}>Submit</button>
         <ul>
-          {this.state.list.map((item) => {
+          {this.state.list.map((task) => {
             return (
               <li>
-                <span
-                  style={{ textDecoration: item.active ? 'none' : 'line-through' }}
-                  onClick={() => this.toggleTask(item.id)}>
-                  {item.name}
-                </span>
-                <button onClick={() => this.deleteTodo(item.id)}>delete</button>
-                <button>edit</button>
-                  <input/>
-                  <button>Ok</button>
+                {this.state.editingTaskId !== task.id ? (
+                  <span>
+                    <span
+                      style={{ textDecoration: task.active ? 'none' : 'line-through' }}
+                      onClick={() => this.toggleTask(task)}>
+                      {task.name}
+                    </span>
+                    <button onClick={() => this.deleteTodo(task.id)}>delete</button>
+                    <button onClick={() => this.editTask(task)}>edit</button>
+                  </span>
+                ) : (
+                  <span>
+                    <input value={this.state.editTaskName} onChange={e => this.setState({ editTaskName: e.target.value })} />
+                    <button onClick={() => this.updateTask(task.id)}>Ok</button>
+                    <button onClick={() => this.setState({ editingTaskId: null })}>Cancel</button>
+                  </span>
+                )}
               </li>
             )
           })}
