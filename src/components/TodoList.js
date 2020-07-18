@@ -71,6 +71,7 @@ class TodoList extends React.Component {
   render() {
     return (
       <div
+        className="TodoList"
         style={{
           height: 500
         }}
