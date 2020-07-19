@@ -77,12 +77,19 @@ class TodoList extends React.Component {
         }}
       >
         <h2>To Do List ({this.state.list.filter(task => task.active).length}):</h2>
-        <input
-          style={{ marginLeft: 20 }}
-          value={this.state.newTaskName}
-          onChange={e => this.setState({ newTaskName: e.target.value })}
-        />
-        <button onClick={() => this.createNewTask()}>Submit</button>
+        <form
+          onSubmit={e => {
+            e.preventDefault();
+            this.createNewTask()
+          }}
+        >
+          <input
+            style={{ marginLeft: 20 }}
+            value={this.state.newTaskName}
+            onChange={e => this.setState({ newTaskName: e.target.value })}
+          />
+          <button type="submit">Submit</button>
+        </form>
         <ul>
           {this.state.list.map(task => {
             return (
