@@ -84,6 +84,7 @@ class TodoList extends React.Component {
           }}
         >
           <input
+            autoFocus
             style={{ marginLeft: 20 }}
             value={this.state.newTaskName}
             onChange={e => this.setState({ newTaskName: e.target.value })}
@@ -118,6 +119,7 @@ class TodoList extends React.Component {
                     }}
                     >
                       <input
+                        autoFocus
                         value={this.state.editTaskName}
                         onChange={e =>
                           this.setState({ editTaskName: e.target.value })
