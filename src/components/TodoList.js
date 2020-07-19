@@ -111,18 +111,26 @@ class TodoList extends React.Component {
                   </span>
                 ) : (
                   <span>
-                    <input
-                      value={this.state.editTaskName}
-                      onChange={e =>
-                        this.setState({ editTaskName: e.target.value })
-                      }
-                    />
-                    <button onClick={() => this.updateTask(task.id)}>Ok</button>
-                    <button
-                      onClick={() => this.setState({ editingTaskId: null })}
+                    <form
+                      onSubmit={e => {
+                        e.preventDefault();
+                        this.updateTask(task.id)
+                    }}
                     >
-                      Cancel
-                    </button>
+                      <input
+                        value={this.state.editTaskName}
+                        onChange={e =>
+                          this.setState({ editTaskName: e.target.value })
+                        }
+                      />
+                      <button>Ok</button>
+                      <button
+                        type="button"
+                        onClick={() => this.setState({ editingTaskId: null })}
+                      >
+                        Cancel
+                      </button>
+                    </form>
                   </span>
                 )}
               </li>
