@@ -1,6 +1,7 @@
 import React from "react";
 import TodoList from "./TodoList";
 
+// Small comment to open the PR
 class App extends React.Component {
   render() {
     return (
