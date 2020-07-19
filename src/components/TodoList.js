@@ -76,7 +76,7 @@ class TodoList extends React.Component {
           height: 500
         }}
       >
-        <h2>To Do List ({this.state.list.length}):</h2>
+        <h2>To Do List ({this.state.list.filter(task => task.active).length}):</h2>
         <input
           style={{ marginLeft: 20 }}
           value={this.state.newTaskName}
