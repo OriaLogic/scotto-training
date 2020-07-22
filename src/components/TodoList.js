@@ -1,24 +1,23 @@
 import React from "react";
-import { updateObjectInList } from '../util/array';
+import { updateObjectInList } from "../util/array";
+import TodoCreationForm from "./TodoCreationForm";
 
 class TodoList extends React.Component {
   state = {
     list: [],
-    newTaskName: "",
     editTaskName: "",
     editingTaskId: null
   };
 
-  deleteTodo(taskToDeleteId) {
+  deleteTodo = (taskToDeleteId) => {
     const newList = this.state.list.filter(task => task.id !== taskToDeleteId);
     this.setState({ list: newList });
   }
 
-  createNewTask() {
+  createNewTask = (name) => {
     if (this.state.list.length === 0) {
       this.setState({
-        list: [{ id: 1, name: this.state.newTaskName, active: true }],
-        newTaskName: ""
+        list: [{ id: 1, name, active: true }],
       });
       return;
     }
@@ -28,29 +27,28 @@ class TodoList extends React.Component {
         ...this.state.list,
         {
           id: this.state.list[this.state.list.length - 1].id + 1,
-          name: this.state.newTaskName,
+          name,
           active: true
         }
-      ],
-      newTaskName: ""
+      ]
     });
   }
 
-  editTask(task) {
+  editTask = (task) => {
     this.setState({
       editingTaskId: task.id,
       editTaskName: task.name
     });
   }
 
-  updateTask(taskId) {
+  updateTask = (taskId) => {
     this.setState({
       list: updateObjectInList(this.state.list, taskId, { name: this.state.editTaskName }),
       editingTaskId: null
     });
   }
 
-  toggleTask(task) {
+  toggleTask = (task) => {
     this.setState({
       list: updateObjectInList(this.state.list, task.id, { active: !task.active }),
       editingTaskId: null
@@ -66,20 +64,7 @@ class TodoList extends React.Component {
         }}
       >
         <h2>To Do List ({this.state.list.filter(task => task.active).length}):</h2>
-        <form
-          onSubmit={e => {
-            e.preventDefault();
-            this.createNewTask()
-          }}
-        >
-          <input
-            autoFocus
-            style={{ marginLeft: 20 }}
-            value={this.state.newTaskName}
-            onChange={e => this.setState({ newTaskName: e.target.value })}
-          />
-          <button type="submit">Submit</button>
-        </form>
+        <TodoCreationForm onCreate={this.createNewTask}/>
         <ul>
           {this.state.list.map(task => {
             return (
