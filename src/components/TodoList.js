@@ -1,4 +1,5 @@
 import React from "react";
+import { updateObjectInList } from '../util/array';
 
 class TodoList extends React.Component {
   state = {
@@ -42,28 +43,16 @@ class TodoList extends React.Component {
     });
   }
 
-  updateTaskInList(taskId, taskUpdateObject) {
-    const { list } = this.state;
-    const taskIndex = list.findIndex(task => task.id === taskId);
-    const task = list[taskIndex];
-
-    return [
-      ...list.slice(0, taskIndex),
-      { ...task, ...taskUpdateObject },
-      ...list.slice(taskIndex + 1, list.length)
-    ];
-  }
-
   updateTask(taskId) {
     this.setState({
-      list: this.updateTaskInList(taskId, { name: this.state.editTaskName }),
+      list: updateObjectInList(this.state.list, taskId, { name: this.state.editTaskName }),
       editingTaskId: null
     });
   }
 
   toggleTask(task) {
     this.setState({
-      list: this.updateTaskInList(task.id, { active: !task.active }),
+      list: updateObjectInList(this.state.list, task.id, { active: !task.active }),
       editingTaskId: null
     });
   }
