@@ -1,6 +1,7 @@
 import React from "react";
 import { updateObjectInList } from "../util/array";
 import TodoCreationForm from "./TodoCreationForm";
+import Todo from "./Todo";
 
 class TodoList extends React.Component {
   state = {
@@ -69,6 +70,7 @@ class TodoList extends React.Component {
           {this.state.list.map(task => {
             return (
               <li>
+              <Todo />
                 {this.state.editingTaskId !== task.id ? (
                   <span>
                     <span
