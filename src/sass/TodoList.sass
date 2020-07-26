@@ -1,7 +1,12 @@
-.TodoList
-  h2
-    color: red
-    margin: 20px
+.todo-list-card
+  @extend .card
+  border-radius: 10px
+  margin-right: 30px
+  min-height: 500px
+  max-height: 500px
+  overflow-y: auto
+  max-width: 300px
+  min-width: 300px
 
   li
     margin-top: 10px
@@ -12,3 +17,9 @@
 
   p
     margin-left: 20px
+
+  .placeholder
+    position: absolute
+    top: 40%
+    left: 40px
+    opacity: 0.4
