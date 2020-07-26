@@ -1,23 +1,23 @@
 import React from "react";
 import { updateObjectInList } from "../util/array";
 import TodoCreationForm from "./TodoCreationForm";
+import Todo from "./Todo";
 
 class TodoList extends React.Component {
   state = {
     list: [],
-    editTaskName: "",
-    editingTaskId: null
+    editingTodoId: null
   };
 
-  deleteTodo = (taskToDeleteId) => {
-    const newList = this.state.list.filter(task => task.id !== taskToDeleteId);
+  deleteTodo = todoToDeleteId => {
+    const newList = this.state.list.filter(todo => todo.id !== todoToDeleteId);
     this.setState({ list: newList });
-  }
+  };
 
-  createNewTask = (name) => {
+  createNewTodo = name => {
     if (this.state.list.length === 0) {
       this.setState({
-        list: [{ id: 1, name, active: true }],
+        list: [{ id: 1, name, active: true }]
       });
       return;
     }
@@ -32,28 +32,29 @@ class TodoList extends React.Component {
         }
       ]
     });
-  }
+  };
 
-  editTask = (task) => {
+  editTodo = todo => {
     this.setState({
-      editingTaskId: task.id,
-      editTaskName: task.name
+      editingTodoId: todo.id
     });
-  }
+  };
 
-  updateTask = (taskId) => {
+  updateTodo = (todoId, name) => {
     this.setState({
-      list: updateObjectInList(this.state.list, taskId, { name: this.state.editTaskName }),
-      editingTaskId: null
+      list: updateObjectInList(this.state.list, todoId, { name }),
+      editingTodoId: null
     });
-  }
+  };
 
-  toggleTask = (task) => {
+  toggleTodo = todo => {
     this.setState({
-      list: updateObjectInList(this.state.list, task.id, { active: !task.active }),
-      editingTaskId: null
+      list: updateObjectInList(this.state.list, todo.id, {
+        active: !todo.active
+      }),
+      editingTodoId: null
     });
-  }
+  };
 
   render() {
     return (
@@ -63,52 +64,24 @@ class TodoList extends React.Component {
           height: 500
         }}
       >
-        <h2>To Do List ({this.state.list.filter(task => task.active).length}):</h2>
-        <TodoCreationForm onCreate={this.createNewTask}/>
+        <h2>
+          To Do List ({this.state.list.filter(todo => todo.active).length}):
+        </h2>
+        <TodoCreationForm onCreate={this.createNewTodo} />
         <ul>
-          {this.state.list.map(task => {
+          {this.state.list.map(todo => {
             return (
               <li>
-                {this.state.editingTaskId !== task.id ? (
-                  <span>
-                    <span
-                      style={{
-                        textDecoration: task.active ? "none" : "line-through"
-                      }}
-                      onClick={() => this.toggleTask(task)}
-                    >
-                      {task.name}
-                    </span>
-                    <button onClick={() => this.deleteTodo(task.id)}>
-                      delete
-                    </button>
-                    <button onClick={() => this.editTask(task)}>edit</button>
-                  </span>
-                ) : (
-                  <span>
-                    <form
-                      onSubmit={e => {
-                        e.preventDefault();
-                        this.updateTask(task.id)
-                    }}
-                    >
-                      <input
-                        autoFocus
-                        value={this.state.editTaskName}
-                        onChange={e =>
-                          this.setState({ editTaskName: e.target.value })
-                        }
-                      />
-                      <button>Ok</button>
-                      <button
-                        type="button"
-                        onClick={() => this.setState({ editingTaskId: null })}
-                      >
-                        Cancel
-                      </button>
-                    </form>
-                  </span>
-                )}
+                <Todo
+                  todo={todo}
+                  editing={this.state.editingTodoId === todo.id}
+                  todo={todo}
+                  toggleTodoActivation={this.toggleTodo}
+                  deleteTodo={this.deleteTodo}
+                  editTodo={this.editTodo}
+                  updateTodo={this.updateTodo}
+                  stopEditTodo={() => this.setState({ editingTodoId: null })}
+                />
               </li>
             );
           })}
