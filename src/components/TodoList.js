@@ -6,7 +6,6 @@ import Todo from "./Todo";
 class TodoList extends React.Component {
   state = {
     list: [],
-    editTaskName: "",
     editingTaskId: null
   };
 
@@ -38,13 +37,12 @@ class TodoList extends React.Component {
   editTask = (task) => {
     this.setState({
       editingTaskId: task.id,
-      editTaskName: task.name
     });
   }
 
-  updateTask = (taskId) => {
+  updateTask = (taskId, newName) => {
     this.setState({
-      list: updateObjectInList(this.state.list, taskId, { name: this.state.editTaskName }),
+      list: updateObjectInList(this.state.list, taskId, { name: newName }),
       editingTaskId: null
     });
   }
@@ -70,7 +68,16 @@ class TodoList extends React.Component {
           {this.state.list.map(task => {
             return (
               <li>
-              <Todo />
+                <Todo
+                  task={task}
+                  // editingTaskId={this.state.editingTaskId}
+                  editing={task.id === this.state.editingTaskId}
+                  onEdit={this.editTask}
+                  onCancelEdit={() => this.setState({editingTaskId: null})}
+                  onToggle={this.toggleTask}
+                  onDelete={this.deleteTodo}
+                  onUpdate={this.updateTask}
+                />
               </li>
             );
           })}

@@ -1,48 +1,51 @@
 import React from 'react';
 
 export default class Todo extends React.Component {
+  state = { editTaskName: this.props.task.name }
+
   render() {
     return (
-      {this.state.editingTaskId !== task.id ? (
+      !this.props.editing ? (
         <span>
           <span
             style={{
-              textDecoration: task.active ? "none" : "line-through"
+              textDecoration: this.props.task.active ? "none" : "line-through"
             }}
-            onClick={() => this.toggleTask(task)}
+            onClick={() => this.props.onToggle(this.props.task)}
           >
-            {task.name}
+            {this.props.task.name}
           </span>
-          <button onClick={() => this.deleteTodo(task.id)}>
+          <button onClick={() => this.props.onDelete(this.props.task.id)}>
             delete
           </button>
-          <button onClick={() => this.editTask(task)}>edit</button>
+          <button onClick={() => this.props.onEdit(this.props.task)}>edit</button>
         </span>
       ) : (
         <span>
           <form
             onSubmit={e => {
               e.preventDefault();
-              this.updateTask(task.id)
+              this.props.onUpdate(this.props.task.id, this.state.editTaskName)
           }}
           >
             <input
               autoFocus
               value={this.state.editTaskName}
-              onChange={e =>
-                this.setState({ editTaskName: e.target.value })
-              }
+              onChange={e => this.setState({ editTaskName: e.target.value })}
             />
             <button>Ok</button>
             <button
               type="button"
-              onClick={() => this.setState({ editingTaskId: null })}
+              onClick={() => {
+                this.props.onCancelEdit()
+                this.setState({ editTaskName: this.props.task.name })
+              }}
             >
               Cancel
             </button>
           </form>
         </span>
-      )}
+      )
     )
   }
 }
