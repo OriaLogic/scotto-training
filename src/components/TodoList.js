@@ -62,7 +62,7 @@ class TodoList extends React.Component {
           height: 500
         }}
       >
-        <h2>To Do List ({this.state.list.filter(task => task.active).length}):</h2>
+        <h2>{this.props.name} ({this.state.list.filter(task => task.active).length}):</h2>
         <TodoCreationForm onCreate={this.createNewTask}/>
         <ul>
           {this.state.list.map(task => {
@@ -70,7 +70,6 @@ class TodoList extends React.Component {
               <li>
                 <Todo
                   task={task}
-                  // editingTaskId={this.state.editingTaskId}
                   editing={task.id === this.state.editingTaskId}
                   onEdit={this.editTask}
                   onCancelEdit={() => this.setState({editingTaskId: null})}

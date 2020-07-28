@@ -16,7 +16,6 @@ export default class TodoCreationForm extends React.Component {
       >
         <input
           autoFocus
-          style={{ marginLeft: 20 }}
           value={this.state.taskName}
           onChange={e => this.setState({taskName: e.target.value})}
         />
