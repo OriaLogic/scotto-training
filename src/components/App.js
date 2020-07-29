@@ -47,7 +47,7 @@ class App extends React.Component {
               value={this.state.newTodoListName}
               onChange={e => this.setState({newTodoListName: e.target.value})}
             />
-            <button type="submit" disabled={this.state.newTodoListName === ""}>Submit</button>
+            <button className="button is-small is-primary" style={{marginLeft: 10}} type="submit" disabled={this.state.newTodoListName === ""}>Submit</button>
           </form>
           <div className="all-todoLists-container">
             {this.state.todoLists.map((todoList) => {
