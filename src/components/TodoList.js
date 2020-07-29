@@ -56,31 +56,39 @@ class TodoList extends React.Component {
 
   render() {
     return (
-      <div
-        className="TodoList"
-        style={{
-          height: 500
-        }}
-      >
-        <h2>{this.props.name} ({this.state.list.filter(task => task.active).length}):</h2>
-        <TodoCreationForm onCreate={this.createNewTask}/>
-        <ul>
-          {this.state.list.map(task => {
-            return (
-              <li>
-                <Todo
-                  task={task}
-                  editing={task.id === this.state.editingTaskId}
-                  onEdit={this.editTask}
-                  onCancelEdit={() => this.setState({editingTaskId: null})}
-                  onToggle={this.toggleTask}
-                  onDelete={this.deleteTodo}
-                  onUpdate={this.updateTask}
-                />
-              </li>
-            );
-          })}
-        </ul>
+      <div className="card">
+        <div
+          className="TodoList"
+          style={{
+            height: 500
+          }}
+        >
+        <header class="card-header">
+          <p class="card-header-title">
+            <h2>{this.props.name} ({this.state.list.filter(task => task.active).length}):</h2>
+          </p>
+        </header>
+        <div class="card-content">
+          <TodoCreationForm onCreate={this.createNewTask}/>
+          <ul>
+            {this.state.list.map(task => {
+              return (
+                <li>
+                  <Todo
+                    task={task}
+                    editing={task.id === this.state.editingTaskId}
+                    onEdit={this.editTask}
+                    onCancelEdit={() => this.setState({editingTaskId: null})}
+                    onToggle={this.toggleTask}
+                    onDelete={this.deleteTodo}
+                    onUpdate={this.updateTask}
+                  />
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+        </div>
       </div>
     );
   }
