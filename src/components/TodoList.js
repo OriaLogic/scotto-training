@@ -63,12 +63,12 @@ class TodoList extends React.Component {
             height: 500
           }}
         >
-        <header class="card-header">
-          <p class="card-header-title">
-            <h2>{this.props.name} ({this.state.list.filter(task => task.active).length}):</h2>
+        <header className="card-header">
+          <p className="card-header-title">
+            <h2>{this.props.name} ({this.state.list.filter(task => task.active).length})</h2>
           </p>
         </header>
-        <div class="card-content">
+        <div className="card-content">
           <TodoCreationForm onCreate={this.createNewTask}/>
           <ul>
             {this.state.list.map(task => {
