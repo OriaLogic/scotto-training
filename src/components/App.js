@@ -42,12 +42,13 @@ class App extends React.Component {
             }}
           >
             <input
+              className="input is-primary is-normal"
               autoFocus
               placeholder="Enter a TodoList name"
               value={this.state.newTodoListName}
               onChange={e => this.setState({newTodoListName: e.target.value})}
             />
-            <button className="button is-small is-primary" style={{marginLeft: 10}} type="submit" disabled={this.state.newTodoListName === ""}>Submit</button>
+            <button className="button is-normal is-primary" style={{marginLeft: 10}} type="submit" disabled={this.state.newTodoListName === ""}>Submit</button>
           </form>
           <div className="all-todoLists-container">
             {this.state.todoLists.map((todoList) => {
