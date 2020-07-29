@@ -21,7 +21,7 @@ export default class TodoCreationForm extends React.Component {
           value={this.state.taskName}
           onChange={e => this.setState({taskName: e.target.value})}
         />
-        <button disabled={this.state.taskName === ""} type="submit">Submit</button>
+        <button className="button is-small is-primary is-outlined" disabled={this.state.taskName === ""} type="submit">Submit</button>
       </form>
     )
   }
