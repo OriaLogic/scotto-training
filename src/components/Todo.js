@@ -37,6 +37,7 @@ export default class Todo extends React.Component {
           }}
           >
             <input
+              className="input is-primary is-small"
               autoFocus
               value={this.state.editTaskName}
               onChange={e => this.setState({ editTaskName: e.target.value })}

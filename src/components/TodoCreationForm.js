@@ -18,7 +18,7 @@ export default class TodoCreationForm extends React.Component {
         <input
           className="input is-primary is-small"
           autoFocus
-          placeholder="Add a task (hit Enter)"
+          placeholder="Add a task (hit Enter to validate)"
           value={this.state.taskName}
           onChange={e => this.setState({taskName: e.target.value})}
         />
