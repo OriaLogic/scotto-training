@@ -68,11 +68,12 @@ class TodoList extends React.Component {
           style={{ alignItems: 'center' }}
         >
           <p className="card-header-title">
-            <h2>{this.props.name} ({this.state.list.filter(task => task.active).length})</h2>
+            {this.props.name} ({this.state.list.filter(task => task.active).length})
           </p>
           <button
             className="button is-text is-small"
             style={{ marginRight: 11 }}
+            onClick={() => this.props.onDelete(this.props.id)}
           >
             <span className="icon has-text-danger">
               <i className="fas fa-trash"></i>
@@ -84,7 +85,7 @@ class TodoList extends React.Component {
           <ul>
             {this.state.list.map(task => {
               return (
-                <li>
+                <li key={task.id}>
                   <Todo
                     task={task}
                     editing={task.id === this.state.editingTaskId}

@@ -27,6 +27,13 @@ class App extends React.Component {
     });
   }
 
+  deleteTodoList = (todoListId) => {
+    const newTodoLists = this.state.todoLists.filter((todoList) => todoList.id !== todoListId )
+    this.setState({
+      todoLists: newTodoLists
+    })
+  }
+
   render() {
     return (
       <div className="App">
@@ -52,7 +59,12 @@ class App extends React.Component {
           <div className="all-todoLists-container">
             {this.state.todoLists.map((todoList) => {
               return (
-                <TodoList name={todoList.name}/>
+                <TodoList
+                  key={todoList.id}
+                  name={todoList.name}
+                  onDelete={this.deleteTodoList}
+                  id={todoList.id}
+                  />
               )
             })}
           </div>
