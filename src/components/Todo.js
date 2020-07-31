@@ -15,10 +15,18 @@ export default class Todo extends React.Component {
           >
             {this.props.task.name}
           </span>
-          <button onClick={() => this.props.onDelete(this.props.task.id)}>
+          <button
+            onClick={() => this.props.onEdit(this.props.task)}
+            className="button is-primary is-outlined is-small"
+          >
+            edit
+          </button>
+          <button
+            onClick={() => this.props.onDelete(this.props.task.id)}
+            className="button is-danger is-small is-outlined"
+          >
             delete
           </button>
-          <button onClick={() => this.props.onEdit(this.props.task)}>edit</button>
         </span>
       ) : (
         <span>
@@ -29,12 +37,18 @@ export default class Todo extends React.Component {
           }}
           >
             <input
+              className="input is-primary is-small"
               autoFocus
               value={this.state.editTaskName}
               onChange={e => this.setState({ editTaskName: e.target.value })}
             />
-            <button>Ok</button>
             <button
+              className="button is-primary is-small"
+            >
+              Ok
+            </button>
+            <button
+              className="button is-danger is-light is-small"
               type="button"
               onClick={() => {
                 this.props.onCancelEdit()

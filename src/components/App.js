@@ -32,7 +32,6 @@ class App extends React.Component {
       <div className="App">
         <h1 className="main-title">Scotto TodoList App !</h1>
         <div className="app-container">
-          <h2 style={{ marginBottom: 30 }}>Number of lists: {this.state.todoLists.length}</h2>
           <form
             onSubmit={e => {
               e.preventDefault();
@@ -44,7 +43,7 @@ class App extends React.Component {
             <input
               className="input is-primary is-normal"
               autoFocus
-              placeholder="Enter a TodoList name"
+              placeholder="Add a TodoList"
               value={this.state.newTodoListName}
               onChange={e => this.setState({newTodoListName: e.target.value})}
             />

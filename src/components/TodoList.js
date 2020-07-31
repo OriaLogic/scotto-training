@@ -56,13 +56,13 @@ class TodoList extends React.Component {
 
   render() {
     return (
-      <div className="card">
-        <div
-          className="TodoList"
-          style={{
-            height: 500
-          }}
-        >
+      <div
+        className="TodoList"
+        style={{
+          height: 500
+        }}
+      >
+        <div className="card">
         <header className="card-header">
           <p className="card-header-title">
             <h2>{this.props.name} ({this.state.list.filter(task => task.active).length})</h2>
