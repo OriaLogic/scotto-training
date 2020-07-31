@@ -1,23 +1,23 @@
 import React from "react";
+import { updateObjectInList } from "../util/array";
+import TodoCreationForm from "./TodoCreationForm";
+import Todo from "./Todo";
 
 class TodoList extends React.Component {
   state = {
     list: [],
-    newTaskName: "",
-    editTaskName: "",
     editingTaskId: null
   };
 
-  deleteTodo(taskToDeleteId) {
+  deleteTodo = (taskToDeleteId) => {
     const newList = this.state.list.filter(task => task.id !== taskToDeleteId);
     this.setState({ list: newList });
   }
 
-  createNewTask() {
+  createNewTask = (name) => {
     if (this.state.list.length === 0) {
       this.setState({
-        list: [{ id: 1, name: this.state.newTaskName, active: true }],
-        newTaskName: ""
+        list: [{ id: 1, name, active: true }],
       });
       return;
     }
@@ -27,101 +27,68 @@ class TodoList extends React.Component {
         ...this.state.list,
         {
           id: this.state.list[this.state.list.length - 1].id + 1,
-          name: this.state.newTaskName,
+          name,
           active: true
         }
-      ],
-      newTaskName: ""
+      ]
     });
   }
 
-  editTask(task) {
+  editTask = (task) => {
     this.setState({
       editingTaskId: task.id,
-      editTaskName: task.name
     });
   }
 
-  updateTaskInList(taskId, taskUpdateObject) {
-    const { list } = this.state;
-    const taskIndex = list.findIndex(task => task.id === taskId);
-    const task = list[taskIndex];
-
-    return [
-      ...list.slice(0, taskIndex),
-      { ...task, ...taskUpdateObject },
-      ...list.slice(taskIndex + 1, list.length)
-    ];
-  }
-
-  updateTask(taskId) {
+  updateTask = (taskId, newName) => {
     this.setState({
-      list: this.updateTaskInList(taskId, { name: this.state.editTaskName }),
+      list: updateObjectInList(this.state.list, taskId, { name: newName }),
       editingTaskId: null
     });
   }
 
-  toggleTask(task) {
+  toggleTask = (task) => {
     this.setState({
-      list: this.updateTaskInList(task.id, { active: !task.active }),
+      list: updateObjectInList(this.state.list, task.id, { active: !task.active }),
       editingTaskId: null
     });
   }
 
   render() {
     return (
-      <div
-        className="TodoList"
-        style={{
-          height: 500
-        }}
-      >
-        <h2>To Do List ({this.state.list.length}):</h2>
-        <input
-          style={{ marginLeft: 20 }}
-          value={this.state.newTaskName}
-          onChange={e => this.setState({ newTaskName: e.target.value })}
-        />
-        <button onClick={() => this.createNewTask()}>Submit</button>
-        <ul>
-          {this.state.list.map(task => {
-            return (
-              <li>
-                {this.state.editingTaskId !== task.id ? (
-                  <span>
-                    <span
-                      style={{
-                        textDecoration: task.active ? "none" : "line-through"
-                      }}
-                      onClick={() => this.toggleTask(task)}
-                    >
-                      {task.name}
-                    </span>
-                    <button onClick={() => this.deleteTodo(task.id)}>
-                      delete
-                    </button>
-                    <button onClick={() => this.editTask(task)}>edit</button>
-                  </span>
-                ) : (
-                  <span>
-                    <input
-                      value={this.state.editTaskName}
-                      onChange={e =>
-                        this.setState({ editTaskName: e.target.value })
-                      }
-                    />
-                    <button onClick={() => this.updateTask(task.id)}>Ok</button>
-                    <button
-                      onClick={() => this.setState({ editingTaskId: null })}
-                    >
-                      Cancel
-                    </button>
-                  </span>
-                )}
-              </li>
-            );
-          })}
-        </ul>
+      <div className="card">
+        <div
+          className="TodoList"
+          style={{
+            height: 500
+          }}
+        >
+        <header className="card-header">
+          <p className="card-header-title">
+            <h2>{this.props.name} ({this.state.list.filter(task => task.active).length})</h2>
+          </p>
+        </header>
+        <div className="card-content">
+          <TodoCreationForm onCreate={this.createNewTask}/>
+          <ul>
+            {this.state.list.map(task => {
+              return (
+                <li>
+                  <Todo
+                    task={task}
+                    editing={task.id === this.state.editingTaskId}
+                    onEdit={this.editTask}
+                    onCancelEdit={() => this.setState({editingTaskId: null})}
+                    onToggle={this.toggleTask}
+                    onDelete={this.deleteTodo}
+                    onUpdate={this.updateTask}
+                  />
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+        </div>
       </div>
     );
   }
