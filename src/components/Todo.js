@@ -15,18 +15,20 @@ export default class Todo extends React.Component {
           >
             {this.props.task.name}
           </span>
-          <button
-            onClick={() => this.props.onEdit(this.props.task)}
-            className="button is-primary is-outlined is-small"
-          >
-            edit
-          </button>
-          <button
-            onClick={() => this.props.onDelete(this.props.task.id)}
-            className="button is-danger is-small is-outlined"
-          >
-            delete
-          </button>
+          <span className="button-container">
+            <button
+              onClick={() => this.props.onEdit(this.props.task)}
+              className="button is-primary is-outlined is-small"
+            >
+              edit
+            </button>
+            <button
+              onClick={() => this.props.onDelete(this.props.task.id)}
+              className="button is-danger is-small is-outlined"
+            >
+              delete
+            </button>
+          </span>
         </span>
       ) : (
         <span>
