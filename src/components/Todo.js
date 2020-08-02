@@ -6,7 +6,7 @@ export default class Todo extends React.Component {
   render() {
     return (
       !this.props.editing ? (
-        <span>
+        <span className="todo-container">
           <span
             style={{
               textDecoration: this.props.task.active ? "none" : "line-through"
