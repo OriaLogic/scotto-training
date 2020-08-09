@@ -6,23 +6,26 @@ $family-sans-serif: "Nunito", sans-serif
 
 // Import the rest of Bulma
 @import "../../node_modules/bulma/bulma.sass"
+@import "../../node_modules/bulma-checkradio/src/sass"
 
 .main-title
   @extend .title.is-2
   background-color: $primary
   color: $white
   text-align: center
-  margin-bottom: 30px
+  margin-bottom: 10px
 
 .app-container
   padding: 10px
 
 .all-todoLists-container
   display: flex
-  margin-top: 50px
+  margin-top: 20px
 
-.input
-  width: 250px
+#save-button
+  position: absolute
+  top: 10px
+  right: 10px
 
 .save-data
   position: absolute
@@ -31,3 +34,4 @@ $family-sans-serif: "Nunito", sans-serif
 
 @import "./TodoList.sass"
 @import "./Todo.sass"
+@import "./Preferences.sass"

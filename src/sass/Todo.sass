@@ -1,6 +1,18 @@
-.todo-container
-  overflow-wrap: break-word
-  display: block
+.todo
+  display: flex
+  justify-content: space-between
+  align-items: center
 
-  .button-container
-    overflow-wrap: break-word
+  padding: 10px
+  background: rgba($info, 0.1)
+  border-radius: 10px
+
+  .is-checkradio[type="checkbox"].is-small + label:before, .is-checkradio[type="checkbox"].is-small + label:after
+    margin-top: 2px
+
+  .dropdown
+    visibility: hidden
+
+  &:hover
+    .dropdown
+      visibility: visible

@@ -1,9 +1,19 @@
-import { createStore } from "redux"
-import todoLists from "./reducers/todoLists"
+import { createStore } from "redux";
+import rootReducer from "./reducers";
 
-const initialState = JSON.parse(localStorage.getItem("dataState"))
-console.log(initialState);
+const initialState = JSON.parse(localStorage.getItem("todoListData")) || {};
 
-const store = createStore(todoLists, initialState)
+for (const todoListId in initialState.todoLists) {
+  for (const todoId in initialState.todoLists[todoListId].todos) {
+    initialState.todoLists[todoListId].todos[todoId].dueDate = new Date(
+      initialState.todoLists[todoListId].todos[todoId].dueDate
+    );
+  }
+}
 
-export default store
+const store = createStore(
+  rootReducer,
+  initialState,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
+export default store;

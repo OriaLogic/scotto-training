@@ -1,28 +1,45 @@
-import React from "react";
+import React, { useState } from "react";
+import DatePicker from "react-datepicker";
 
-export default class TodoCreationForm extends React.Component {
-  state = {
-    taskName: ""
-  }
+export default function TodoCreationForm({ onCreate }) {
+  const [name, setName] = useState("");
+  const [dueDate, setDueDate] = useState(null);
+  const canSubmit = name !== "" && !!dueDate;
 
-  render() {
-    return (
-      <form
-        onSubmit={e => {
-          e.preventDefault();
-          if (this.state.taskName === "") return;
-          this.props.onCreate(this.state.taskName)
-          this.setState({taskName: ""})
-        }}
+  return (
+    <form
+      onSubmit={e => {
+        e.preventDefault();
+        if (!canSubmit) return;
+        onCreate(name, dueDate);
+        setName("");
+        setDueDate(null);
+      }}
+      style={{ display: "flex" }}
+    >
+      <input
+        className="input is-primary is-small"
+        autoFocus
+        placeholder="Add a task (hit Enter to validate)"
+        value={name}
+        onChange={e => setName(e.target.value)}
+        style={{ marginRight: 10 }}
+      />
+      <DatePicker
+        selected={dueDate}
+        onChange={setDueDate}
+        className="input is-small is-primary"
+        placeholderText="Due date"
+      />
+      <button
+        className="button is-success is-small"
+        type="submit"
+        disabled={!canSubmit}
       >
-        <input
-          className="input is-primary is-small"
-          autoFocus
-          placeholder="Add a task (hit Enter to validate)"
-          value={this.state.taskName}
-          onChange={e => this.setState({taskName: e.target.value})}
-        />
-      </form>
-    )
-  }
+        <span className="icon">
+          <i className="fas fa-check-circle" />
+        </span>
+      </button>
+    </form>
+  );
 }
