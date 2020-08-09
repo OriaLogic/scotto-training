@@ -1,3 +1,4 @@
+export const SAVE_DATA = "SAVE_DATA";
 export const ADD_TODOLIST = "ADD_TODOLIST";
 export const DELETE_TODOLIST = "DELETE_TODOLIST";
 export const EDIT_TODOLIST = "EDIT_TODOLIST";

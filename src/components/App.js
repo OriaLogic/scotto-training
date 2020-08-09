@@ -2,7 +2,7 @@ import React from "react";
 import { values } from "lodash";
 import { connect } from "react-redux";
 
-import { addTodoList } from "../redux/actions/todoList";
+import { addTodoList, saveData } from "../redux/actions";
 
 import TodoList from "./TodoList";
 
@@ -17,6 +17,13 @@ class App extends React.Component {
       <div className="App">
         <h1 className="main-title">Scotto TodoList App !</h1>
         <div className="app-container">
+          <button
+            className="button is-normal is-primary"
+            onClick={this.props.saveData}
+          >
+            Save
+          </button>
+
           <form
             onSubmit={e => {
               e.preventDefault();
@@ -57,7 +64,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  createTodoList: name => dispatch(addTodoList(name))
+  createTodoList: name => dispatch(addTodoList(name)),
+  saveData: () => dispatch(saveData())
 });
 
 export default connect(

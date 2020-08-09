@@ -8,7 +8,8 @@ import {
   EDIT_TODOLIST,
   ADD_TODO,
   DELETE_TODO,
-  EDIT_TODO
+  EDIT_TODO,
+  SAVE_DATA
 } from "../../constants/ActionTypes";
 
 const initialTodoListId = uuid();
@@ -52,6 +53,9 @@ const todoLists = (state = initialState, action) => {
           ...payload
         }
       };
+    case SAVE_DATA:
+      localStorage.setItem("todoListData", JSON.stringify(state));
+      return state;
     case ADD_TODO:
     case DELETE_TODO:
     case EDIT_TODO:
