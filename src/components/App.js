@@ -1,31 +1,16 @@
 import React from "react";
+import { values } from "lodash";
+import { connect } from "react-redux";
+
+import { addTodoList } from "../redux/actions/todoList";
+
 import TodoList from "./TodoList";
 
 // Small comment to open the PR
 class App extends React.Component {
   state = {
-    todoLists: [],
     newTodoListName: ""
-  }
-
-  createTodoList = () => {
-    if (this.state.todoLists.length === 0) {
-      this.setState({
-        todoLists: [{ id: 1, name: this.state.newTodoListName}],
-      });
-      return;
-    }
-
-      this.setState({
-        todoLists: [
-          ...this.state.todoLists,
-          {
-            id: this.state.todoLists[this.state.todoLists.length - 1].id + 1,
-            name: this.state.newTodoListName
-          }
-        ]
-    });
-  }
+  };
 
   render() {
     return (
@@ -36,8 +21,8 @@ class App extends React.Component {
             onSubmit={e => {
               e.preventDefault();
               if (this.state.newTodoListName === "") return;
-              this.createTodoList();
-              this.setState({newTodoListName: ""})
+              this.props.createTodoList(this.state.newTodoListName);
+              this.setState({ newTodoListName: "" });
             }}
           >
             <input
@@ -45,15 +30,20 @@ class App extends React.Component {
               autoFocus
               placeholder="Add a TodoList"
               value={this.state.newTodoListName}
-              onChange={e => this.setState({newTodoListName: e.target.value})}
+              onChange={e => this.setState({ newTodoListName: e.target.value })}
             />
-            <button className="button is-normal is-primary" style={{marginLeft: 10}} type="submit" disabled={this.state.newTodoListName === ""}>Submit</button>
+            <button
+              className="button is-normal is-primary"
+              style={{ marginLeft: 10 }}
+              type="submit"
+              disabled={this.state.newTodoListName === ""}
+            >
+              Submit
+            </button>
           </form>
           <div className="all-todoLists-container">
-            {this.state.todoLists.map((todoList) => {
-              return (
-                <TodoList name={todoList.name}/>
-              )
+            {this.props.todoLists.map(todoList => {
+              return <TodoList todoList={todoList} />;
             })}
           </div>
         </div>
@@ -62,4 +52,15 @@ class App extends React.Component {
   }
 }
 
-export default App;
+const mapStateToProps = state => ({
+  todoLists: values(state.todoLists)
+});
+
+const mapDispatchToProps = dispatch => ({
+  createTodoList: name => dispatch(addTodoList(name))
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);

@@ -1,60 +1,39 @@
 import React from "react";
-import { updateObjectInList } from "../util/array";
+import { connect } from "react-redux";
+import { values } from "lodash";
+
+import {
+  deleteTodoList,
+  addTodo,
+  deleteTodo,
+  editTodo
+} from "../redux/actions";
+
 import TodoCreationForm from "./TodoCreationForm";
 import Todo from "./Todo";
 
 class TodoList extends React.Component {
   state = {
-    list: [],
     editingTaskId: null
   };
 
-  deleteTodo = (taskToDeleteId) => {
-    const newList = this.state.list.filter(task => task.id !== taskToDeleteId);
-    this.setState({ list: newList });
-  }
-
-  createNewTask = (name) => {
-    if (this.state.list.length === 0) {
-      this.setState({
-        list: [{ id: 1, name, active: true }],
-      });
-      return;
-    }
-
+  editTask = task => {
     this.setState({
-      list: [
-        ...this.state.list,
-        {
-          id: this.state.list[this.state.list.length - 1].id + 1,
-          name,
-          active: true
-        }
-      ]
+      editingTaskId: task.id
     });
-  }
-
-  editTask = (task) => {
-    this.setState({
-      editingTaskId: task.id,
-    });
-  }
-
-  updateTask = (taskId, newName) => {
-    this.setState({
-      list: updateObjectInList(this.state.list, taskId, { name: newName }),
-      editingTaskId: null
-    });
-  }
-
-  toggleTask = (task) => {
-    this.setState({
-      list: updateObjectInList(this.state.list, task.id, { active: !task.active }),
-      editingTaskId: null
-    });
-  }
+  };
 
   render() {
+    const {
+      todos,
+      todoList,
+      deleteTodoList,
+      createTodo,
+      deleteTodo,
+      updateTodo
+    } = this.props;
+
+    console.log(todoList, todos);
     return (
       <div
         className="TodoList"
@@ -63,35 +42,68 @@ class TodoList extends React.Component {
         }}
       >
         <div className="card">
-        <header className="card-header">
-          <p className="card-header-title">
-            <h2>{this.props.name} ({this.state.list.filter(task => task.active).length})</h2>
-          </p>
-        </header>
-        <div className="card-content">
-          <TodoCreationForm onCreate={this.createNewTask}/>
-          <ul>
-            {this.state.list.map(task => {
-              return (
-                <li>
-                  <Todo
-                    task={task}
-                    editing={task.id === this.state.editingTaskId}
-                    onEdit={this.editTask}
-                    onCancelEdit={() => this.setState({editingTaskId: null})}
-                    onToggle={this.toggleTask}
-                    onDelete={this.deleteTodo}
-                    onUpdate={this.updateTask}
-                  />
-                </li>
-              );
-            })}
-          </ul>
-        </div>
+          <header className="card-header">
+            <p
+              className="card-header-title"
+              style={{ justifyContent: "space-between" }}
+            >
+              {todoList.name} ({todos.filter(task => task.active).length})
+              <button
+                className="button is-text"
+                onClick={() => deleteTodoList(todoList.id)}
+              >
+                <span className="icon has-text-danger">
+                  <i className="fas fa-trash" />
+                </span>
+              </button>
+            </p>
+          </header>
+          <div className="card-content">
+            <TodoCreationForm onCreate={createTodo} />
+            <ul>
+              {todos.map(todo => {
+                return (
+                  <li>
+                    <Todo
+                      todo={todo}
+                      editing={todo.id === this.state.editingTaskId}
+                      onEdit={this.editTask}
+                      onCancelEdit={() =>
+                        this.setState({ editingTaskId: null })
+                      }
+                      onToggle={() =>
+                        updateTodo(todo.id, { active: !todo.active })
+                      }
+                      onDelete={deleteTodo}
+                      onUpdate={updatedKeys => {
+                        updateTodo(todo.id, updatedKeys);
+                        this.setState({ editingTaskId: null });
+                      }}
+                    />
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
         </div>
       </div>
     );
   }
 }
 
-export default TodoList;
+const mapStateToProps = (state, { todoList }) => ({
+  todos: values(state.todoLists[todoList.id].todos)
+});
+
+const mapDispatchToProps = (dispatch, { todoList }) => ({
+  deleteTodoList: () => dispatch(deleteTodoList(todoList.id)),
+  createTodo: name => dispatch(addTodo(todoList.id, name)),
+  deleteTodo: id => dispatch(deleteTodo(todoList.id, id)),
+  updateTodo: (id, updatedKeys) =>
+    dispatch(editTodo(todoList.id, id, updatedKeys))
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(TodoList);
