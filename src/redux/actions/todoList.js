@@ -1,0 +1,10 @@
+import { ADD_TODOLIST } from "../ActionTypes"
+
+export const addTodoList = (name) => {
+  return {
+    type: ADD_TODOLIST,
+    payload: {
+      name
+    }
+  }
+}

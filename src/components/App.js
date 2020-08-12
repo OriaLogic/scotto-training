@@ -1,5 +1,8 @@
 import React from "react";
+import { values } from "lodash";
 import TodoList from "./TodoList";
+import { connect } from "react-redux";
+import { addTodoList } from "../redux/actions/todoList";
 
 // Small comment to open the PR
 class App extends React.Component {
@@ -43,7 +46,7 @@ class App extends React.Component {
             onSubmit={e => {
               e.preventDefault();
               if (this.state.newTodoListName === "") return;
-              this.createTodoList();
+              this.props.addTodoList(this.state.newTodoListName);
               this.setState({newTodoListName: ""})
             }}
           >
@@ -57,7 +60,7 @@ class App extends React.Component {
             <button className="button is-normal is-primary" style={{marginLeft: 10}} type="submit" disabled={this.state.newTodoListName === ""}>Submit</button>
           </form>
           <div className="all-todoLists-container">
-            {this.state.todoLists.map((todoList) => {
+            {this.props.todoLists.map((todoList) => {
               return (
                 <TodoList
                   key={todoList.id}
@@ -74,4 +77,16 @@ class App extends React.Component {
   }
 }
 
-export default App;
+const mapStateToProps = (state, props) => {
+  return {
+    todoLists: values(state)
+  }
+}
+
+const mapDispatchToProps = (dispatch, props) => {
+  return {
+    addTodoList: (name) => dispatch(addTodoList(name))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
