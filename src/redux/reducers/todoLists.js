@@ -2,7 +2,7 @@ import { ADD_TODOLIST } from "../ActionTypes"
 import { newId } from "../../util/id"
 
 const initialState = {
-  0: {
+  1: {
      id: 1,
      name: "General todolist",
      todos: {
