@@ -3,11 +3,11 @@ import { values } from "lodash";
 import TodoList from "./TodoList";
 import { connect } from "react-redux";
 
-// Small comment to open the PR
+// Small comment to open the PR (again)
 class App extends React.Component {
   state = {
     newTodoListName: ""
-  }
+  };
 
   render() {
     return (
@@ -27,9 +27,16 @@ class App extends React.Component {
               autoFocus
               placeholder="Add a TodoList"
               value={this.state.newTodoListName}
-              onChange={e => this.setState({newTodoListName: e.target.value})}
+              onChange={e => this.setState({ newTodoListName: e.target.value })}
             />
-            <button className="button is-normal is-primary" style={{marginLeft: 10}} type="submit" disabled={this.state.newTodoListName === ""}>Submit</button>
+            <button
+              className="button is-normal is-primary"
+              style={{ marginLeft: 10 }}
+              type="submit"
+              disabled={this.state.newTodoListName === ""}
+            >
+              Submit
+            </button>
           </form>
           <div className="all-todoLists-container">
             {this.props.todoLists.map((todoList) => {
@@ -39,8 +46,8 @@ class App extends React.Component {
                   name={todoList.name}
                   onDelete={this.props.deleteTodoList}
                   id={todoList.id}
-                  />
-              )
+                />
+              );
             })}
           </div>
         </div>
