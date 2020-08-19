@@ -58,8 +58,18 @@ const mapStateToProps = (state, props) => {
 
 const mapDispatchToProps = (dispatch, props) => {
   return {
-    addTodoList: (name) => dispatch(addTodoList(name)),
-    deleteTodoList: (id) => dispatch(deleteTodoList(id))
+    addTodoList: (name) => dispatch({
+      type: 'ADD_TODOLIST',
+      payload: {
+        name
+      }
+    }),
+    deleteTodoList: (todoListId) => dispatch({
+      type: 'DELETE_TODOLIST',
+      payload: {
+        todoListId
+      }
+    })
   }
 }
 

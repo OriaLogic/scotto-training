@@ -1,4 +1,3 @@
-import { ADD_TODOLIST, DELETE_TODOLIST, ADD_TODO } from "../ActionTypes"
 import { newId } from "../../util/id"
 
 const initialState = {
@@ -19,7 +18,7 @@ const todoLists = (state = initialState, action) => {
   let id;
 
   switch (action.type) {
-    case ADD_TODOLIST:
+    case 'ADD_TODOLIST':
       id = newId();
       return {
         ...state,
@@ -30,11 +29,11 @@ const todoLists = (state = initialState, action) => {
         }
       };
 
-    case DELETE_TODOLIST:
+    case 'DELETE_TODOLIST':
       delete state[action.payload.todoListId]
       return { ...state };
 
-    case ADD_TODO:
+    case 'ADD_TODO':
       id = newId();
 
       return {
