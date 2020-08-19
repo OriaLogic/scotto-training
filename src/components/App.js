@@ -7,34 +7,7 @@ import { addTodoList, deleteTodoList } from "../redux/actions/todoList";
 // Small comment to open the PR
 class App extends React.Component {
   state = {
-    todoLists: [],
     newTodoListName: ""
-  }
-
-  createTodoList = () => {
-    if (this.state.todoLists.length === 0) {
-      this.setState({
-        todoLists: [{ id: 1, name: this.state.newTodoListName}],
-      });
-      return;
-    }
-
-      this.setState({
-        todoLists: [
-          ...this.state.todoLists,
-          {
-            id: this.state.todoLists[this.state.todoLists.length - 1].id + 1,
-            name: this.state.newTodoListName
-          }
-        ]
-    });
-  }
-
-  deleteTodoList = (todoListId) => {
-    const newTodoLists = this.state.todoLists.filter((todoList) => todoList.id !== todoListId )
-    this.setState({
-      todoLists: newTodoLists
-    })
   }
 
   render() {
