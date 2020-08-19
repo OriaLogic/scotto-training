@@ -2,7 +2,6 @@ import React from "react";
 import { values } from "lodash";
 import TodoList from "./TodoList";
 import { connect } from "react-redux";
-import { addTodoList, deleteTodoList } from "../redux/actions/todoList";
 
 // Small comment to open the PR
 class App extends React.Component {

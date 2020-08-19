@@ -4,7 +4,6 @@ import { updateObjectInList } from "../util/array";
 import TodoCreationForm from "./TodoCreationForm";
 import Todo from "./Todo";
 import { connect } from "react-redux";
-import { addTodo } from "../redux/actions/todo"
 
 
 class TodoList extends React.Component {
@@ -76,7 +75,7 @@ class TodoList extends React.Component {
                     onEdit={this.editTask}
                     onCancelEdit={() => this.setState({editingTaskId: null})}
                     onToggle={this.toggleTask}
-                    onDelete={this.deleteTodo}
+                    onDelete={this.props.deleteTodo}
                     onUpdate={this.updateTask}
                   />
                 </li>
@@ -103,6 +102,15 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         type: 'ADD_TODO',
         payload: {
           newTodoName,
+          todoListId: ownProps.id
+        }
+      })
+    },
+    deleteTodo: (todoId) => {
+      dispatch({
+        type: 'DELETE_TODO',
+        payload: {
+          todoId,
           todoListId: ownProps.id
         }
       })
