@@ -15,7 +15,8 @@ const initialState = {
 }
 
 const todoLists = (state = initialState, action) => {
-  let id, todoListId, todoList, todoId;
+  let id, todoListId, todoId;
+  let todoList, todos;
 
   switch (action.type) {
     case 'ADD_TODOLIST':
@@ -35,7 +36,7 @@ const todoLists = (state = initialState, action) => {
 
     case 'ADD_TODO':
       id = newId();
-      todoListId = action.payload.todoListId
+      todoListId = action.payload.todoListId;
       todoList = state[todoListId]
 
       return {
@@ -57,8 +58,8 @@ const todoLists = (state = initialState, action) => {
       todoId = action.payload.todoId
       todoListId = action.payload.todoListId
 
-      const todoList = state[todoListId]
-      const todos = todoList.todos;
+      todoList = state[todoListId]
+      todos = todoList.todos;
       delete todos[todoId]
 
       return {

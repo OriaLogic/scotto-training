@@ -8,14 +8,8 @@ import { connect } from "react-redux";
 
 class TodoList extends React.Component {
   state = {
-    list: [],
     editingTaskId: null
   };
-
-  deleteTodo = (taskToDeleteId) => {
-    const newList = this.state.list.filter(task => task.id !== taskToDeleteId);
-    this.setState({ list: newList });
-  }
 
   editTask = (task) => {
     this.setState({
