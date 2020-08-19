@@ -30,7 +30,7 @@ const todoLists = (state = initialState, action) => {
       };
     case DELETE_TODOLIST:
       delete state[action.payload.todoListId]
-      return state;
+      return { ...state }
     default:
       return state
   }

@@ -2,7 +2,7 @@ import React from "react";
 import { values } from "lodash";
 import TodoList from "./TodoList";
 import { connect } from "react-redux";
-import { addTodoList } from "../redux/actions/todoList";
+import { addTodoList, deleteTodoList } from "../redux/actions/todoList";
 
 // Small comment to open the PR
 class App extends React.Component {
@@ -65,7 +65,7 @@ class App extends React.Component {
                 <TodoList
                   key={todoList.id}
                   name={todoList.name}
-                  onDelete={this.deleteTodoList}
+                  onDelete={this.props.deleteTodoList}
                   id={todoList.id}
                   />
               )
@@ -85,7 +85,8 @@ const mapStateToProps = (state, props) => {
 
 const mapDispatchToProps = (dispatch, props) => {
   return {
-    addTodoList: (name) => dispatch(addTodoList(name))
+    addTodoList: (name) => dispatch(addTodoList(name)),
+    deleteTodoList: (id) => dispatch(deleteTodoList(id))
   }
 }
 
