@@ -1,4 +1,5 @@
 import { ADD_TODOLIST } from "../ActionTypes"
+import { DELETE_TODOLIST } from "../ActionTypes"
 import { newId } from "../../util/id"
 
 const initialState = {
@@ -26,7 +27,10 @@ const todoLists = (state = initialState, action) => {
           name: action.payload.name,
           todos: {}
         }
-      }
+      };
+    case DELETE_TODOLIST:
+      delete state[action.payload.todoListId]
+      return state;
     default:
       return state
   }
