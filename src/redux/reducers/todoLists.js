@@ -2,12 +2,12 @@ import { ADD_TODOLIST, DELETE_TODOLIST, ADD_TODO } from "../ActionTypes"
 import { newId } from "../../util/id"
 
 const initialState = {
-  1: {
-     id: 1,
+  0: {
+     id: 0,
      name: "General todolist",
      todos: {
-       1: {
-         id: 1,
+       0: {
+         id: 0,
          name: "First todo",
          active: true
        }
@@ -16,10 +16,11 @@ const initialState = {
 }
 
 const todoLists = (state = initialState, action) => {
-  switch (action.type) {
+  let id;
 
+  switch (action.type) {
     case ADD_TODOLIST:
-      const id = newId()
+      id = newId();
       return {
         ...state,
         [id]: {
@@ -34,7 +35,8 @@ const todoLists = (state = initialState, action) => {
       return { ...state };
 
     case ADD_TODO:
-      const id = newId()
+      id = newId();
+
       return {
         ...state,
         [action.payload.todoListId]: {

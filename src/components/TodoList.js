@@ -1,7 +1,11 @@
 import React from "react";
+import { values } from "lodash";
 import { updateObjectInList } from "../util/array";
 import TodoCreationForm from "./TodoCreationForm";
 import Todo from "./Todo";
+import { connect } from "react-redux";
+import { addTodo } from "../redux/actions/todo"
+
 
 class TodoList extends React.Component {
   state = {
@@ -12,26 +16,6 @@ class TodoList extends React.Component {
   deleteTodo = (taskToDeleteId) => {
     const newList = this.state.list.filter(task => task.id !== taskToDeleteId);
     this.setState({ list: newList });
-  }
-
-  createNewTask = (name) => {
-    if (this.state.list.length === 0) {
-      this.setState({
-        list: [{ id: 1, name, active: true }],
-      });
-      return;
-    }
-
-    this.setState({
-      list: [
-        ...this.state.list,
-        {
-          id: this.state.list[this.state.list.length - 1].id + 1,
-          name,
-          active: true
-        }
-      ]
-    });
   }
 
   editTask = (task) => {
@@ -68,7 +52,7 @@ class TodoList extends React.Component {
           style={{ alignItems: 'center' }}
         >
           <p className="card-header-title">
-            {this.props.name} ({this.state.list.filter(task => task.active).length})
+            {this.props.name} ({this.props.todos.filter(task => task.active).length})
           </p>
           <button
             className="button is-text is-small"
@@ -81,9 +65,9 @@ class TodoList extends React.Component {
           </button>
         </header>
         <div className="card-content">
-          <TodoCreationForm onCreate={this.createNewTask}/>
+          <TodoCreationForm onCreate={this.props.addTodo}/>
           <ul>
-            {this.state.list.map(task => {
+            {this.props.todos.map(task => {
               return (
                 <li key={task.id}>
                   <Todo
@@ -106,4 +90,24 @@ class TodoList extends React.Component {
   }
 }
 
-export default TodoList;
+const mapStateToProps = (state, ownProps) => {
+  return {
+    todos: values(state[ownProps.id].todos)
+  }
+}
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    addTodo: (newTodoName) => {
+      dispatch({
+        type: 'ADD_TODO',
+        payload: {
+          newTodoName,
+          todoListId: ownProps.id
+        }
+      })
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TodoList);
