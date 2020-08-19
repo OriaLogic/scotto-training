@@ -11,7 +11,7 @@ export default class Todo extends React.Component {
             style={{
               textDecoration: this.props.task.active ? "none" : "line-through"
             }}
-            onClick={() => this.props.onToggle(this.props.task)}
+            onClick={() => this.props.onUpdate(this.props.task.id, { active: !this.props.task.active})}
           >
             {this.props.task.name}
           </span>
@@ -35,7 +35,7 @@ export default class Todo extends React.Component {
           <form
             onSubmit={e => {
               e.preventDefault();
-              this.props.onUpdate(this.props.task.id, this.state.editTaskName)
+              this.props.onUpdate(this.props.task.id, {name: this.state.editTaskName})
           }}
           >
             <input

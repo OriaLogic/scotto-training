@@ -17,16 +17,9 @@ class TodoList extends React.Component {
     });
   }
 
-  updateTask = (taskId, newName) => {
+  updateTodo = (todoId, updatedKeysInTodo) => {
+    this.props.updateTodo(todoId, updatedKeysInTodo);
     this.setState({
-      list: updateObjectInList(this.state.list, taskId, { name: newName }),
-      editingTaskId: null
-    });
-  }
-
-  toggleTask = (task) => {
-    this.setState({
-      list: updateObjectInList(this.state.list, task.id, { active: !task.active }),
       editingTaskId: null
     });
   }
@@ -68,9 +61,8 @@ class TodoList extends React.Component {
                     editing={task.id === this.state.editingTaskId}
                     onEdit={this.editTask}
                     onCancelEdit={() => this.setState({editingTaskId: null})}
-                    onToggle={this.toggleTask}
                     onDelete={this.props.deleteTodo}
-                    onUpdate={this.updateTask}
+                    onUpdate={this.updateTodo}
                   />
                 </li>
               );
@@ -100,6 +92,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         }
       })
     },
+
     deleteTodo: (todoId) => {
       dispatch({
         type: 'DELETE_TODO',
@@ -108,7 +101,19 @@ const mapDispatchToProps = (dispatch, ownProps) => {
           todoListId: ownProps.id
         }
       })
+    },
+
+    updateTodo: (todoId, updatedKeysInTodo) => {
+      dispatch({
+        type: 'UPDATE_TODO',
+        payload: {
+          todoId,
+          updatedKeysInTodo,
+          todoListId: ownProps.id
+        }
+      })
     }
+
   }
 }
 
