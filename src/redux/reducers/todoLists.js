@@ -1,5 +1,4 @@
-import { ADD_TODOLIST } from "../ActionTypes"
-import { DELETE_TODOLIST } from "../ActionTypes"
+import { ADD_TODOLIST, DELETE_TODOLIST, ADD_TODO } from "../ActionTypes"
 import { newId } from "../../util/id"
 
 const initialState = {
@@ -18,6 +17,7 @@ const initialState = {
 
 const todoLists = (state = initialState, action) => {
   switch (action.type) {
+
     case ADD_TODOLIST:
       const id = newId()
       return {
@@ -28,9 +28,28 @@ const todoLists = (state = initialState, action) => {
           todos: {}
         }
       };
+
     case DELETE_TODOLIST:
       delete state[action.payload.todoListId]
-      return { ...state }
+      return { ...state };
+
+    case ADD_TODO:
+      const id = newId()
+      return {
+        ...state,
+        [action.payload.todoListId]: {
+          ...state[action.payload.todoListId],
+          todos: {
+            ...state[action.payload.todoListId].todos,
+            [id]: {
+              id,
+              name: action.payload.newTodoName,
+              active: true
+            }
+          }
+        }
+      }
+
     default:
       return state
   }
