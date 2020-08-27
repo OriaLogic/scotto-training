@@ -13,6 +13,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <h1 className="main-title">Scotto TodoList App !</h1>
+        <button id="save-data-button" className="button is-normal">Save</button>
         <div className="app-container">
           <form
             onSubmit={e => {
