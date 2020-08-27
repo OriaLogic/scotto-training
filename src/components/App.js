@@ -1,37 +1,12 @@
 import React from "react";
+import { values } from "lodash";
 import TodoList from "./TodoList";
+import { connect } from "react-redux";
 
 // Small comment to open the PR
 class App extends React.Component {
   state = {
-    todoLists: [],
     newTodoListName: ""
-  }
-
-  createTodoList = () => {
-    if (this.state.todoLists.length === 0) {
-      this.setState({
-        todoLists: [{ id: 1, name: this.state.newTodoListName}],
-      });
-      return;
-    }
-
-      this.setState({
-        todoLists: [
-          ...this.state.todoLists,
-          {
-            id: this.state.todoLists[this.state.todoLists.length - 1].id + 1,
-            name: this.state.newTodoListName
-          }
-        ]
-    });
-  }
-
-  deleteTodoList = (todoListId) => {
-    const newTodoLists = this.state.todoLists.filter((todoList) => todoList.id !== todoListId )
-    this.setState({
-      todoLists: newTodoLists
-    })
   }
 
   render() {
@@ -43,7 +18,7 @@ class App extends React.Component {
             onSubmit={e => {
               e.preventDefault();
               if (this.state.newTodoListName === "") return;
-              this.createTodoList();
+              this.props.addTodoList(this.state.newTodoListName);
               this.setState({newTodoListName: ""})
             }}
           >
@@ -57,12 +32,12 @@ class App extends React.Component {
             <button className="button is-normal is-primary" style={{marginLeft: 10}} type="submit" disabled={this.state.newTodoListName === ""}>Submit</button>
           </form>
           <div className="all-todoLists-container">
-            {this.state.todoLists.map((todoList) => {
+            {this.props.todoLists.map((todoList) => {
               return (
                 <TodoList
                   key={todoList.id}
                   name={todoList.name}
-                  onDelete={this.deleteTodoList}
+                  onDelete={this.props.deleteTodoList}
                   id={todoList.id}
                   />
               )
@@ -74,4 +49,27 @@ class App extends React.Component {
   }
 }
 
-export default App;
+const mapStateToProps = (state, props) => {
+  return {
+    todoLists: values(state)
+  }
+}
+
+const mapDispatchToProps = (dispatch, props) => {
+  return {
+    addTodoList: (name) => dispatch({
+      type: 'ADD_TODOLIST',
+      payload: {
+        name
+      }
+    }),
+    deleteTodoList: (todoListId) => dispatch({
+      type: 'DELETE_TODOLIST',
+      payload: {
+        todoListId
+      }
+    })
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

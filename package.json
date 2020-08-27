@@ -8,10 +8,14 @@
     "@testing-library/user-event": "^7.2.1",
     "bulma": "^0.9.0",
     "flow-bin": "^0.129.0",
+    "lodash": "^4.17.19",
     "node-sass": "^4.14.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-scripts": "3.4.1"
+    "react-redux": "^7.2.1",
+    "react-scripts": "3.4.1",
+    "redux": "^4.0.5",
+    "uuidv4": "^6.2.2"
   },
   "scripts": {
     "start": "react-scripts start",

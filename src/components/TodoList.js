@@ -1,38 +1,15 @@
 import React from "react";
+import { values } from "lodash";
 import { updateObjectInList } from "../util/array";
 import TodoCreationForm from "./TodoCreationForm";
 import Todo from "./Todo";
+import { connect } from "react-redux";
+
 
 class TodoList extends React.Component {
   state = {
-    list: [],
     editingTaskId: null
   };
-
-  deleteTodo = (taskToDeleteId) => {
-    const newList = this.state.list.filter(task => task.id !== taskToDeleteId);
-    this.setState({ list: newList });
-  }
-
-  createNewTask = (name) => {
-    if (this.state.list.length === 0) {
-      this.setState({
-        list: [{ id: 1, name, active: true }],
-      });
-      return;
-    }
-
-    this.setState({
-      list: [
-        ...this.state.list,
-        {
-          id: this.state.list[this.state.list.length - 1].id + 1,
-          name,
-          active: true
-        }
-      ]
-    });
-  }
 
   editTask = (task) => {
     this.setState({
@@ -40,16 +17,9 @@ class TodoList extends React.Component {
     });
   }
 
-  updateTask = (taskId, newName) => {
+  updateTodo = (todoId, updatedKeysInTodo) => {
+    this.props.updateTodo(todoId, updatedKeysInTodo);
     this.setState({
-      list: updateObjectInList(this.state.list, taskId, { name: newName }),
-      editingTaskId: null
-    });
-  }
-
-  toggleTask = (task) => {
-    this.setState({
-      list: updateObjectInList(this.state.list, task.id, { active: !task.active }),
       editingTaskId: null
     });
   }
@@ -68,7 +38,7 @@ class TodoList extends React.Component {
           style={{ alignItems: 'center' }}
         >
           <p className="card-header-title">
-            {this.props.name} ({this.state.list.filter(task => task.active).length})
+            {this.props.name} ({this.props.todos.filter(task => task.active).length})
           </p>
           <button
             className="button is-text is-small"
@@ -81,9 +51,9 @@ class TodoList extends React.Component {
           </button>
         </header>
         <div className="card-content">
-          <TodoCreationForm onCreate={this.createNewTask}/>
+          <TodoCreationForm onCreate={this.props.addTodo}/>
           <ul>
-            {this.state.list.map(task => {
+            {this.props.todos.map(task => {
               return (
                 <li key={task.id}>
                   <Todo
@@ -91,9 +61,8 @@ class TodoList extends React.Component {
                     editing={task.id === this.state.editingTaskId}
                     onEdit={this.editTask}
                     onCancelEdit={() => this.setState({editingTaskId: null})}
-                    onToggle={this.toggleTask}
-                    onDelete={this.deleteTodo}
-                    onUpdate={this.updateTask}
+                    onDelete={this.props.deleteTodo}
+                    onUpdate={this.updateTodo}
                   />
                 </li>
               );
@@ -106,4 +75,46 @@ class TodoList extends React.Component {
   }
 }
 
-export default TodoList;
+const mapStateToProps = (state, ownProps) => {
+  return {
+    todos: values(state[ownProps.id].todos)
+  }
+}
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    addTodo: (newTodoName) => {
+      dispatch({
+        type: 'ADD_TODO',
+        payload: {
+          newTodoName,
+          todoListId: ownProps.id
+        }
+      })
+    },
+
+    deleteTodo: (todoId) => {
+      dispatch({
+        type: 'DELETE_TODO',
+        payload: {
+          todoId,
+          todoListId: ownProps.id
+        }
+      })
+    },
+
+    updateTodo: (todoId, updatedKeysInTodo) => {
+      dispatch({
+        type: 'UPDATE_TODO',
+        payload: {
+          todoId,
+          updatedKeysInTodo,
+          todoListId: ownProps.id
+        }
+      })
+    }
+
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TodoList);
