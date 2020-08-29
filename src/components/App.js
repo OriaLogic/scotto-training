@@ -13,7 +13,13 @@ class App extends React.Component {
     return (
       <div className="App">
         <h1 className="main-title">Scotto TodoList App !</h1>
-        <button id="save-data-button" className="button is-normal">Save</button>
+        <button
+          id="save-data-button"
+          className="button is-normal"
+          onClick={this.props.saveData}
+        >
+          Save
+        </button>
         <div className="app-container">
           <form
             onSubmit={e => {
@@ -76,6 +82,9 @@ const mapDispatchToProps = (dispatch, props) => {
       payload: {
         todoListId
       }
+    }),
+    saveData: () => dispatch({
+      type: 'SAVE_DATA'
     })
   }
 }
