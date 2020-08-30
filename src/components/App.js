@@ -7,10 +7,6 @@ import { connect } from "react-redux";
 
 // Small comment to open the PR (again)
 class App extends React.Component {
-  state = {
-    newTodoListName: ""
-  };
-
   render() {
     return (
       <div className="App">
@@ -21,7 +17,7 @@ class App extends React.Component {
             onClick={this.props.saveData}
           />
         <div className="app-container">
-          <TodoListCreationForm/>
+          <TodoListCreationForm onCreate={this.props.addTodoList}/>
           <div className="all-todoLists-container">
             {this.props.todoLists.map((todoList) => {
               return (
