@@ -5,7 +5,7 @@ import userPreferences from "./reducers/userPreferences"
 const initialState = {
   todoLists: JSON.parse(localStorage.getItem("dataState")),
   userPreferences: {
-    filter: 'ALL'
+    filter: 'ACTIVE'
   }
 }
 
