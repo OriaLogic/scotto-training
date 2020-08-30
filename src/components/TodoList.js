@@ -77,7 +77,7 @@ class TodoList extends React.Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    todos: values(state[ownProps.id].todos)
+    todos: values(state.todoLists[ownProps.id].todos)
   }
 }
 

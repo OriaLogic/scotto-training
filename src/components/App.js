@@ -44,7 +44,7 @@ class App extends React.Component {
 
 const mapStateToProps = (state, props) => {
   return {
-    todoLists: values(state)
+    todoLists: values(state.todoLists)
   }
 }
 
