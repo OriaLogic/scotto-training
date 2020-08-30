@@ -12,10 +12,12 @@ class App extends React.Component {
       <div className="App">
         <h1 className="main-title">Scotto TodoList App !</h1>
           <Button
-            className="button save-data"
-            name="Save"
+            additionalClassName="save-data"
             onClick={this.props.saveData}
-          />
+            size="normal"
+          >
+            Save
+          </Button>
         <div className="app-container">
           <TodoListCreationForm onCreate={this.props.addTodoList}/>
           <div className="all-todoLists-container">

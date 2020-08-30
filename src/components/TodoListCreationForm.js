@@ -24,11 +24,13 @@ export default class TodoListCreationForm extends React.Component {
           onChange={e => this.setState({ newTodoListName: e.target.value })}
         />
         <Button
-          className="button submit-todolist"
+          style={{ marginLeft: 10 }}
           type="submit"
+          color="primary"
           disabled={this.state.newTodoListName === ""}
-          name="Submit"
-        />
+        >
+          Submit
+        </Button>
       </form>
     )
   }
