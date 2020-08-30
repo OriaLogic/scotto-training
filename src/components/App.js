@@ -1,6 +1,7 @@
 import React from "react";
 import { values } from "lodash";
 import TodoList from "./TodoList";
+import Button from "./Library/Button";
 import { connect } from "react-redux";
 
 // Small comment to open the PR (again)
@@ -13,13 +14,10 @@ class App extends React.Component {
     return (
       <div className="App">
         <h1 className="main-title">Scotto TodoList App !</h1>
-        <button
-          id="save-data-button"
-          className="button is-normal"
-          onClick={this.props.saveData}
-        >
-          Save
-        </button>
+          <Button
+            name="Save"
+            onClick={this.props.saveData}
+          />
         <div className="app-container">
           <form
             onSubmit={e => {
