@@ -12,7 +12,7 @@ class App extends React.Component {
       <div className="App">
         <h1 className="main-title">Scotto TodoList App !</h1>
           <Button
-            className="save-data-button"
+            className="button save-data"
             name="Save"
             onClick={this.props.saveData}
           />
