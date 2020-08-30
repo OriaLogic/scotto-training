@@ -1,6 +1,7 @@
 import React from "react";
 import { values } from "lodash";
 import TodoList from "./TodoList";
+import TodoListCreationForm from "./TodoListCreationForm";
 import Button from "./Library/Button";
 import { connect } from "react-redux";
 
@@ -20,30 +21,7 @@ class App extends React.Component {
             onClick={this.props.saveData}
           />
         <div className="app-container">
-          <form
-            onSubmit={e => {
-              e.preventDefault();
-              if (this.state.newTodoListName === "") return;
-              this.props.addTodoList(this.state.newTodoListName);
-              this.setState({newTodoListName: ""})
-            }}
-          >
-            <input
-              className="input is-primary is-normal"
-              autoFocus
-              placeholder="Add a TodoList"
-              value={this.state.newTodoListName}
-              onChange={e => this.setState({ newTodoListName: e.target.value })}
-            />
-            <button
-              className="button is-normal is-primary"
-              style={{ marginLeft: 10 }}
-              type="submit"
-              disabled={this.state.newTodoListName === ""}
-            >
-              Submit
-            </button>
-          </form>
+          <TodoListCreationForm/>
           <div className="all-todoLists-container">
             {this.props.todoLists.map((todoList) => {
               return (
