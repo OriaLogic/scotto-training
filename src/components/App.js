@@ -5,7 +5,7 @@ import TodoListCreationForm from "./TodoListCreationForm";
 import Button from "./Library/Button";
 import { connect } from "react-redux";
 
-// Small comment to open the PR (again)
+// Small comment to open the PR
 class App extends React.Component {
   render() {
     return (
