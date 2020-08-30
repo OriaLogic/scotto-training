@@ -1,36 +1,26 @@
 import React from "react";
 import { values } from "lodash";
 import TodoList from "./TodoList";
+import TodoListCreationForm from "./TodoListCreationForm";
+import Button from "./Library/Button";
 import { connect } from "react-redux";
 
-// Small comment to open the PR
+// Small comment to open the PR (again)
 class App extends React.Component {
-  state = {
-    newTodoListName: ""
-  }
-
   render() {
     return (
       <div className="App">
         <h1 className="main-title">Scotto TodoList App !</h1>
+        <Button
+          additionalClassName="save-data"
+          onClick={this.props.saveData}
+        >
+          Save
+        </Button>
+
         <div className="app-container">
-          <form
-            onSubmit={e => {
-              e.preventDefault();
-              if (this.state.newTodoListName === "") return;
-              this.props.addTodoList(this.state.newTodoListName);
-              this.setState({newTodoListName: ""})
-            }}
-          >
-            <input
-              className="input is-primary is-normal"
-              autoFocus
-              placeholder="Add a TodoList"
-              value={this.state.newTodoListName}
-              onChange={e => this.setState({newTodoListName: e.target.value})}
-            />
-            <button className="button is-normal is-primary" style={{marginLeft: 10}} type="submit" disabled={this.state.newTodoListName === ""}>Submit</button>
-          </form>
+          <TodoListCreationForm onCreate={this.props.addTodoList}/>
+
           <div className="all-todoLists-container">
             {this.props.todoLists.map((todoList) => {
               return (
@@ -39,8 +29,8 @@ class App extends React.Component {
                   name={todoList.name}
                   onDelete={this.props.deleteTodoList}
                   id={todoList.id}
-                  />
-              )
+                />
+              );
             })}
           </div>
         </div>
@@ -68,6 +58,9 @@ const mapDispatchToProps = (dispatch, props) => {
       payload: {
         todoListId
       }
+    }),
+    saveData: () => dispatch({
+      type: 'SAVE_DATA'
     })
   }
 }
