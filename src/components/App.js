@@ -11,15 +11,16 @@ class App extends React.Component {
     return (
       <div className="App">
         <h1 className="main-title">Scotto TodoList App !</h1>
-          <Button
-            additionalClassName="save-data"
-            onClick={this.props.saveData}
-            size="normal"
-          >
-            Save
-          </Button>
+        <Button
+          additionalClassName="save-data"
+          onClick={this.props.saveData}
+        >
+          Save
+        </Button>
+
         <div className="app-container">
           <TodoListCreationForm onCreate={this.props.addTodoList}/>
+
           <div className="all-todoLists-container">
             {this.props.todoLists.map((todoList) => {
               return (
