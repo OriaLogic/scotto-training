@@ -1,4 +1,5 @@
 import React from "react";
+import Button from "./Library/Button";
 
 export default class TodoListCreationForm extends React.Component {
   state = {
@@ -22,14 +23,12 @@ export default class TodoListCreationForm extends React.Component {
           value={this.state.newTodoListName}
           onChange={e => this.setState({ newTodoListName: e.target.value })}
         />
-        <button
-          className="button is-normal is-primary"
-          style={{ marginLeft: 10 }}
+        <Button
+          className="button submit-todolist"
           type="submit"
           disabled={this.state.newTodoListName === ""}
-        >
-          Submit
-        </button>
+          name="Submit"
+        />
       </form>
     )
   }
