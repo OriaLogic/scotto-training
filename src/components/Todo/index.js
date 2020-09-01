@@ -71,7 +71,7 @@ export default function Todo({
       <form
         onSubmit={e => {
           e.preventDefault();
-          onUpdate({
+          onUpdate(todo.id, {
             name: editTaskName,
             dueDate: editDueDate
           });

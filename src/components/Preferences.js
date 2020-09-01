@@ -2,12 +2,6 @@ import React from "react";
 import { connect } from "react-redux";
 import { capitalize, replace } from "lodash";
 
-import {
-  FILTERS,
-  SORT_BY_FIELDS,
-  SORT_BY_DIRECTIONS
-} from "../constants/Preferences";
-import { updatePreferences } from "../redux/actions";
 import { Dropdown, DropdownItem } from "./library/Dropdown";
 
 function Preferences({
@@ -25,7 +19,7 @@ function Preferences({
       </h3>
       <div className="filters" style={{ marginBottom: 5 }}>
         <h4 className="is-size-6">Filters:</h4>
-        {Object.keys(FILTERS).map(key => (
+        {["ALL", "ACTIVE", "INACTIVE"].map(key => (
           <button
             className="button is-small"
             disabled={filter === key}
@@ -50,7 +44,7 @@ function Preferences({
             </button>
           }
         >
-          {Object.keys(SORT_BY_FIELDS).map(key => (
+          {["NAME", "DUE_DATE"].map(key => (
             <DropdownItem
               onClick={() => updateSortByField(key)}
               active={key === sortByField}
@@ -70,7 +64,7 @@ function Preferences({
             </button>
           }
         >
-          {Object.keys(SORT_BY_DIRECTIONS).map(key => (
+          {["ASC", "DESC"].map(key => (
             <DropdownItem
               onClick={() => updateSortByDirection(key)}
               active={key === sortByDirection}
@@ -85,15 +79,25 @@ function Preferences({
 }
 
 const mapStateToProps = state => ({
-  preferences: state.preferences
+  preferences: state.userPreferences
 });
 
 const mapDispatchToProps = dispatch => ({
-  updateFilter: filter => dispatch(updatePreferences({ filter })),
+  updateFilter: filter =>
+    dispatch({
+      type: "UPDATE_PREFERENCES",
+      payload: { filter }
+    }),
   updateSortByField: sortByField =>
-    dispatch(updatePreferences({ sortByField })),
+    dispatch({
+      type: "UPDATE_PREFERENCES",
+      payload: { sortByField }
+    }),
   updateSortByDirection: sortByDirection =>
-    dispatch(updatePreferences({ sortByDirection }))
+    dispatch({
+      type: "UPDATE_PREFERENCES",
+      payload: { sortByDirection }
+    })
 });
 
 export default connect(

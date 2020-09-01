@@ -1,11 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
 import { values, sortBy, camelCase } from "lodash";
-import {
-  FILTERS,
-  SORT_BY_FIELDS,
-  SORT_BY_DIRECTIONS
-} from "../constants/Preferences";
 
 import TodoCreationForm from "./TodoCreationForm";
 import Todo from "./Todo";
@@ -15,9 +10,9 @@ class TodoList extends React.Component {
     editingTaskId: null
   };
 
-  editTask = task => {
+  editTask = todo => {
     this.setState({
-      editingTaskId: task.id
+      editingTaskId: todo.id
     });
   };
 
@@ -30,7 +25,7 @@ class TodoList extends React.Component {
 
   deleteTodoList = () => {
     if (window.confirm("Are you sure you want to delete this todo list ?")) {
-      this.props.deleteTodoList();
+      this.props.onDelete(this.props.id);
     }
   };
 
@@ -38,11 +33,11 @@ class TodoList extends React.Component {
     const { todos, preferences } = this.props;
     const { filter, sortByDirection, sortByField } = preferences;
     const fieldName = camelCase(sortByField);
-    const multiple = sortByDirection === SORT_BY_DIRECTIONS.ASC ? 1 : -1;
+    const multiple = sortByDirection === "ASC" ? 1 : -1;
     const filteredTodos =
-      filter === FILTERS.ALL
+      filter === "ALL"
         ? todos
-        : todos.filter(todo => todo.active === (filter === FILTERS.ACTIVE));
+        : todos.filter(todo => todo.active === (filter === "ACTIVE"));
     return sortBy(filteredTodos, todo => multiple * todo[fieldName]);
   };
 
@@ -68,12 +63,12 @@ class TodoList extends React.Component {
           <header className="card-header" style={{ alignItems: "center" }}>
             <p className="card-header-title">
               {this.props.name} (
-              {this.props.todos.filter(task => task.active).length})
+              {this.props.todos.filter(todo => todo.active).length})
             </p>
             <button
               className="button is-text is-small"
               style={{ marginRight: 11 }}
-              onClick={() => this.props.onDelete(this.props.id)}
+              onClick={() => this.deleteTodoList(this.props.id)}
             >
               <span className="icon has-text-danger">
                 <i className="fas fa-trash"></i>
@@ -83,12 +78,12 @@ class TodoList extends React.Component {
           <div className="card-content">
             <TodoCreationForm onCreate={this.props.addTodo} />
             <ul>
-              {this.props.todos.map(task => {
+              {this.todos().map(todo => {
                 return (
-                  <li key={task.id}>
+                  <li key={todo.id}>
                     <Todo
-                      task={task}
-                      editing={task.id === this.state.editingTaskId}
+                      todo={todo}
+                      editing={todo.id === this.state.editingTaskId}
                       onEdit={this.editTask}
                       onCancelEdit={() =>
                         this.setState({ editingTaskId: null })
@@ -109,18 +104,20 @@ class TodoList extends React.Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    todos: values(state[ownProps.id].todos)
+    todos: values(state.todoLists[ownProps.id].todos),
+    preferences: state.userPreferences
   };
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    addTodo: newTodoName => {
+    addTodo: (newTodoName, dueDate) => {
       dispatch({
         type: "ADD_TODO",
         payload: {
           newTodoName,
-          todoListId: ownProps.id
+          todoListId: ownProps.id,
+          dueDate
         }
       });
     },

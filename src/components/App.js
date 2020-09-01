@@ -2,7 +2,7 @@ import React from "react";
 import { values } from "lodash";
 import TodoList from "./TodoList";
 import TodoListCreationForm from "./TodoListCreationForm";
-import Button from "./Library/Button";
+import Button from "./library/Button";
 import { connect } from "react-redux";
 import Preferences from "./Preferences";
 
@@ -17,14 +17,21 @@ class App extends React.Component {
         </Button>
 
         <div className="app-container">
-          <Preferences />
-          <TodoListCreationForm onCreate={this.props.addTodoList} />
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "flex-end"
+            }}
+          >
+            <TodoListCreationForm onCreate={this.props.addTodoList} />
+            <Preferences />
+          </div>
 
           <div className="all-todoLists-container">
             {this.props.todoLists.map(todoList => {
               return (
                 <TodoList
-                  todoList={todoList}
                   key={todoList.id}
                   name={todoList.name}
                   onDelete={this.props.deleteTodoList}
@@ -42,7 +49,7 @@ class App extends React.Component {
 
 const mapStateToProps = (state, props) => {
   return {
-    todoLists: values(state)
+    todoLists: values(state.todoLists)
   };
 };
 

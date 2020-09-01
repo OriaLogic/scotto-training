@@ -47,7 +47,7 @@ const todoLists = (state = initialState, action) => {
             ...todoList.todos,
             [id]: {
               id,
-              dueDate: payload.dueDate,
+              dueDate: action.payload.dueDate,
               name: action.payload.newTodoName,
               active: true
             }
@@ -93,10 +93,6 @@ const todoLists = (state = initialState, action) => {
           }
         }
       };
-
-    case "SAVE_DATA":
-      localStorage.setItem("dataState", JSON.stringify(state));
-      return state;
 
     default:
       return state;

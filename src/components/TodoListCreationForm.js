@@ -1,10 +1,10 @@
 import React from "react";
-import Button from "./Library/Button";
+import Button from "./library/Button";
 
 export default class TodoListCreationForm extends React.Component {
   state = {
     newTodoListName: ""
-  }
+  };
 
   render() {
     return (
@@ -13,8 +13,9 @@ export default class TodoListCreationForm extends React.Component {
           e.preventDefault();
           if (this.state.newTodoListName === "") return;
           this.props.onCreate(this.state.newTodoListName);
-          this.setState({newTodoListName: ""})
+          this.setState({ newTodoListName: "" });
         }}
+        style={{ display: "flex" }}
       >
         <input
           className="input is-primary is-normal"
@@ -32,6 +33,6 @@ export default class TodoListCreationForm extends React.Component {
           Submit
         </Button>
       </form>
-    )
+    );
   }
 }
