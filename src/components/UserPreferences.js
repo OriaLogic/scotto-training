@@ -27,4 +27,15 @@ const mapStateToProps = (state, props) => {
   }
 }
 
-export default connect(mapStateToProps)(UserPreferences);
+const mapDispatchToProps = (dispatch, props) => {
+  return {
+    changeFilter: (filter) => dispatch({
+      type: "CHANGE_FILTER",
+      payload: {
+        filter
+      }
+    })
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserPreferences);
