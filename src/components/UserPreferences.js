@@ -8,13 +8,13 @@ class UserPreferences extends React.Component {
       <div className="user-preferences">
         <h2 style={{ marginBottom: 10 }} className="title is-4">Preferences</h2>
         <div style={{ display: "flex" }}>
-          <h5 class="subtitle is-5">Filters:</h5>
-          <Button disabled={this.props.filter === "ALL"} style={{ marginLeft: 10 }} size="small">All</Button>
-          <Button disabled={this.props.filter === "ACTIVE"} style={{ marginLeft: 10 }} size="small">Active</Button>
-          <Button disabled={this.props.filter === "INACTIVE"} style={{ marginLeft: 10 }} size="small">Inactive</Button>
+          <h5 className="subtitle is-5">Filters:</h5>
+          <Button onClick={() => this.props.changeFilter("ALL")} disabled={this.props.filter === "ALL"} style={{ marginLeft: 10 }} size="small">All</Button>
+          <Button onClick={() => this.props.changeFilter("ACTIVE")} disabled={this.props.filter === "ACTIVE"} style={{ marginLeft: 10 }} size="small">Active</Button>
+          <Button onClick={() => this.props.changeFilter("INACTIVE")} disabled={this.props.filter === "INACTIVE"} style={{ marginLeft: 10 }} size="small">Inactive</Button>
         </div>
         <div style={{ display: "flex" }}>
-          <h5 class="subtitle is-5">Sort by:</h5>
+          <h5 className="subtitle is-5">Sort by:</h5>
         </div>
       </div>
     )
