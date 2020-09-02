@@ -76,8 +76,19 @@ class TodoList extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
+  const filter = state.userPreferences.filter;
+  const todos = values(state.todoLists[ownProps.id].todos);
+
+  const filteredTodos = todos.filter(todo => {
+    switch (filter) {
+      case 'ALL': return true
+      case 'ACTIVE': return todo.active === true
+      case 'INACTIVE': return todo.active === false
+    }
+  });
+
   return {
-    todos: values(state.todoLists[ownProps.id].todos)
+    todos: filteredTodos
   }
 }
 

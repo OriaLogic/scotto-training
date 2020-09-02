@@ -6,10 +6,9 @@ const initialState = {
 const userPreferences = (state = initialState, action) => {
   switch (action.type) {
     case 'CHANGE_FILTER':
-    console.log(action.payload)
     return {
-      ...state,
-      filter: action.payload.filter}
+      filter: action.payload.filter
+    };
 
     default:
       return state
