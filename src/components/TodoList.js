@@ -25,6 +25,14 @@ class TodoList extends React.Component {
   }
 
   render() {
+    const filteredTodos = this.props.todos.filter(todo => {
+      switch (this.props.filter) {
+        case 'ALL': return true
+        case 'ACTIVE': return todo.active === true
+        case 'INACTIVE': return todo.active === false
+      }
+    });
+
     return (
       <div
         className="TodoList"
@@ -53,7 +61,7 @@ class TodoList extends React.Component {
         <div className="card-content">
           <TodoCreationForm onCreate={this.props.addTodo}/>
           <ul>
-            {this.props.todos.map(task => {
+            {filteredTodos.map(task => {
               return (
                 <li key={task.id}>
                   <Todo
@@ -77,7 +85,8 @@ class TodoList extends React.Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    todos: values(state[ownProps.id].todos)
+    todos: values(state.todoLists[ownProps.id].todos),
+    filter: state.userPreferences.filter
   }
 }
 

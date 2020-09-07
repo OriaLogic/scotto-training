@@ -1,13 +1,19 @@
-import { createStore } from "redux";
+import { createStore, combineReducers } from "redux"
 import todoLists from "./reducers/todoLists";
+import userPreferences from "./reducers/userPreferences"
 
-const initialState = JSON.parse(localStorage.getItem("dataState"));
-console.log(initialState);
+const initialState = {
+  todoLists: JSON.parse(localStorage.getItem("dataState")),
+  userPreferences: {
+    filter: "ALL"
+  }
+}
 
-const store = createStore(
+const rootReducer = combineReducers({
   todoLists,
-  initialState,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-);
+  userPreferences
+})
+
+const store = createStore(rootReducer, initialState, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 
 export default store;

@@ -1,11 +1,12 @@
 import React from "react";
 import { values } from "lodash";
 import TodoList from "./TodoList";
+import UserPreferences from "./UserPreferences";
 import TodoListCreationForm from "./TodoListCreationForm";
 import Button from "./Library/Button";
 import { connect } from "react-redux";
 
-// Small comment to open the PR (again)
+// Small comment to open the PR
 class App extends React.Component {
   render() {
     return (
@@ -19,8 +20,10 @@ class App extends React.Component {
         </Button>
 
         <div className="app-container">
-          <TodoListCreationForm onCreate={this.props.addTodoList}/>
-
+          <div className="bloc-1">
+            <UserPreferences/>
+            <TodoListCreationForm onCreate={this.props.addTodoList}/>
+          </div>
           <div className="all-todoLists-container">
             {this.props.todoLists.map((todoList) => {
               return (
@@ -41,7 +44,7 @@ class App extends React.Component {
 
 const mapStateToProps = (state, props) => {
   return {
-    todoLists: values(state)
+    todoLists: values(state.todoLists)
   }
 }
 
