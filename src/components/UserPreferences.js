@@ -15,6 +15,9 @@ class UserPreferences extends React.Component {
         </div>
         <div style={{ display: "flex" }}>
           <h5 className="subtitle is-5">Sort by:</h5>
+          <Button onClick={() => this.props.changeSortBy("Name")} disabled={this.props.sortBy === "Name"} style={{ marginLeft: 10 }} size="small">Name</Button>
+          <Button onClick={() => this.props.changeSortBy("Length")} disabled={this.props.sortBy === "Length"} style={{ marginLeft: 10 }} size="small">Length</Button>
+          <Button onClick={() => this.props.changeSortBy("Number of Vowels")} disabled={this.props.sortBy === "Number of Vowels"} style={{ marginLeft: 10 }} size="small">Number of Vowels</Button>
         </div>
       </div>
     )
@@ -23,7 +26,8 @@ class UserPreferences extends React.Component {
 
 const mapStateToProps = (state, props) => {
   return {
-    filter: state.userPreferences.filter
+    filter: state.userPreferences.filter,
+    sortBy: state.userPreferences.sortBy
   }
 }
 
@@ -34,7 +38,15 @@ const mapDispatchToProps = (dispatch, props) => {
       payload: {
         filter
       }
+    }),
+
+    changeSortBy: (sortBy) => dispatch({
+      type: "CHANGE_SORT_BY",
+      payload: {
+        sortBy
+      }
     })
+
   }
 }
 
