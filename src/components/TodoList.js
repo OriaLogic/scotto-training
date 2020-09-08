@@ -49,10 +49,20 @@ class TodoList extends React.Component {
       return 0;
     };
 
+    const countVowels = str => Array.from(str).filter(letter => 'aeiou'.includes(letter)).length;
+
+    const sortByVowelsFunction = (todo1, todo2) => {
+      if (countVowels(todo1.name) < countVowels(todo2.name))
+        return -1;
+      if (countVowels(todo1.name) > countVowels(todo2.name))
+        return 1;
+      return 0;
+    };
+
     const sortedAndFilteredTodos = filteredTodos.sort((todo1, todo2) => {
         if (this.props.sortBy === 'NAME') return sortByNameFunction(todo1, todo2);
         if (this.props.sortBy === 'LENGTH') return sortByLengthFunction(todo1, todo2);
-        if (this.props.sortBy === 'NUMBER_OF_VOWELS') return sortByNameFunction(todo1, todo2)
+        if (this.props.sortBy === 'NUMBER_OF_VOWELS') return sortByVowelsFunction(todo1, todo2)
     })
 
     return (
