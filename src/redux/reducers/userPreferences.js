@@ -1,7 +1,7 @@
 
 const initialState = {
   filter: "ALL",
-  sortBy: "Name"
+  sortBy: "NAME"
 }
 
 const userPreferences = (state = initialState, action) => {

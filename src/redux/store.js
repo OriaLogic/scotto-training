@@ -6,7 +6,7 @@ const initialState = {
   todoLists: JSON.parse(localStorage.getItem("dataState")),
   userPreferences: {
     filter: "ALL",
-    sortBy: "Name"
+    sortBy: "NAME"
   }
 }
 

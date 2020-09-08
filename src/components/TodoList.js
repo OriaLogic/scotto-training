@@ -33,6 +33,20 @@ class TodoList extends React.Component {
       }
     });
 
+    const sortByNameFunction = (todo1, todo2) => {
+      if (todo1.name < todo2.name)
+        return -1;
+      if (todo1.name > todo2.name)
+        return 1;
+      return 0;
+    };
+
+    const sortedAndFilteredTodos = filteredTodos.sort((todo1, todo2) => {
+        if (this.props.sortBy === 'NAME') return sortByNameFunction(todo1, todo2);
+        if (this.props.sortBy === 'LENGTH') // return sortByNameFunction(todo1, todo2)
+        if (this.props.sortBy === 'NUMBER_OF_VOWELS') // return sortByNameFunction(todo1, todo2)
+    })
+
     return (
       <div
         className="TodoList"
@@ -61,7 +75,7 @@ class TodoList extends React.Component {
         <div className="card-content">
           <TodoCreationForm onCreate={this.props.addTodo}/>
           <ul>
-            {filteredTodos.map(task => {
+            {sortedAndFilteredTodos.map(task => {
               return (
                 <li key={task.id}>
                   <Todo
@@ -86,7 +100,8 @@ class TodoList extends React.Component {
 const mapStateToProps = (state, ownProps) => {
   return {
     todos: values(state.todoLists[ownProps.id].todos),
-    filter: state.userPreferences.filter
+    filter: state.userPreferences.filter,
+    sortBy: state.userPreferences.sortBy
   }
 }
 
