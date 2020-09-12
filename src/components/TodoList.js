@@ -8,19 +8,19 @@ import { connect } from "react-redux";
 
 class TodoList extends React.Component {
   state = {
-    editingTaskId: null
+    editingTodoId: null
   };
 
-  editTask = (task) => {
+  editTodo = (todo) => {
     this.setState({
-      editingTaskId: task.id,
+      editingTodoId: todo.id,
     });
   }
 
   updateTodo = (todoId, updatedKeysInTodo) => {
     this.props.updateTodo(todoId, updatedKeysInTodo);
     this.setState({
-      editingTaskId: null
+      editingTodoId: null
     });
   }
 
@@ -82,7 +82,7 @@ class TodoList extends React.Component {
           style={{ alignItems: 'center' }}
         >
           <p className="card-header-title">
-            {this.props.name} ({this.props.todos.filter(task => task.active).length})
+            {this.props.name} ({this.props.todos.filter(todo => todo.active).length})
           </p>
           <button
             className="button is-text is-small"
@@ -97,14 +97,14 @@ class TodoList extends React.Component {
         <div className="card-content">
           <TodoCreationForm onCreate={this.props.addTodo}/>
           <ul>
-            {this.getFilteredAndSortedTodos().map(task => {
+            {this.getFilteredAndSortedTodos().map(todo => {
               return (
-                <li key={task.id}>
+                <li key={todo.id}>
                   <Todo
-                    task={task}
-                    editing={task.id === this.state.editingTaskId}
-                    onEdit={this.editTask}
-                    onCancelEdit={() => this.setState({editingTaskId: null})}
+                    todo={todo}
+                    editing={todo.id === this.state.editingTodoId}
+                    onEdit={this.editTodo}
+                    onCancelEdit={() => this.setState({editingTodoId: null})}
                     onDelete={this.props.deleteTodo}
                     onUpdate={this.updateTodo}
                   />

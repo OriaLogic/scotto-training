@@ -5,7 +5,7 @@ import "react-datepicker/dist/react-datepicker.css";
 
 export default class TodoCreationForm extends React.Component {
   state = {
-    taskName: ""
+    todoName: ""
   }
 
   render() {
@@ -13,17 +13,17 @@ export default class TodoCreationForm extends React.Component {
       <form
         onSubmit={e => {
           e.preventDefault();
-          if (this.state.taskName === "") return;
-          this.props.onCreate(this.state.taskName)
-          this.setState({taskName: ""})
+          if (this.state.todoName === "") return;
+          this.props.onCreate(this.state.todoName)
+          this.setState({todoName: ""})
         }}
       >
         <input
           className="input is-primary is-small"
           autoFocus
-          placeholder="Add a task (hit Enter to validate)"
-          value={this.state.taskName}
-          onChange={e => this.setState({taskName: e.target.value})}
+          placeholder="Add a todo (hit Enter to validate)"
+          value={this.state.todoName}
+          onChange={e => this.setState({todoName: e.target.value})}
         />
       </form>
     )

@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default class Todo extends React.Component {
-  state = { editTaskName: this.props.task.name }
+  state = { editTodoName: this.props.todo.name }
 
   render() {
     return (
@@ -9,21 +9,21 @@ export default class Todo extends React.Component {
         <span className="todo-container">
           <span
             style={{
-              textDecoration: this.props.task.active ? "none" : "line-through"
+              textDecoration: this.props.todo.active ? "none" : "line-through"
             }}
-            onClick={() => this.props.onUpdate(this.props.task.id, { active: !this.props.task.active})}
+            onClick={() => this.props.onUpdate(this.props.todo.id, { active: !this.props.todo.active})}
           >
-            {this.props.task.name}
+            {this.props.todo.name}
           </span>
           <span className="button-container">
             <button
-              onClick={() => this.props.onEdit(this.props.task)}
+              onClick={() => this.props.onEdit(this.props.todo)}
               className="button is-primary is-outlined is-small"
             >
               edit
             </button>
             <button
-              onClick={() => this.props.onDelete(this.props.task.id)}
+              onClick={() => this.props.onDelete(this.props.todo.id)}
               className="button is-danger is-small is-outlined"
             >
               delete
@@ -35,14 +35,14 @@ export default class Todo extends React.Component {
           <form
             onSubmit={e => {
               e.preventDefault();
-              this.props.onUpdate(this.props.task.id, {name: this.state.editTaskName})
+              this.props.onUpdate(this.props.todo.id, {name: this.state.editTodoName})
           }}
           >
             <input
               className="input is-primary is-small"
               autoFocus
-              value={this.state.editTaskName}
-              onChange={e => this.setState({ editTaskName: e.target.value })}
+              value={this.state.editTodoName}
+              onChange={e => this.setState({ editTodoName: e.target.value })}
             />
             <button
               className="button is-primary is-small"
@@ -54,7 +54,7 @@ export default class Todo extends React.Component {
               type="button"
               onClick={() => {
                 this.props.onCancelEdit()
-                this.setState({ editTaskName: this.props.task.name })
+                this.setState({ editTodoName: this.props.todo.name })
               }}
             >
               Cancel
