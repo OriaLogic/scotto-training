@@ -1,6 +1,9 @@
 import React from "react";
 import Button from "./Library/Button";
 import { connect } from "react-redux";
+import { capitalize, startCase } from 'lodash';
+
+
 
 class UserPreferences extends React.Component {
   render(){
@@ -9,12 +12,31 @@ class UserPreferences extends React.Component {
         <h2 style={{ marginBottom: 10 }} className="title is-4">Preferences</h2>
         <div style={{ display: "flex" }}>
           <h5 className="subtitle is-5">Filters:</h5>
-          <Button onClick={() => this.props.changeFilter("ALL")} disabled={this.props.filter === "ALL"} style={{ marginLeft: 10 }} size="small">All</Button>
-          <Button onClick={() => this.props.changeFilter("ACTIVE")} disabled={this.props.filter === "ACTIVE"} style={{ marginLeft: 10 }} size="small">Active</Button>
-          <Button onClick={() => this.props.changeFilter("INACTIVE")} disabled={this.props.filter === "INACTIVE"} style={{ marginLeft: 10 }} size="small">Inactive</Button>
+          { 
+            ["ALL", "ACTIVE", "INACTIVE"].map(filterValue => (
+              <Button
+                onClick={() => this.props.changeFilter(filterValue)}
+                disabled={this.props.filter === filterValue}
+                style={{ marginLeft: 10 }}
+                size="small">
+                {capitalize(filterValue)}
+              </Button>
+            ))
+          }
         </div>
         <div style={{ display: "flex" }}>
           <h5 className="subtitle is-5">Sort by:</h5>
+          { 
+            ["NAME", "LENGTH", "NUMBER_OF_VOWELS"].map(sortByValue => (
+              <Button
+                onClick={() => this.props.changeSortBy(sortByValue)}
+                disabled={this.props.sortBy === sortByValue}
+                style={{ marginLeft: 10 }}
+                size="small">
+                {capitalize(startCase(sortByValue))}
+              </Button>
+            ))
+          }
         </div>
       </div>
     )
@@ -23,7 +45,8 @@ class UserPreferences extends React.Component {
 
 const mapStateToProps = (state, props) => {
   return {
-    filter: state.userPreferences.filter
+    filter: state.userPreferences.filter,
+    sortBy: state.userPreferences.sortBy
   }
 }
 
@@ -34,7 +57,15 @@ const mapDispatchToProps = (dispatch, props) => {
       payload: {
         filter
       }
+    }),
+
+    changeSortBy: (sortBy) => dispatch({
+      type: "CHANGE_SORT_BY",
+      payload: {
+        sortBy
+      }
     })
+
   }
 }
 
