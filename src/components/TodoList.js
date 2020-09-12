@@ -24,7 +24,7 @@ class TodoList extends React.Component {
     });
   }
 
-  render() {
+  getFilteredAndSortedTodos = () => {
     const filteredTodos = this.props.todos.filter(todo => {
       switch (this.props.filter) {
         case 'ALL': return true
@@ -59,12 +59,16 @@ class TodoList extends React.Component {
       return 0;
     };
 
-    const sortedAndFilteredTodos = filteredTodos.sort((todo1, todo2) => {
+    const filteredAndSortedTodos = filteredTodos.sort((todo1, todo2) => {
         if (this.props.sortBy === 'NAME') return sortByNameFunction(todo1, todo2);
         if (this.props.sortBy === 'LENGTH') return sortByLengthFunction(todo1, todo2);
         if (this.props.sortBy === 'NUMBER_OF_VOWELS') return sortByVowelsFunction(todo1, todo2)
     })
 
+    return filteredAndSortedTodos
+  }
+
+  render() {
     return (
       <div
         className="TodoList"
@@ -93,7 +97,7 @@ class TodoList extends React.Component {
         <div className="card-content">
           <TodoCreationForm onCreate={this.props.addTodo}/>
           <ul>
-            {sortedAndFilteredTodos.map(task => {
+            {this.getFilteredAndSortedTodos().map(task => {
               return (
                 <li key={task.id}>
                   <Todo
