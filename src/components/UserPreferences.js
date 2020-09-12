@@ -1,6 +1,9 @@
 import React from "react";
 import Button from "./Library/Button";
 import { connect } from "react-redux";
+import { capitalize, startCase } from 'lodash';
+
+
 
 class UserPreferences extends React.Component {
   render(){
@@ -9,15 +12,31 @@ class UserPreferences extends React.Component {
         <h2 style={{ marginBottom: 10 }} className="title is-4">Preferences</h2>
         <div style={{ display: "flex" }}>
           <h5 className="subtitle is-5">Filters:</h5>
-          <Button onClick={() => this.props.changeFilter("ALL")} disabled={this.props.filter === "ALL"} style={{ marginLeft: 10 }} size="small">All</Button>
-          <Button onClick={() => this.props.changeFilter("ACTIVE")} disabled={this.props.filter === "ACTIVE"} style={{ marginLeft: 10 }} size="small">Active</Button>
-          <Button onClick={() => this.props.changeFilter("INACTIVE")} disabled={this.props.filter === "INACTIVE"} style={{ marginLeft: 10 }} size="small">Inactive</Button>
+          { 
+            ["ALL", "ACTIVE", "INACTIVE"].map(filterValue => (
+              <Button
+                onClick={() => this.props.changeFilter(filterValue)}
+                disabled={this.props.filter === filterValue}
+                style={{ marginLeft: 10 }}
+                size="small">
+                {capitalize(filterValue)}
+              </Button>
+            ))
+          }
         </div>
         <div style={{ display: "flex" }}>
           <h5 className="subtitle is-5">Sort by:</h5>
-          <Button onClick={() => this.props.changeSortBy("NAME")} disabled={this.props.sortBy === "NAME"} style={{ marginLeft: 10 }} size="small">Name</Button>
-          <Button onClick={() => this.props.changeSortBy("LENGTH")} disabled={this.props.sortBy === "LENGTH"} style={{ marginLeft: 10 }} size="small">Length</Button>
-          <Button onClick={() => this.props.changeSortBy("NUMBER_OF_VOWELS")} disabled={this.props.sortBy === "NUMBER_OF_VOWELS"} style={{ marginLeft: 10 }} size="small">Number of Vowels</Button>
+          { 
+            ["NAME", "LENGTH", "NUMBER_OF_VOWELS"].map(sortByValue => (
+              <Button
+                onClick={() => this.props.changeSortBy(sortByValue)}
+                disabled={this.props.sortBy === sortByValue}
+                style={{ marginLeft: 10 }}
+                size="small">
+                {capitalize(startCase(sortByValue))}
+              </Button>
+            ))
+          }
         </div>
       </div>
     )
