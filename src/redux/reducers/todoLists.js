@@ -8,6 +8,7 @@ const initialState = {
        0: {
          id: 0,
          name: "First todo",
+         dueDate: "13/09/2020",
          active: true
        }
      }
@@ -48,6 +49,7 @@ const todoLists = (state = initialState, action) => {
             [id]: {
               id,
               name: action.payload.newTodoName,
+              dueDate: action.payload.dueDate,
               active: true
             }
           }

@@ -129,11 +129,12 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    addTodo: (newTodoName) => {
+    addTodo: (newTodoName, dueDate) => {
       dispatch({
         type: 'ADD_TODO',
         payload: {
           newTodoName,
+          dueDate,
           todoListId: ownProps.id
         }
       })

@@ -41,7 +41,7 @@ export default class TodoCreationForm extends React.Component {
           color="success"
           size="small"
           disabled={this.state.todoName === ""}
-          onClick={() => this.props.onCreate(this.state.todoName)}
+          onClick={() => this.props.onCreate(this.state.todoName, this.state.dueDate)}
         >
           <span className="icon">
             <i className="fas fa-check-circle"></i>
