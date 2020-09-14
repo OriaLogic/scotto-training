@@ -3,7 +3,7 @@ import { values } from "lodash";
 import TodoList from "./TodoList";
 import UserPreferences from "./UserPreferences";
 import TodoListCreationForm from "./TodoListCreationForm";
-import Button from "./Library/Button";
+import Button from "./library/Button";
 import { connect } from "react-redux";
 
 // Small comment to open the PR

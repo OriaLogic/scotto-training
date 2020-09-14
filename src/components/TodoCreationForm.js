@@ -1,18 +1,12 @@
 import React from "react";
 import DatePicker from "react-datepicker";
-import Button from "./Library/Button";
+import Button from "./library/Button";
 
 export default class TodoCreationForm extends React.Component {
   state = {
     todoName: "",
-    dueDate: new Date()
+    dueDate: null
   }
-
-  handleDueDateChange = date => {
-    this.setState({
-      dueDate: date
-    });
-  };
 
   render() {
     return (
@@ -33,7 +27,7 @@ export default class TodoCreationForm extends React.Component {
         />
         <DatePicker
           selected={this.state.dueDate}
-          onChange={this.handleDueDateChange}
+          onChange={newDate => this.setState({ dueDate: newDate })}
           className="input date-picker-input is-primary is-small"
         />
         <Button
