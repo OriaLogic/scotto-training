@@ -26,6 +26,7 @@ export default class TodoCreationForm extends React.Component {
           onChange={e => this.setState({todoName: e.target.value})}
         />
         <DatePicker
+          placeholderText="Click to select a date"
           selected={this.state.dueDate}
           onChange={newDate => this.setState({ dueDate: newDate })}
           className="input date-picker-input is-primary is-small"
@@ -34,7 +35,7 @@ export default class TodoCreationForm extends React.Component {
           type="button"
           color="success"
           size="small"
-          disabled={this.state.todoName === ""}
+          disabled={this.state.todoName === "" || this.state.dueDate === null}
           onClick={() => this.props.onCreate(this.state.todoName, this.state.dueDate)}
         >
           <span className="icon">
