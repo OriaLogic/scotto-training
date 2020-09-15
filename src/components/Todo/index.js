@@ -43,7 +43,9 @@ export default class Todo extends React.Component {
             delete
           </button>
         </span>
+
         <DueDate dueDate={todo.dueDate}/>
+
       </span>
     )
   }
