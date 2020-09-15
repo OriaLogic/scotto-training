@@ -1,15 +1,17 @@
 import React from 'react';
-import moment from 'moment';
 import EditionForm from './EditionForm';
+import DueDate from './DueDate';
 
 export default class Todo extends React.Component {
 
   render() {
+    const { todo } = this.props;
+
     if (this.props.editing) {
       return (
         <span className="todo-container">
           <EditionForm
-            todo={this.props.todo}
+            todo={todo}
             onUpdate={this.props.onUpdate}
             onCancel={this.props.onCancelEdit}
           />
@@ -21,29 +23,27 @@ export default class Todo extends React.Component {
       <span className="todo-container">
         <span
           style={{
-            textDecoration: this.props.todo.active ? "none" : "line-through"
+            textDecoration: todo.active ? "none" : "line-through"
           }}
-          onClick={() => this.props.onUpdate(this.props.todo.id, { active: !this.props.todo.active})}
+          onClick={() => this.props.onUpdate(todo.id, { active: !todo.active})}
         >
-          {this.props.todo.name}
+          {todo.name}
         </span>
         <span className="button-container">
           <button
-            onClick={() => this.props.onEdit(this.props.todo)}
+            onClick={() => this.props.onEdit(todo)}
             className="button is-primary is-outlined is-small"
           >
             edit
           </button>
           <button
-            onClick={() => this.props.onDelete(this.props.todo.id)}
+            onClick={() => this.props.onDelete(todo.id)}
             className="button is-danger is-small is-outlined"
           >
             delete
           </button>
         </span>
-        <span className="due-date-container">
-          <span className="test">{moment(this.props.todo.dueDate).format("DD/MM/YYYY")}</span>
-        </span>
+        <DueDate dueDate={todo.dueDate}/>
       </span>
     )
   }
