@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 
 export default class Todo extends React.Component {
   state = { editTodoName: this.props.todo.name }
@@ -30,7 +31,7 @@ export default class Todo extends React.Component {
             </button>
           </span>
           <span className="due-date-container">
-            <span className="test">{this.props.todo.dueDate}</span>
+            <span className="test">{moment(this.props.todo.dueDate).format("DD/MM/YYYY")}</span>
           </span>
         </span>
       ) : (
