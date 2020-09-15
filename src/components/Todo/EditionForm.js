@@ -1,14 +1,19 @@
 import React from "react";
+import Datepicker from "react-datepicker";
 
 export default class EditionForm extends React.Component {
-  state = { editTodoName: this.props.todo.name }
+  state = {
+    editTodoName: this.props.todo.name,
+    editDueDate: this.props.todo.dueDate
+   }
 
   render() {
+
     return (
       <form
         onSubmit={e => {
           e.preventDefault();
-          this.props.onUpdate(this.props.todo.id, {name: this.state.editTodoName})
+          this.props.onUpdate(this.props.todo.id, {name: this.state.editTodoName, dueDate: this.state.editDueDate})
       }}
       >
         <input
@@ -17,7 +22,12 @@ export default class EditionForm extends React.Component {
           value={this.state.editTodoName}
           onChange={e => this.setState({ editTodoName: e.target.value })}
         />
+        <Datepicker
+          selected={this.state.editDueDate}
+          onChange={newDate => this.setState({ editDueDate: newDate })}
+        />
         <button
+          type="submit"
           className="button is-primary is-small"
         >
           Ok
