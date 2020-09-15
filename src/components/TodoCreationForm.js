@@ -9,12 +9,14 @@ export default class TodoCreationForm extends React.Component {
   }
 
   render() {
+    const disabled = !this.state.todoName || !this.state.dueDate
+
     return (
       <form
         className="todo-creation-form"
         onSubmit={e => {
           e.preventDefault();
-          if (this.state.todoName === "") return;
+          if (disabled) return;
           this.props.onCreate(this.state.todoName, this.state.dueDate);
           this.setState({todoName: "", dueDate: null})
         }}
@@ -37,7 +39,7 @@ export default class TodoCreationForm extends React.Component {
           type="submit"
           color="success"
           size="small"
-          disabled={this.state.todoName === "" || this.state.dueDate === null}
+          disabled={disabled}
         >
           <span className="icon">
             <i className="fas fa-check-circle"></i>
