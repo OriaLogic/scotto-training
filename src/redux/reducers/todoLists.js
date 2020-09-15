@@ -8,7 +8,7 @@ const initialState = {
        0: {
          id: 0,
          name: "First todo",
-         dueDate: "13/09/2020",
+         dueDate: null,
          active: true
        }
      }

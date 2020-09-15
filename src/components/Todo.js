@@ -29,6 +29,9 @@ export default class Todo extends React.Component {
               delete
             </button>
           </span>
+          <span className="due-date-container">
+            <span className="test">COUCOU</span>
+          </span>
         </span>
       ) : (
         <span>

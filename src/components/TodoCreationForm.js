@@ -15,8 +15,10 @@ export default class TodoCreationForm extends React.Component {
         onSubmit={e => {
           e.preventDefault();
           if (this.state.todoName === "") return;
-          this.setState({todoName: ""})
+          this.props.onCreate(this.state.todoName, this.state.dueDate);
+          this.setState({todoName: "", dueDate: null})
         }}
+
       >
         <input
           className="input is-primary is-small"
@@ -26,17 +28,16 @@ export default class TodoCreationForm extends React.Component {
           onChange={e => this.setState({todoName: e.target.value})}
         />
         <DatePicker
-          placeholderText="Click to select a date"
+          placeholderText="Click to select date"
           selected={this.state.dueDate}
           onChange={newDate => this.setState({ dueDate: newDate })}
           className="input date-picker-input is-primary is-small"
         />
         <Button
-          type="button"
+          type="submit"
           color="success"
           size="small"
           disabled={this.state.todoName === "" || this.state.dueDate === null}
-          onClick={() => this.props.onCreate(this.state.todoName, this.state.dueDate)}
         >
           <span className="icon">
             <i className="fas fa-check-circle"></i>
