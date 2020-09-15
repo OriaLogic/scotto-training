@@ -30,7 +30,7 @@ export default class Todo extends React.Component {
             </button>
           </span>
           <span className="due-date-container">
-            <span className="test">COUCOU</span>
+            <span className="test">{this.props.todo.dueDate}</span>
           </span>
         </span>
       ) : (
