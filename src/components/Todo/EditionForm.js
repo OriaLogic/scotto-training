@@ -23,12 +23,15 @@ export default class EditionForm extends React.Component {
           onChange={e => this.setState({ editTodoName: e.target.value })}
         />
         <Datepicker
+          className="input is-primary is-small"
+          placeholderText="Click to select a date"
           selected={this.state.editDueDate}
           onChange={newDate => this.setState({ editDueDate: newDate })}
         />
         <button
           type="submit"
           className="button is-primary is-small"
+          disabled={ this.state.editTodoName === "" || this.state.editDueDate === null }
         >
           Ok
         </button>
