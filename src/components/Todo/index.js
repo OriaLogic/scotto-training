@@ -1,6 +1,7 @@
 import React from 'react';
 import EditionForm from './EditionForm';
 import DueDate from './DueDate';
+import Dropdown from '../library/Dropdown';
 
 export default class Todo extends React.Component {
 
@@ -21,6 +22,7 @@ export default class Todo extends React.Component {
 
     return (
       <span className="todo-container">
+
         <span
           style={{
             textDecoration: todo.active ? "none" : "line-through"
@@ -29,6 +31,13 @@ export default class Todo extends React.Component {
         >
           {todo.name}
         </span>
+
+
+
+        <DueDate dueDate={todo.dueDate}/>
+
+        <Dropdown/>
+
         <span className="button-container">
           <button
             onClick={() => this.props.onEdit(todo)}
@@ -36,16 +45,16 @@ export default class Todo extends React.Component {
           >
             edit
           </button>
+
           <button
             onClick={() => this.props.onDelete(todo.id)}
             className="button is-danger is-small is-outlined"
           >
             delete
           </button>
+
         </span>
-
-        <DueDate dueDate={todo.dueDate}/>
-
+        
       </span>
     )
   }
