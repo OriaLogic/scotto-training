@@ -54,7 +54,7 @@ export default class Todo extends React.Component {
           </button>
 
         </span>
-        
+
       </span>
     )
   }
