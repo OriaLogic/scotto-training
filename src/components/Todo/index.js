@@ -1,7 +1,7 @@
 import React from 'react';
 import EditionForm from './EditionForm';
 import DueDate from './DueDate';
-import Dropdown from '../library/Dropdown';
+import Dropdown, { DropdownItem } from '../library/Dropdown';
 
 export default class Todo extends React.Component {
 
@@ -36,24 +36,7 @@ export default class Todo extends React.Component {
 
         <DueDate dueDate={todo.dueDate}/>
 
-        <Dropdown/>
-
-        <span className="button-container">
-          <button
-            onClick={() => this.props.onEdit(todo)}
-            className="button is-primary is-outlined is-small"
-          >
-            edit
-          </button>
-
-          <button
-            onClick={() => this.props.onDelete(todo.id)}
-            className="button is-danger is-small is-outlined"
-          >
-            delete
-          </button>
-
-        </span>
+        <Dropdown onClick={() => this.props.onEdit(todo)}/>
 
       </span>
     )
