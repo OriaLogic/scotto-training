@@ -40,7 +40,7 @@ export default class EditionForm extends React.Component {
           type="button"
           onClick={() => {
             this.props.onCancel()
-            this.setState({ editTodoName: this.props.todo.name })
+            this.setState({ editTodoName: this.props.todo.name, editDueDate: this.props.todo.dueDate })
           }}
         >
           Cancel
