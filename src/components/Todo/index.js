@@ -36,7 +36,10 @@ export default class Todo extends React.Component {
 
         <DueDate dueDate={todo.dueDate}/>
 
-        <Dropdown onClick={() => this.props.onEdit(todo)}/>
+        <Dropdown>
+          <DropdownItem onClick={() => this.props.onEdit(todo)}>Edit</DropdownItem>
+          <DropdownItem onClick={() => this.props.onDelete(todo.id)}>Delete</DropdownItem>
+        </Dropdown>
 
       </span>
     )

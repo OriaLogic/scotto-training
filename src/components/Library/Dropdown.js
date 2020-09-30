@@ -12,22 +12,15 @@ export default function Dropdown({trigger, children, style, align}) {
       </div>
       <div className="dropdown-menu" id="dropdown-menu" role="menu">
         <div className="dropdown-content">
-          <DropdownItem/>
+          {children}
         </div>
       </div>
     </div>
   )
 }
 
-export function DropdownItem({children, onClick, active}) {
+export function DropdownItem({children, onClick}) {
   return(
-    <div>
-    <a onClick={onClick} className="dropdown-item">
-      Edit
-    </a>
-    <a onClick={onClick} className="dropdown-item">
-      Delete
-    </a>
-    </div>
+    <a onClick={onClick} className="dropdown-item">{children}</a>
   )
 }
