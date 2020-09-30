@@ -27,7 +27,7 @@ class UserPreferences extends React.Component {
         <div style={{ display: "flex" }}>
           <h5 className="subtitle is-5">Sort by:</h5>
           { 
-            ["NAME", "LENGTH", "NUMBER_OF_VOWELS"].map(sortByValue => (
+            ["NAME", "LENGTH", "DUE_DATE"].map(sortByValue => (
               <Button
                 onClick={() => this.props.changeSortBy(sortByValue)}
                 disabled={this.props.sortBy === sortByValue}
