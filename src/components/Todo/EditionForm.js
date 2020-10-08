@@ -8,18 +8,22 @@ export default class EditionForm extends React.Component {
    }
 
   render() {
+    const { onUpdate, todo } = this.props;
+    const { editTodoName, editDueDate } = this.state;
+    const canSubmit = editTodoName === "" || editDueDate === null;
 
     return (
       <form
         onSubmit={e => {
           e.preventDefault();
-          this.props.onUpdate(this.props.todo.id, {name: this.state.editTodoName, dueDate: this.state.editDueDate})
+          if (!canSubmit) return;
+          onUpdate(todo.id, {name: editTodoName, dueDate: editDueDate})
       }}
       >
         <input
           className="input is-primary is-small"
           autoFocus
-          value={this.state.editTodoName}
+          value={editTodoName}
           onChange={e => this.setState({ editTodoName: e.target.value })}
         />
         <Datepicker
@@ -31,7 +35,7 @@ export default class EditionForm extends React.Component {
         <button
           type="submit"
           className="button is-primary is-small"
-          disabled={ this.state.editTodoName === "" || this.state.editDueDate === null }
+          disabled={ canSubmit }
         >
           Ok
         </button>
@@ -40,7 +44,7 @@ export default class EditionForm extends React.Component {
           type="button"
           onClick={() => {
             this.props.onCancel()
-            this.setState({ editTodoName: this.props.todo.name, editDueDate: this.props.todo.dueDate })
+            this.setState({ editTodoName: todo.name, editDueDate: todo.dueDate })
           }}
         >
           Cancel
