@@ -6,15 +6,15 @@ import Dropdown, { DropdownItem } from '../library/Dropdown';
 export default class Todo extends React.Component {
 
   render() {
-    const { todo } = this.props;
+    const { todo, editing, onUpdate, onCancelEdit, onEdit, onDelete } = this.props;
 
-    if (this.props.editing) {
+    if (editing) {
       return (
         <span className="todo-container">
           <EditionForm
             todo={todo}
-            onUpdate={this.props.onUpdate}
-            onCancel={this.props.onCancelEdit}
+            onUpdate={onUpdate}
+            onCancel={onCancelEdit}
           />
         </span>
       )
@@ -27,7 +27,7 @@ export default class Todo extends React.Component {
           style={{
             textDecoration: todo.active ? "none" : "line-through"
           }}
-          onClick={() => this.props.onUpdate(todo.id, { active: !todo.active})}
+          onClick={() => onUpdate(todo.id, { active: !todo.active})}
         >
           {todo.name}
         </span>
@@ -37,8 +37,8 @@ export default class Todo extends React.Component {
         <DueDate dueDate={todo.dueDate}/>
 
         <Dropdown>
-          <DropdownItem onClick={() => this.props.onEdit(todo)}>Edit</DropdownItem>
-          <DropdownItem onClick={() => this.props.onDelete(todo.id)}>Delete</DropdownItem>
+          <DropdownItem onClick={() => onEdit(todo)}>Edit</DropdownItem>
+          <DropdownItem onClick={() => onDelete(todo.id)}>Delete</DropdownItem>
         </Dropdown>
 
       </span>
