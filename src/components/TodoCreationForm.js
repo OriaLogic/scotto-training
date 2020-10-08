@@ -9,7 +9,9 @@ export default class TodoCreationForm extends React.Component {
   }
 
   render() {
-    const disabled = !this.state.todoName || !this.state.dueDate
+    const { onCreate } = this.props
+    const { todoName, dueDate } = this.state;
+    const disabled = !todoName || !dueDate;
 
     return (
       <form
@@ -17,7 +19,7 @@ export default class TodoCreationForm extends React.Component {
         onSubmit={e => {
           e.preventDefault();
           if (disabled) return;
-          this.props.onCreate(this.state.todoName, this.state.dueDate);
+          onCreate(todoName, dueDate);
           this.setState({todoName: "", dueDate: null})
         }}
 
@@ -26,12 +28,12 @@ export default class TodoCreationForm extends React.Component {
           className="input is-primary is-small"
           autoFocus
           placeholder="Add a todo (hit Enter to validate)"
-          value={this.state.todoName}
+          value={todoName}
           onChange={e => this.setState({todoName: e.target.value})}
         />
         <DatePicker
           placeholderText="Click to select a date"
-          selected={this.state.dueDate}
+          selected={dueDate}
           onChange={newDate => this.setState({ dueDate: newDate })}
           className="input date-picker-input is-primary is-small"
         />
