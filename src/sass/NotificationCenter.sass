@@ -1,0 +1,23 @@
+.notification-center
+  position: fixed
+  top: 70px
+  right: 10px
+  padding-left: 10px
+  z-index: 10
+  max-height: 100%
+  overflow-y: auto
+
+  > div
+    &:last-child
+      margin-bottom: 150px
+
+  .notification
+    width: 250px
+    margin-bottom: 10px
+
+    .actions
+      margin-top: 10px
+      display: flex
+      justify-content: flex-end
+      .button:not(:last-child)
+        margin-right: 5px

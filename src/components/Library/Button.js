@@ -1,45 +1,47 @@
-import React from 'react';
+import React from "react";
 
 function Button({
   children,
   additionalClassName,
+  outlined,
   disabled,
   onClick,
   color,
   size,
   style
 }) {
-
-  let className = "button "
+  let className = "button ";
   switch (color) {
     case "success":
-      className = className + " is-success"
-      break
+      className = className + " is-success";
+      break;
     case "primary":
-      className = className + " is-primary"
-      break
+      className = className + " is-primary";
+      break;
     case "danger":
-      className = className + " is-danger"
-      break
+      className = className + " is-danger";
+      break;
     case "warning":
-      className = className + " is-warning"
-      break
+      className = className + " is-warning";
+      break;
     case "info":
-      className = className + " is-info"
-      break
+      className = className + " is-info";
+      break;
   }
 
   switch (size) {
     case "small":
-      className = className + " is-small"
-      break
+      className = className + " is-small";
+      break;
     case "normal":
-      className = className + " is-normal"
-      break
+      className = className + " is-normal";
+      break;
     case "large":
-      className = className + " is-large"
-      break
+      className = className + " is-large";
+      break;
   }
+
+  className += outlined ? " is-outlined" : "";
 
   return (
     <button
@@ -51,12 +53,12 @@ function Button({
     >
       {children}
     </button>
-  )
+  );
 }
 
 Button.defaultProps = {
-  color: 'default',
-  size: 'normal'
+  color: "default",
+  size: "normal"
 };
 
 export default Button;
