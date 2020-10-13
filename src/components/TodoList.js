@@ -8,19 +8,19 @@ import { connect } from "react-redux";
 
 class TodoList extends React.Component {
   state = {
-    editingTaskId: null
+    editingTodoId: null
   };
 
-  editTask = (task) => {
+  editTodo = (todo) => {
     this.setState({
-      editingTaskId: task.id,
+      editingTodoId: todo.id,
     });
   }
 
   updateTodo = (todoId, updatedKeysInTodo) => {
     this.props.updateTodo(todoId, updatedKeysInTodo);
     this.setState({
-      editingTaskId: null
+      editingTodoId: null
     });
   }
 
@@ -49,12 +49,10 @@ class TodoList extends React.Component {
       return 0;
     };
 
-    const countVowels = str => Array.from(str).filter(letter => 'aeiou'.includes(letter)).length;
-
-    const sortByVowelsFunction = (todo1, todo2) => {
-      if (countVowels(todo1.name) < countVowels(todo2.name))
+    const sortByDueDate = (todo1, todo2) => {
+      if (todo1.dueDate < todo2.dueDate)
         return -1;
-      if (countVowels(todo1.name) > countVowels(todo2.name))
+      if (todo1.dueDate > todo2.dueDate)
         return 1;
       return 0;
     };
@@ -62,7 +60,7 @@ class TodoList extends React.Component {
     const filteredAndSortedTodos = filteredTodos.sort((todo1, todo2) => {
         if (this.props.sortBy === 'NAME') return sortByNameFunction(todo1, todo2);
         if (this.props.sortBy === 'LENGTH') return sortByLengthFunction(todo1, todo2);
-        if (this.props.sortBy === 'NUMBER_OF_VOWELS') return sortByVowelsFunction(todo1, todo2)
+        if (this.props.sortBy === 'DUE_DATE') return sortByDueDate(todo1, todo2)
     })
 
     return filteredAndSortedTodos
@@ -82,7 +80,7 @@ class TodoList extends React.Component {
           style={{ alignItems: 'center' }}
         >
           <p className="card-header-title">
-            {this.props.name} ({this.props.todos.filter(task => task.active).length})
+            {this.props.name} ({this.props.todos.filter(todo => todo.active).length})
           </p>
           <button
             className="button is-text is-small"
@@ -97,14 +95,14 @@ class TodoList extends React.Component {
         <div className="card-content">
           <TodoCreationForm onCreate={this.props.addTodo}/>
           <ul>
-            {this.getFilteredAndSortedTodos().map(task => {
+            {this.getFilteredAndSortedTodos().map(todo => {
               return (
-                <li key={task.id}>
+                <li key={todo.id}>
                   <Todo
-                    task={task}
-                    editing={task.id === this.state.editingTaskId}
-                    onEdit={this.editTask}
-                    onCancelEdit={() => this.setState({editingTaskId: null})}
+                    todo={todo}
+                    editing={todo.id === this.state.editingTodoId}
+                    onEdit={this.editTodo}
+                    onCancelEdit={() => this.setState({editingTodoId: null})}
                     onDelete={this.props.deleteTodo}
                     onUpdate={this.updateTodo}
                   />
@@ -129,11 +127,12 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    addTodo: (newTodoName) => {
+    addTodo: (newTodoName, dueDate) => {
       dispatch({
         type: 'ADD_TODO',
         payload: {
           newTodoName,
+          dueDate,
           todoListId: ownProps.id
         }
       })

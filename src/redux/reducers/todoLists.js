@@ -1,4 +1,4 @@
-import { newId } from "../../util/id"
+import { v4 as uuidv4 } from "uuid";
 
 const initialState = {
   0: {
@@ -8,6 +8,7 @@ const initialState = {
        0: {
          id: 0,
          name: "First todo",
+         dueDate: new Date(),
          active: true
        }
      }
@@ -20,7 +21,7 @@ const todoLists = (state = initialState, action) => {
 
   switch (action.type) {
     case 'ADD_TODOLIST':
-      id = newId();
+      id = uuidv4();
       return {
         ...state,
         [id]: {
@@ -35,7 +36,7 @@ const todoLists = (state = initialState, action) => {
       return { ...state }
 
     case 'ADD_TODO':
-      id = newId();
+      id = uuidv4();
       todoListId = action.payload.todoListId;
       todoList = state[todoListId]
 
@@ -48,6 +49,7 @@ const todoLists = (state = initialState, action) => {
             [id]: {
               id,
               name: action.payload.newTodoName,
+              dueDate: action.payload.dueDate,
               active: true
             }
           }
