@@ -10,7 +10,7 @@ export default class EditionForm extends React.Component {
   render() {
     const { onUpdate, todo } = this.props;
     const { editTodoName, editDueDate } = this.state;
-    const canSubmit = editTodoName === "" || editDueDate === null;
+    const canSubmit = !!editTodoName && !!editDueDate;
 
     return (
       <form
@@ -35,7 +35,7 @@ export default class EditionForm extends React.Component {
         <button
           type="submit"
           className="button is-primary is-small"
-          disabled={ canSubmit }
+          disabled={ !canSubmit }
         >
           Ok
         </button>
