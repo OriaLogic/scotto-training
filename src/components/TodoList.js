@@ -17,6 +17,12 @@ class TodoList extends React.Component {
     });
   }
 
+  onDelete = () => {
+    if (window.confirm("Are you sure?")) {
+      this.props.onDelete(this.props.id)
+    };
+  }
+
   updateTodo = (todoId, updatedKeysInTodo) => {
     this.props.updateTodo(todoId, updatedKeysInTodo);
     this.setState({
@@ -85,7 +91,7 @@ class TodoList extends React.Component {
           <button
             className="button is-text is-small"
             style={{ marginRight: 11 }}
-            onClick={() => this.props.onDelete(this.props.id)}
+            onClick={this.onDelete}
           >
             <span className="icon has-text-danger">
               <i className="fas fa-trash"></i>
