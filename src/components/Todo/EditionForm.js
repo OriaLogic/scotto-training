@@ -14,6 +14,7 @@ export default class EditionForm extends React.Component {
 
     return (
       <form
+        className="todo-edition-form"
         onSubmit={e => {
           e.preventDefault();
           if (!canSubmit) return;
@@ -27,7 +28,7 @@ export default class EditionForm extends React.Component {
           onChange={e => this.setState({ editTodoName: e.target.value })}
         />
         <Datepicker
-          className="input is-primary is-small"
+          className="input is-primary is-small date-picker-input"
           placeholderText="Click to select a date"
           selected={this.state.editDueDate}
           onChange={newDate => this.setState({ editDueDate: newDate })}
