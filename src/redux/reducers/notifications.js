@@ -1,6 +1,7 @@
+import { v4 as uuidv4 } from "uuid";
 
 const initialState = {
-  
+
   1: {
     id: 1,
     active: true,
@@ -32,10 +33,32 @@ const initialState = {
 }
 
 const notifications = (state = initialState, action) => {
+  let id, todoListId;
+  let todos, todo;
+
   switch (action.type) {
+    case 'ADD_NOTIFICATION':
+    id = uuidv4();
+    return {
+      ...state,
+      [id]: {
+        id,
+        name: action.payload.name,
+        active: true,
+        todos: {}
+      }
+    }
+
+    case 'DISMISS_NOTIFICATION':
+    return {
+      ...state,
+      active: false
+    }
+
     default:
       return state
   }
+
 }
 
 export default notifications;
