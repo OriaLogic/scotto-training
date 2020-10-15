@@ -1,6 +1,7 @@
 import { createStore, combineReducers } from "redux"
 import todoLists from "./reducers/todoLists";
-import userPreferences from "./reducers/userPreferences"
+import userPreferences from "./reducers/userPreferences";
+import notifications from "./reducers/notifications"
 
 const todoListsState = JSON.parse(localStorage.getItem("dataState"));
 
@@ -19,12 +20,14 @@ const initialState = {
   userPreferences: {
     filter: "ALL",
     sortBy: "NAME"
-  }
+  },
+  notifications: { }
 }
 
 const rootReducer = combineReducers({
   todoLists,
-  userPreferences
+  userPreferences,
+  notifications
 })
 
 const store = createStore(rootReducer, initialState, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
