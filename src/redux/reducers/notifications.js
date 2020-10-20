@@ -19,15 +19,6 @@ const initialState = {
       name: "pakaLolo all day long",
       todoListId: 2
     }
-  },
-  3:  {
-    id: 3,
-    active: true,
-    todo: {
-      id: 3,
-      name: "plongée all day long",
-      todoListId: 3
-    }
   }
 
 }
@@ -38,26 +29,26 @@ const notifications = (state = initialState, action) => {
 
   switch (action.type) {
     case 'ADD_NOTIFICATION':
-    id = uuidv4();
-    return {
-      ...state,
-      [id]: {
-        id,
-        name: action.payload.name,
-        active: true,
-        todos: {}
+      id = uuidv4();
+      return {
+        ...state,
+        [id]: {
+          id,
+          name: action.payload.name,
+          active: true,
+          todos: {}
       }
     }
 
     case 'DISMISS_NOTIFICATION':
-    return {
-      ...state,
-      active: false
-    }
+      return {
+        ...state,
+        active: false
+      }
 
-    default:
-      return state
-  }
+      default:
+        return state
+    }
 
 }
 
