@@ -24,8 +24,7 @@ const initialState = {
 }
 
 const notifications = (state = initialState, action) => {
-  let id, todoListId;
-  let todos, todo;
+  let id
 
   switch (action.type) {
     case 'ADD_NOTIFICATION':
@@ -34,9 +33,8 @@ const notifications = (state = initialState, action) => {
         ...state,
         [id]: {
           id,
-          name: action.payload.name,
           active: true,
-          todos: {}
+          todo: action.payload.todo
       }
     }
 
