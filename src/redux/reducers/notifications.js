@@ -11,6 +11,7 @@ const initialState = {
       todoListId: 1
     }
   },
+
   2:  {
     id: 2,
     active: false,
@@ -24,11 +25,12 @@ const initialState = {
 }
 
 const notifications = (state = initialState, action) => {
-  let id
+  let id, todo
 
   switch (action.type) {
     case 'ADD_NOTIFICATION':
       id = uuidv4();
+
       return {
         ...state,
         [id]: {
@@ -39,9 +41,15 @@ const notifications = (state = initialState, action) => {
     }
 
     case 'DISMISS_NOTIFICATION':
+      id = action.payload.id
+
       return {
         ...state,
-        active: false
+        [id]: {
+          id,
+          active: false,
+          todo
+      }
       }
 
       default:
