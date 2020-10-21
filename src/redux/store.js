@@ -31,5 +31,24 @@ const rootReducer = combineReducers({
 })
 
 const store = createStore(rootReducer, initialState, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
+setTimeout(() => {
+  Object.keys(todoListsState).forEach(todoListId => {
+    const todoList = todoListsState[todoListId];
+    const todos = todoList.todos;
+
+    Object.keys(todos).forEach(todoId => {
+      const todo = todos[todoId];
+      if (todo.active && todo.dueDate < new Date()) {
+        store.dispatch({
+          type: 'ADD_NOTIFICATION',
+          payload: {
+            todo
+          }
+        })
+      }
+    })
+  })
+}, 5000)
+
 
 export default store;
