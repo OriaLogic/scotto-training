@@ -46,10 +46,9 @@ const notifications = (state = initialState, action) => {
       return {
         ...state,
         [id]: {
-          id,
-          active: false,
-          todo
-      }
+          ...state[id],
+          active: false
+        }
       }
 
       default:
