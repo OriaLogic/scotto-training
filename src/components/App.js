@@ -5,6 +5,7 @@ import UserPreferences from "./UserPreferences";
 import TodoListCreationForm from "./TodoListCreationForm";
 import Button from "./library/Button";
 import { connect } from "react-redux";
+import NotificationCenter from "./NotificationCenter"
 
 // Small comment to open the PR
 class App extends React.Component {
@@ -18,6 +19,8 @@ class App extends React.Component {
         >
           Save
         </Button>
+
+        <NotificationCenter/>
 
         <div className="app-container">
           <div className="bloc-1">
