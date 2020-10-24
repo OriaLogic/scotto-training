@@ -1,10 +1,8 @@
 import React from "react";
 
-export function Notification() {
-  render() {
+export default function Notification() {
     return (
       <div className="notification">WESH LA FAMILLE
       </div>
     )
-  }
 }
