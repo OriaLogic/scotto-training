@@ -13,6 +13,7 @@ export function NotificationCenter ({notifications, dismissNotification}) {
             <li key={notification.id}>
               <Notification
                 notification={notification}
+                onDismiss={() => dismissNotification(notification.id)}
               />
             </li>
           )
