@@ -3,6 +3,7 @@ import { values } from "lodash";
 import { connect } from "react-redux";
 import Notification from "./Notification";
 
+
 export function NotificationCenter ({notifications}) {
   return (
     <div className="notification-center">
@@ -27,4 +28,17 @@ const mapStateToProps = (state, ownProps) => {
   }
 }
 
-export default connect(mapStateToProps)(NotificationCenter);
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    dismissNotification: (id) => {
+      dispatch({
+        type:'DISMISS_NOTIFICATION',
+        payload: {
+          id
+        }
+      })
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(NotificationCenter);
