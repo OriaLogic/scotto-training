@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import Notification from "./Notification";
 
 
-export function NotificationCenter ({notifications}) {
+export function NotificationCenter ({notifications, dismissNotification}) {
   return (
     <div className="notification-center">
       <ul>
