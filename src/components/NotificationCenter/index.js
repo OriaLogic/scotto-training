@@ -2,9 +2,10 @@ import React from "react";
 import { values } from "lodash";
 import { connect } from "react-redux";
 import Notification from "./Notification";
+import TodoList from "../TodoList";
 
 
-export function NotificationCenter ({notifications, dismissNotification}) {
+export function NotificationCenter ({notifications, dismissNotification, deactivateNotification}) {
   return (
     <div className="notification-center">
       <ul>
@@ -38,7 +39,27 @@ const mapDispatchToProps = (dispatch, ownProps) => {
           id
         }
       })
+    },
+
+    deactivateNotification: (id, todoId, todoListId, updatedKeysInTodo) => {
+      dispatch({
+        type: 'DISMISS_NOTIFICATION',
+        payload: {
+          id
+        }
+      });
+
+      dispatch({
+        type: 'UPDATE_TODO',
+        payload: {
+          todoId,
+          updatedKeysInTodo,
+          todoListId: ownProps.id,
+          active: false
+        }
+      })
     }
+
   }
 }
 
