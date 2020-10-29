@@ -36,7 +36,8 @@ const notifications = (state = initialState, action) => {
         [id]: {
           id,
           active: true,
-          todo: action.payload.todo
+          todo: action.payload.todo,
+          todoListId: action.payload.todoListId
       }
     }
 
