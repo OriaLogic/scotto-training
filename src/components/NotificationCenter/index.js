@@ -15,6 +15,7 @@ export function NotificationCenter ({notifications, dismissNotification, deactiv
               <Notification
                 notification={notification}
                 onDismiss={() => dismissNotification(notification.id)}
+                onDeactivate={() => deactivateNotification(notification.id, notification.todo.id)}
               />
             </li>
           )
