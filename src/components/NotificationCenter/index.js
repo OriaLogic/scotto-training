@@ -15,7 +15,7 @@ export function NotificationCenter ({notifications, dismissNotification, deactiv
               <Notification
                 notification={notification}
                 onDismiss={() => dismissNotification(notification.id)}
-                onDeactivate={() => deactivateNotification(notification.id, notification.todo.id)}
+                onDeactivate={() => deactivateNotification(notification.id, notification.todo.id, notification.todoListId)}
               />
             </li>
           )
@@ -42,7 +42,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
       })
     },
 
-    deactivateNotification: (id, todoId, todoListId, updatedKeysInTodo) => {
+    deactivateNotification: (id, todoId, todoListId) => {
       dispatch({
         type: 'DISMISS_NOTIFICATION',
         payload: {
@@ -54,9 +54,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         type: 'UPDATE_TODO',
         payload: {
           todoId,
-          updatedKeysInTodo,
-          todoListId: ownProps.id,
-          active: false
+          todoListId,
+          updatedKeysInTodo: { active: false }
         }
       })
     }
