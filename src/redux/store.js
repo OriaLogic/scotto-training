@@ -42,7 +42,8 @@ setTimeout(() => {
         store.dispatch({
           type: 'ADD_NOTIFICATION',
           payload: {
-            todo
+            todo,
+            todoListId
           }
         })
       }
