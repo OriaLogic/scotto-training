@@ -38,10 +38,9 @@ export default class Todo extends React.Component {
 
         <Dropdown>
           <DropdownItem onClick={() => onEdit(todo)}>Edit</DropdownItem>
-          <DropdownItem
-            onClick={() => onDelete(todo.id)}
-            style={{ color: "red" }}
-            >Delete</DropdownItem>
+          <DropdownItem onClick={() => onDelete(todo.id)}>
+            <span className="has-text-danger">Delete</span>
+          </DropdownItem>
         </Dropdown>
 
       </span>
