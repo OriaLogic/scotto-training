@@ -1,7 +1,7 @@
 import React from 'react';
 import EditionForm from './EditionForm';
 import DueDate from './DueDate';
-import Dropdown, { DropdownItem } from '../library/Dropdown';
+import Dropdown, { DropdownItem, DropdownDivider } from '../library/Dropdown';
 
 export default class Todo extends React.Component {
 
@@ -41,8 +41,12 @@ export default class Todo extends React.Component {
           <DropdownItem onClick={() => onDelete(todo.id)}>
             <span className="has-text-danger">Delete</span>
           </DropdownItem>
+          <DropdownDivider/>
+            <DropdownItem onClick={() => console.log('Snooze 1 day')}>Snooze 1 day</DropdownItem>
+            <DropdownItem onClick={() => console.log('Snooze 3 days')}>Snooze 3 days</DropdownItem>
+            <DropdownItem onClick={() => console.log('Snooze 1 week')}>Snooze 1 week</DropdownItem>
+            <DropdownItem onClick={() => console.log('Snooze 3 weeks')}>Snooze 3 weeks</DropdownItem>
         </Dropdown>
-
       </span>
     )
   }

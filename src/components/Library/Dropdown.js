@@ -29,3 +29,9 @@ export function DropdownItem({children, onClick, style}) {
     <a onClick={onClick} style={style} className="dropdown-item">{children}</a>
   )
 }
+
+export function DropdownDivider() {
+  return(
+    <a className="dropdown-divider"></a>
+  )
+}
