@@ -6,7 +6,7 @@ import Dropdown, { DropdownItem, DropdownDivider } from '../library/Dropdown';
 export default class Todo extends React.Component {
 
   render() {
-    const { todo, editing, onUpdate, onCancelEdit, onEdit, onDelete } = this.props;
+    const { todo, editing, onUpdate, onCancelEdit, onEdit, onDelete, onSnooze } = this.props;
 
     if (editing) {
       return (
@@ -42,10 +42,10 @@ export default class Todo extends React.Component {
             <span className="has-text-danger">Delete</span>
           </DropdownItem>
           <DropdownDivider/>
-            <DropdownItem onClick={() => console.log('Snooze 1 day')}>Snooze 1 day</DropdownItem>
-            <DropdownItem onClick={() => console.log('Snooze 3 days')}>Snooze 3 days</DropdownItem>
-            <DropdownItem onClick={() => console.log('Snooze 1 week')}>Snooze 1 week</DropdownItem>
-            <DropdownItem onClick={() => console.log('Snooze 3 weeks')}>Snooze 3 weeks</DropdownItem>
+            <DropdownItem onClick={() => onSnooze(todo, 1, console.log(todo.newTodoDate))}>Snooze 1 day</DropdownItem>
+            <DropdownItem onClick={() => onSnooze(todo, 3)}>Snooze 3 days</DropdownItem>
+            <DropdownItem onClick={() => onSnooze(todo, 7)}>Snooze 1 week</DropdownItem>
+            <DropdownItem onClick={() => onSnooze(todo, 21)}>Snooze 3 weeks</DropdownItem>
         </Dropdown>
       </span>
     )
