@@ -42,10 +42,10 @@ export default class Todo extends React.Component {
             <span className="has-text-danger">Delete</span>
           </DropdownItem>
           <DropdownDivider/>
-            <DropdownItem onClick={() => onSnooze(todo, 1, console.log(todo.newTodoDate))}>Snooze 1 day</DropdownItem>
-            <DropdownItem onClick={() => onSnooze(todo, 3)}>Snooze 3 days</DropdownItem>
-            <DropdownItem onClick={() => onSnooze(todo, 7)}>Snooze 1 week</DropdownItem>
-            <DropdownItem onClick={() => onSnooze(todo, 21)}>Snooze 3 weeks</DropdownItem>
+          <DropdownItem onClick={() => onSnooze(todo, 1)}>Snooze 1 day</DropdownItem>
+          <DropdownItem onClick={() => onSnooze(todo, 3)}>Snooze 3 days</DropdownItem>
+          <DropdownItem onClick={() => onSnooze(todo, 7)}>Snooze 1 week</DropdownItem>
+          <DropdownItem onClick={() => onSnooze(todo, 21)}>Snooze 3 weeks</DropdownItem>
         </Dropdown>
       </span>
     )
