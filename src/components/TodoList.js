@@ -167,7 +167,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     },
 
     snoozeTodo: (todo, numberOfDays) => {
-      const newTodoDate = moment(todo.dueDate).add(numberOfDays, 'days')
+      const newTodoDate = moment(todo.dueDate).add(numberOfDays, 'days').toDate()
 
       dispatch({
         type: 'UPDATE_TODO',
