@@ -3,9 +3,9 @@ import { values } from "lodash";
 import { connect } from "react-redux";
 import Notification from "./Notification";
 import TodoList from "../TodoList";
+import moment from 'moment';
 
-
-export function NotificationCenter ({notifications, dismissNotification, deactivateNotification}) {
+export function NotificationCenter ({notifications, dismissNotification, deactivateNotification, snoozeTodo}) {
   return (
     <div className="notification-center">
       <ul>
@@ -16,6 +16,7 @@ export function NotificationCenter ({notifications, dismissNotification, deactiv
                 notification={notification}
                 onDismiss={() => dismissNotification(notification.id)}
                 onDeactivate={() => deactivateNotification(notification.id, notification.todo.id, notification.todoListId)}
+                onSnooze={snoozeTodo}
               />
             </li>
           )
@@ -58,6 +59,26 @@ const mapDispatchToProps = (dispatch, ownProps) => {
           updatedKeysInTodo: { active: false }
         }
       })
+    },
+
+    snoozeTodo: (id, todoListId, todo, numberOfDays) => {
+      dispatch({
+        type: 'DISMISS_NOTIFICATION',
+        payload: {
+          id
+        }
+      });
+
+      const newTodoDate = moment(todo.dueDate).add(numberOfDays, 'days').toDate()
+      dispatch({
+        type: 'UPDATE_TODO',
+        payload: {
+          todoListId,
+          todoId: todo.id,
+          updatedKeysInTodo: { dueDate: newTodoDate }
+        }
+      })
+
     }
 
   }
