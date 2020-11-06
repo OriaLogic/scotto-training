@@ -36,6 +36,7 @@ class TodoList extends React.Component {
         case 'ALL': return true
         case 'ACTIVE': return todo.active === true
         case 'INACTIVE': return todo.active === false
+        case 'OVERDUE': return todo.active && todo.dueDate < new Date() === true
       }
     });
 
