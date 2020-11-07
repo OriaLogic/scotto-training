@@ -10,10 +10,14 @@ export default function Notification({onDismiss, onDeactivate, notification, onS
           <button className="button is-white is-small" onClick={onDeactivate}>Mark as done</button>
 
           <button className="button snooze is-white is-small">
-          <span className="icon is-small">
-            <i class="fas fa-clock"></i>
-          </span>
-            <Dropdown>
+            <Dropdown
+              trigger={
+                (<span className="icon is-small">
+                  <i className="clockIcon fas fa-clock"></i>
+                  <i className="snoozeIcon fas fa-angle-down" aria-hidden="true"></i>
+                </span>)
+              }
+            >
               <DropdownItem onClick={() => onSnooze(notification.id, notification.todoListId, notification.todo, 1)}>Snooze 1 day</DropdownItem>
               <DropdownItem onClick={() => onSnooze(notification.id, notification.todoListId, notification.todo, 3)}>Snooze 3 days</DropdownItem>
               <DropdownItem onClick={() => onSnooze(notification.id, notification.todoListId, notification.todo, 7)}>Snooze 1 week</DropdownItem>
