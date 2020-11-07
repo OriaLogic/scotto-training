@@ -36,7 +36,13 @@ export default class Todo extends React.Component {
 
         <DueDate dueDate={todo.dueDate}/>
 
-        <Dropdown>
+        <Dropdown
+          trigger={
+            (<span className="icon is-small">
+              <i className="fas fa-angle-down" aria-hidden="true"></i>
+            </span>)
+          }
+        >
           <DropdownItem onClick={() => onEdit(todo)}>Edit</DropdownItem>
           <DropdownItem onClick={() => onDelete(todo.id)}>
             <span className="has-text-danger">Delete</span>
