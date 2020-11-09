@@ -12,10 +12,14 @@ export default function Notification({onDismiss, onDeactivate, notification, onS
           <button className="button snooze is-white is-small">
             <Dropdown
               trigger={
-                (<span className="icon is-small">
-                  <i className="clockIcon fas fa-clock"></i>
-                  <i className="snoozeIcon fas fa-angle-down" aria-hidden="true"></i>
-                </span>)
+                (<React.Fragment>
+                  <span className="icon is-small">
+                    <i className="clockIcon fas fa-clock" />
+                  </span>
+                  <span className="icon is-small">
+                    <i className="snoozeIcon fas fa-angle-down" aria-hidden="true" />
+                  </span>
+                </React.Fragment>)
               }
             >
               <DropdownItem onClick={() => onSnooze(notification.id, notification.todoListId, notification.todo, 1)}>Snooze 1 day</DropdownItem>
