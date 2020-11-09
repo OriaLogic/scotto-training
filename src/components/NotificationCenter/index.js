@@ -45,30 +45,23 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 
     deactivateNotification: (id, todoId, todoListId) => {
       dispatch({
-        type: 'DISMISS_NOTIFICATION',
-        payload: {
-          id
-        }
-      });
-
-      dispatch({
         type: 'UPDATE_TODO',
         payload: {
           todoId,
           todoListId,
           updatedKeysInTodo: { active: false }
         }
-      })
-    },
+      });
 
-    snoozeTodo: (id, todoListId, todo, numberOfDays) => {
       dispatch({
         type: 'DISMISS_NOTIFICATION',
         payload: {
           id
         }
-      });
+      })
+    },
 
+    snoozeTodo: (id, todoListId, todo, numberOfDays) => {
       const newTodoDate = moment(todo.dueDate).add(numberOfDays, 'days').toDate()
       dispatch({
         type: 'UPDATE_TODO',
@@ -76,6 +69,13 @@ const mapDispatchToProps = (dispatch, ownProps) => {
           todoListId,
           todoId: todo.id,
           updatedKeysInTodo: { dueDate: newTodoDate }
+        }
+      });
+
+      dispatch({
+        type: 'DISMISS_NOTIFICATION',
+        payload: {
+          id
         }
       })
 
