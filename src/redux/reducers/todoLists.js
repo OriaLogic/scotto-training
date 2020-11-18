@@ -95,10 +95,6 @@ const todoLists = (state = initialState, action) => {
         }
       }
 
-    case 'SAVE_DATA':
-      localStorage.setItem('dataState', JSON.stringify(state))
-      return state
-
     default:
       return state
   }
