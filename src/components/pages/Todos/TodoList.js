@@ -1,6 +1,5 @@
 import React from "react";
 import { values } from "lodash";
-import { updateObjectInList } from "../util/array";
 import TodoCreationForm from "./TodoCreationForm";
 import Todo from "./Todo";
 import { connect } from "react-redux";
