@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import Notification from "./Notification";
 import TodoList from "../TodoList";
 import moment from 'moment';
+import posed, { PoseGroup } from 'react-pose';
 
 export function NotificationCenter ({notifications, dismissNotification, deactivateNotification, snoozeTodo}) {
   return (
