@@ -3,24 +3,31 @@ import { values } from "lodash";
 import { connect } from "react-redux";
 import Notification from "./Notification";
 import TodoList from "../TodoList";
+import moment from 'moment';
+import posed, { PoseGroup } from 'react-pose';
 
+const AnimatedNotification = posed.ul({
+  enter: { opacity: 1 },
+  exit: { opacity: 0 }
+});
 
-export function NotificationCenter ({notifications, dismissNotification, deactivateNotification}) {
+export function NotificationCenter ({notifications, dismissNotification, deactivateNotification, snoozeTodo}) {
   return (
     <div className="notification-center">
-      <ul>
-        {notifications.map(notification => {
-          return (
-            <li key={notification.id}>
-              <Notification
-                notification={notification}
-                onDismiss={() => dismissNotification(notification.id)}
-                onDeactivate={() => deactivateNotification(notification.id, notification.todo.id, notification.todoListId)}
-              />
-            </li>
-          )
-        })}
-      </ul>
+      <PoseGroup>
+          {notifications.map(notification => {
+            return (
+              <AnimatedNotification key={notification.id}>
+                <Notification
+                  notification={notification}
+                  onDismiss={() => dismissNotification(notification.id)}
+                  onDeactivate={() => deactivateNotification(notification.id, notification.todo.id, notification.todoListId)}
+                  onSnooze={snoozeTodo}
+                />
+              </AnimatedNotification>
+            )
+          })}
+      </PoseGroup>
     </div>
   )
 }
@@ -44,20 +51,40 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 
     deactivateNotification: (id, todoId, todoListId) => {
       dispatch({
-        type: 'DISMISS_NOTIFICATION',
-        payload: {
-          id
-        }
-      });
-
-      dispatch({
         type: 'UPDATE_TODO',
         payload: {
           todoId,
           todoListId,
           updatedKeysInTodo: { active: false }
         }
+      });
+
+      dispatch({
+        type: 'DISMISS_NOTIFICATION',
+        payload: {
+          id
+        }
       })
+    },
+
+    snoozeTodo: (id, todoListId, todo, numberOfDays) => {
+      const newTodoDate = moment(todo.dueDate).add(numberOfDays, 'days').toDate()
+      dispatch({
+        type: 'UPDATE_TODO',
+        payload: {
+          todoListId,
+          todoId: todo.id,
+          updatedKeysInTodo: { dueDate: newTodoDate }
+        }
+      });
+
+      dispatch({
+        type: 'DISMISS_NOTIFICATION',
+        payload: {
+          id
+        }
+      })
+
     }
 
   }

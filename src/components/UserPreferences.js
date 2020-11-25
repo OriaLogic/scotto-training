@@ -13,7 +13,7 @@ class UserPreferences extends React.Component {
         <div style={{ display: "flex" }}>
           <h5 className="subtitle is-5">Filters:</h5>
           { 
-            ["ALL", "ACTIVE", "INACTIVE"].map(filterValue => (
+            ["ALL", "ACTIVE", "INACTIVE", "OVERDUE"].map(filterValue => (
               <Button
                 onClick={() => this.props.changeFilter(filterValue)}
                 disabled={this.props.filter === filterValue}

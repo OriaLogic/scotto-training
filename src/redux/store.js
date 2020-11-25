@@ -1,9 +1,8 @@
-import { createStore, combineReducers } from "redux"
-import todoLists from "./reducers/todoLists";
-import userPreferences from "./reducers/userPreferences";
-import notifications from "./reducers/notifications"
+import { createStore } from "redux"
+import rootReducer from './reducers/root'
 
-const todoListsState = JSON.parse(localStorage.getItem("dataState"));
+const storedState = JSON.parse(localStorage.getItem("dataState"));
+const todoListsState = storedState.todoLists;
 
 Object.keys(todoListsState).forEach(todoListId => {
   const todoList = todoListsState[todoListId];
@@ -17,20 +16,16 @@ Object.keys(todoListsState).forEach(todoListId => {
 
 const initialState = {
   todoLists: todoListsState,
-  userPreferences: {
-    filter: "ALL",
-    sortBy: "NAME"
-  },
+  userPreferences: storedState.userPreferences,
   notifications: { }
 }
 
-const rootReducer = combineReducers({
-  todoLists,
-  userPreferences,
-  notifications
-})
+const store = createStore(
+  rootReducer,
+  initialState,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+)
 
-const store = createStore(rootReducer, initialState, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 setTimeout(() => {
   Object.keys(todoListsState).forEach(todoListId => {
     const todoList = todoListsState[todoListId];

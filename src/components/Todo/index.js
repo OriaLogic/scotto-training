@@ -1,12 +1,12 @@
 import React from 'react';
 import EditionForm from './EditionForm';
 import DueDate from './DueDate';
-import Dropdown, { DropdownItem } from '../library/Dropdown';
+import Dropdown, { DropdownItem, DropdownDivider } from '../library/Dropdown';
 
 export default class Todo extends React.Component {
 
   render() {
-    const { todo, editing, onUpdate, onCancelEdit, onEdit, onDelete } = this.props;
+    const { todo, editing, onUpdate, onCancelEdit, onEdit, onDelete, onSnooze } = this.props;
 
     if (editing) {
       return (
@@ -36,13 +36,23 @@ export default class Todo extends React.Component {
 
         <DueDate dueDate={todo.dueDate}/>
 
-        <Dropdown>
+        <Dropdown
+          trigger={
+            (<span className="icon is-small">
+              <i className="fas fa-angle-down" aria-hidden="true"></i>
+            </span>)
+          }
+        >
           <DropdownItem onClick={() => onEdit(todo)}>Edit</DropdownItem>
           <DropdownItem onClick={() => onDelete(todo.id)}>
             <span className="has-text-danger">Delete</span>
           </DropdownItem>
+          <DropdownDivider/>
+          <DropdownItem onClick={() => onSnooze(todo, 1)}>Snooze 1 day</DropdownItem>
+          <DropdownItem onClick={() => onSnooze(todo, 3)}>Snooze 3 days</DropdownItem>
+          <DropdownItem onClick={() => onSnooze(todo, 7)}>Snooze 1 week</DropdownItem>
+          <DropdownItem onClick={() => onSnooze(todo, 21)}>Snooze 3 weeks</DropdownItem>
         </Dropdown>
-
       </span>
     )
   }

@@ -5,11 +5,7 @@ export default function Dropdown({trigger, children, align}) {
     <div className="dropdown is-hoverable" >
 
       <div className="dropdown-trigger">
-
-          <span className="icon is-small">
-            <i className="fas fa-angle-down" aria-hidden="true"></i>
-          </span>
-
+          {trigger}
       </div>
 
       <div className="dropdown-menu" id="dropdown-menu" role="menu">
@@ -27,5 +23,11 @@ export default function Dropdown({trigger, children, align}) {
 export function DropdownItem({children, onClick, style}) {
   return(
     <a onClick={onClick} style={style} className="dropdown-item">{children}</a>
+  )
+}
+
+export function DropdownDivider() {
+  return(
+    <a className="dropdown-divider"></a>
   )
 }

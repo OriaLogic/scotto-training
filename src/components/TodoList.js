@@ -4,7 +4,7 @@ import { updateObjectInList } from "../util/array";
 import TodoCreationForm from "./TodoCreationForm";
 import Todo from "./Todo";
 import { connect } from "react-redux";
-
+import moment from 'moment';
 
 class TodoList extends React.Component {
   state = {
@@ -36,6 +36,7 @@ class TodoList extends React.Component {
         case 'ALL': return true
         case 'ACTIVE': return todo.active === true
         case 'INACTIVE': return todo.active === false
+        case 'OVERDUE': return todo.active && todo.dueDate < new Date()
       }
     });
 
@@ -111,6 +112,7 @@ class TodoList extends React.Component {
                     onCancelEdit={() => this.setState({editingTodoId: null})}
                     onDelete={this.props.deleteTodo}
                     onUpdate={this.updateTodo}
+                    onSnooze={this.props.snoozeTodo}
                   />
                 </li>
               );
@@ -160,6 +162,19 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         payload: {
           todoId,
           updatedKeysInTodo,
+          todoListId: ownProps.id
+        }
+      })
+    },
+
+    snoozeTodo: (todo, numberOfDays) => {
+      const newTodoDate = moment(todo.dueDate).add(numberOfDays, 'days').toDate()
+
+      dispatch({
+        type: 'UPDATE_TODO',
+        payload: {
+          todoId: todo.id,
+          updatedKeysInTodo: { dueDate: newTodoDate },
           todoListId: ownProps.id
         }
       })
