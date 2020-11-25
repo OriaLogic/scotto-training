@@ -6,23 +6,28 @@ import TodoList from "../TodoList";
 import moment from 'moment';
 import posed, { PoseGroup } from 'react-pose';
 
+const AnimatedNotification = posed.ul({
+  enter: { opacity: 1 },
+  exit: { opacity: 0 }
+});
+
 export function NotificationCenter ({notifications, dismissNotification, deactivateNotification, snoozeTodo}) {
   return (
     <div className="notification-center">
-      <ul>
-        {notifications.map(notification => {
-          return (
-            <li key={notification.id}>
-              <Notification
-                notification={notification}
-                onDismiss={() => dismissNotification(notification.id)}
-                onDeactivate={() => deactivateNotification(notification.id, notification.todo.id, notification.todoListId)}
-                onSnooze={snoozeTodo}
-              />
-            </li>
-          )
-        })}
-      </ul>
+      <PoseGroup>
+          {notifications.map(notification => {
+            return (
+              <AnimatedNotification key={notification.id}>
+                <Notification
+                  notification={notification}
+                  onDismiss={() => dismissNotification(notification.id)}
+                  onDeactivate={() => deactivateNotification(notification.id, notification.todo.id, notification.todoListId)}
+                  onSnooze={snoozeTodo}
+                />
+              </AnimatedNotification>
+            )
+          })}
+      </PoseGroup>
     </div>
   )
 }
