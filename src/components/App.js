@@ -5,42 +5,64 @@ import UserPreferences from "./UserPreferences";
 import TodoListCreationForm from "./TodoListCreationForm";
 import Button from "./library/Button";
 import { connect } from "react-redux";
-import NotificationCenter from "./NotificationCenter"
+import NotificationCenter from "./NotificationCenter";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 
 // Small comment to open the PR
 class App extends React.Component {
   render() {
     return (
-      <div className="App">
-        <h1 className="main-title">Scotto TodoList App !</h1>
-        <Button
-          additionalClassName="save-data"
-          onClick={this.props.saveData}
-        >
-          Save
-        </Button>
+      <Router>
+        <div className="App">
+          <h1 className="main-title">Scotto TodoList App !</h1>
+          <Button
+            additionalClassName="save-data"
+            onClick={this.props.saveData}
+          >
+            Save
+          </Button>
 
-        <NotificationCenter/>
+          <NotificationCenter/>
 
-        <div className="app-container">
-          <div className="bloc-1">
-            <UserPreferences/>
-            <TodoListCreationForm onCreate={this.props.addTodoList}/>
-          </div>
-          <div className="all-todoLists-container">
-            {this.props.todoLists.map((todoList) => {
-              return (
-                <TodoList
-                  key={todoList.id}
-                  name={todoList.name}
-                  onDelete={this.props.deleteTodoList}
-                  id={todoList.id}
-                />
-              );
-            })}
+          <nav>
+          <ul>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/todos">Todos</Link>
+            </li>
+            <li>
+              <Link to="/notes">Notes</Link>
+            </li>
+          </ul>
+          </nav>
+
+          <div className="app-container">
+            <div className="bloc-1">
+              <UserPreferences/>
+              <TodoListCreationForm onCreate={this.props.addTodoList}/>
+            </div>
+            <div className="all-todoLists-container">
+              {this.props.todoLists.map((todoList) => {
+                return (
+                  <TodoList
+                    key={todoList.id}
+                    name={todoList.name}
+                    onDelete={this.props.deleteTodoList}
+                    id={todoList.id}
+                  />
+                );
+              })}
+            </div>
           </div>
         </div>
-      </div>
+      </Router>
     );
   }
 }
