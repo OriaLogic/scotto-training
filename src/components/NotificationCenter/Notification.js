@@ -21,11 +21,12 @@ export default function Notification({onDismiss, onDeactivate, notification, onS
                   </span>
                 </React.Fragment>)
               }
+              style={{ marginLeft: -11 }}
             >
-              <DropdownItem onClick={() => onSnooze(notification.id, notification.todoListId, notification.todo, 1)}>Snooze 1 day</DropdownItem>
-              <DropdownItem onClick={() => onSnooze(notification.id, notification.todoListId, notification.todo, 3)}>Snooze 3 days</DropdownItem>
-              <DropdownItem onClick={() => onSnooze(notification.id, notification.todoListId, notification.todo, 7)}>Snooze 1 week</DropdownItem>
-              <DropdownItem onClick={() => onSnooze(notification.id, notification.todoListId, notification.todo, 21)}>Snooze 3 weeks</DropdownItem>
+              <DropdownItem style={{ textAlign: 'left' }} onClick={() => onSnooze(notification.id, notification.todoListId, notification.todo, 1)}>Snooze 1 day</DropdownItem>
+              <DropdownItem style={{ textAlign: 'left' }} onClick={() => onSnooze(notification.id, notification.todoListId, notification.todo, 3)}>Snooze 3 days</DropdownItem>
+              <DropdownItem style={{ textAlign: 'left' }} onClick={() => onSnooze(notification.id, notification.todoListId, notification.todo, 7)}>Snooze 1 week</DropdownItem>
+              <DropdownItem style={{ textAlign: 'left' }} onClick={() => onSnooze(notification.id, notification.todoListId, notification.todo, 21)}>Snooze 3 weeks</DropdownItem>
             </Dropdown>
           </button>
         </div>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-export default function Dropdown({trigger, children, align}) {
+export default function Dropdown({trigger, children, align, style}) {
   return(
     <div className="dropdown is-hoverable" >
 
@@ -8,7 +8,7 @@ export default function Dropdown({trigger, children, align}) {
           {trigger}
       </div>
 
-      <div className="dropdown-menu" id="dropdown-menu" role="menu">
+      <div className="dropdown-menu" id="dropdown-menu" role="menu" style={style}>
 
         <div className="dropdown-content">
           {children}
