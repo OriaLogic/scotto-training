@@ -1,5 +1,6 @@
-import { createStore } from "redux"
-import rootReducer from './reducers/root'
+import { createStore } from "redux";
+import rootReducer from './reducers/root';
+import { getInitialState, afterStoreInitialization } from "./init";
 
 const storedState = JSON.parse(localStorage.getItem("dataState"));
 const todoListsState = storedState.todoLists;
