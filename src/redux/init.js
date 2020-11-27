@@ -1,7 +1,7 @@
-const storedState = JSON.parse(localStorage.getItem("dataState"));
-const todoListsState = storedState.todoLists;
-
 export const getInitialState = () => {
+  const storedState = JSON.parse(localStorage.getItem("dataState"));
+  const todoListsState = storedState.todoLists;
+
   Object.keys(todoListsState).forEach(todoListId => {
     const todoList = todoListsState[todoListId];
     const todos = todoList.todos;
@@ -26,7 +26,8 @@ export const afterStoreInitialization = store => {
 };
 
 const triggerNotifications = store => {
-  setTimeout(() => {
+    const todoListsState = store.getState().todoLists;
+
     Object.keys(todoListsState).forEach(todoListId => {
       const todoList = todoListsState[todoListId];
       const todos = todoList.todos;
@@ -44,5 +45,5 @@ const triggerNotifications = store => {
         }
       })
     })
-  }, 5000)
+
 };
