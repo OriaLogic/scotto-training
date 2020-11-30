@@ -5,7 +5,7 @@ import App from "./components/App";
 import { Provider } from "react-redux";
 import store from "./redux/store";
 import "react-datepicker/dist/react-datepicker.css";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 
 ReactDOM.render(
   <React.StrictMode>

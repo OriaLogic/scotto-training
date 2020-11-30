@@ -1,0 +1,70 @@
+.notes-container
+  height: 100%
+
+  .group-nav, .note-nav
+    height: 100%
+    > .column
+      height: 100%
+      &.is-2, &.is-3
+        border-right: 1px solid $grey-lightest
+
+    .menu
+      height: 100%
+      position: relative
+
+      .new-button
+        position: absolute
+        bottom: 0
+        left: 0
+        right: 0
+
+      li > a
+        display: block
+        position: relative
+
+        .name
+          max-width: calc(100% - 17px)
+          text-overflow: ellipsis
+          overflow: hidden
+          white-space: nowrap
+
+        .tag
+          position: absolute
+          right: 6px
+          top: 6px
+
+        .actions
+          display: none
+          position: absolute
+          right: 3px
+          top: 3px
+
+          .button:not(:last-child)
+            margin-right: 3px
+
+        &:hover
+          .actions
+            display: block
+          .tag
+            display: none
+
+        &.is-active
+          .actions button
+            background-color: transparent
+            span
+              color: white !important
+
+    .note-nav
+      .no-note-placeholder
+        padding: 20%
+
+      .note
+        height: 100%
+
+        textarea.textarea
+          resize: none
+          height: 100%
+          width: 100%
+          border: none
+          outline: none
+          box-shadow: none
