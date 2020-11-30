@@ -9,20 +9,22 @@ export const getInitialState = () => {
     Object.keys(todos).forEach(todoId => {
       const todo = todos[todoId];
       todo.dueDate = new Date(todo.dueDate);
-    })
-  })
+    });
+  });
 
   const initialState = {
     todoLists: todoListsState,
     userPreferences: storedState.userPreferences,
-    notifications: { }
-  }
+    notes: storedState.notes,
+    noteGroups: storedState.noteGroups,
+    notifications: {}
+  };
 
-  return initialState
+  return initialState;
 };
 
 export const afterStoreInitialization = store => {
-  setTimeout(() => triggerNotifications(store), 5000);
+  // setTimeout(() => triggerNotifications(store), 5000);
 };
 
 const triggerNotifications = store => {
@@ -35,14 +37,14 @@ const triggerNotifications = store => {
         const todo = todos[todoId];
         if (todo.active && todo.dueDate < new Date()) {
           store.dispatch({
-            type: 'ADD_NOTIFICATION',
+            type: "ADD_NOTIFICATION",
             payload: {
               todo,
               todoListId
             }
-          })
+          });
         }
-      })
-    })
-  }, 5000)
+      });
+    });
+  }, 5000);
 };
