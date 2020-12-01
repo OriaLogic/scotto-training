@@ -20,6 +20,10 @@ export default function Dropdown({trigger, children, align, style}) {
   )
 }
 
+Dropdown.defaultProps = {
+  align: 'is-left'
+};
+
 export function DropdownItem({children, onClick, style}) {
   return(
     <a onClick={onClick} style={style} className="dropdown-item">{children}</a>
