@@ -1,8 +1,14 @@
 import React, { useState } from 'react';
+import classNames from 'classnames';
 
 export default function Dropdown({trigger, children, align, style}) {
+
+  const dropdownClassname = classNames("dropdown", "is-hoverable", {
+    "is-right": align === "right"
+  })
+
   return(
-    <div className="dropdown is-hoverable" >
+    <div className={dropdownClassname} >
 
       <div className="dropdown-trigger">
           {trigger}
@@ -21,7 +27,7 @@ export default function Dropdown({trigger, children, align, style}) {
 }
 
 Dropdown.defaultProps = {
-  align: 'is-left'
+  align: "left"
 };
 
 export function DropdownItem({children, onClick, style}) {
