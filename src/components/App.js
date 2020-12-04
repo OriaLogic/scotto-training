@@ -7,12 +7,15 @@ import Button from "./library/Button";
 import NotificationCenter from "./NotificationCenter";
 import Notes from "./pages/Notes";
 import Todos from "./pages/Todos";
+import AppLayout from "./AppLayout";
 
 // Small comment to open the PR
 class App extends React.Component {
   render() {
     return (
       <Router>
+
+      <AppLayout />
         <div className="App">
 
           <h1 className="main-title">Scotto TodoList App !</h1>
