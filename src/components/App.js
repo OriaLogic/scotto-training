@@ -28,20 +28,6 @@ class App extends React.Component {
 
           <NotificationCenter/>
 
-          <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/todos">Todos</Link>
-            </li>
-            <li>
-              <Link to="/notes">Notes</Link>
-            </li>
-          </ul>
-          </nav>
-
           <div className="app-container">
             <Switch>
               <Route path="/notes">
