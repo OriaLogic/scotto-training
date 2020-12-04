@@ -7,8 +7,8 @@ export default class Header extends React.Component {
     return(
       <nav className="navbar is-primary" role="navigation" aria-label="main navigation">
         <div className="navbar-brand">
-          <a className="navbar-item">
-            <NavLink to="/" activeClassName="is-active">
+          <a>
+            <NavLink className="navbar-item" to="/" activeClassName="is-active">
               <img src="/app-logo.png" height="28"/>
             </NavLink>
           </a>
@@ -23,12 +23,12 @@ export default class Header extends React.Component {
         <div id="navbarBasicExample" className="navbar-menu">
 
           <div className="navbar-start">
-            <a className="navbar-item">
-              <NavLink to="/Todos" activeClassName="is-active">Todos</NavLink>
+            <a>
+              <NavLink to="/Todos" className="navbar-item" activeClassName="is-active">Todos</NavLink>
             </a>
 
-            <a className="navbar-item">
-              <NavLink to="/Notes" activeClassName="is-active">Notes</NavLink>
+            <a>
+              <NavLink to="/Notes" className="navbar-item" activeClassName="is-active">Notes</NavLink>
             </a>
 
           </div>
