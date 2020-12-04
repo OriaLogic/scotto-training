@@ -9,40 +9,22 @@ import Todos from "./pages/Todos";
 import AppLayout from "./AppLayout";
 
 // Small comment to open the PR
-export default class App extends React.Component {
-  render() {
+export default function App () {
     return (
       <Router>
-
-        <div className="App">
-          <AppLayout />
-          
-          <NotificationCenter/>
-
-          <div className="app-container">
-            <Switch>
-              <Route path="/notes">
-                <Notes />
-              </Route>
-              <Route path="/todos">
-                <Todos />
-              </Route>
-              <Route path="/">
-                <Todos />
-              </Route>
-            </Switch>
-          </div>
-
-        </div>
+        <AppLayout>
+          <Switch>
+            <Route path="/notes">
+              <Notes />
+            </Route>
+            <Route path="/todos">
+              <Todos />
+            </Route>
+            <Route path="/">
+              <Todos />
+            </Route>
+          </Switch>
+        </AppLayout>
       </Router>
     );
-  }
-}
-
-const mapDispatchToProps = (dispatch, props) => {
-  return {
-    saveData: () => dispatch({
-      type: 'SAVE_DATA'
-    })
-  }
 }
