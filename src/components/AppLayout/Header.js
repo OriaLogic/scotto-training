@@ -7,7 +7,7 @@ export default class Header extends React.Component {
       <nav className="navbar is-primary" role="navigation" aria-label="main navigation">
         <div className="navbar-brand">
           <a className="navbar-item" href="https://bulma.io">
-            <img src="/app-logo.png" width="112" height="28"/>
+            <img src="/app-logo.png" height="28"/>
           </a>
 
           <a role="button" className="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
