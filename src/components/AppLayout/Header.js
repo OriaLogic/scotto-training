@@ -26,19 +26,14 @@ class Header extends React.Component {
         <div id="navbarBasicExample" className="navbar-menu">
 
           <div className="navbar-start">
-            <a>
               <NavLink to="/Todos" className="navbar-item" activeClassName="is-active">Todos</NavLink>
-            </a>
 
-            <a>
               <NavLink to="/Notes" className="navbar-item" activeClassName="is-active">Notes</NavLink>
-            </a>
 
           </div>
 
           <div className="navbar-end">
               <Button
-                className="navbar-item"
                 additionalClassName="save-data"
                 onClick={this.props.saveData}
               >
