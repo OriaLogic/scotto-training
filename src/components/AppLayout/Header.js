@@ -1,7 +1,10 @@
 import React from "react";
 import { NavLink, Route } from 'react-router-dom';
+import { connect } from "react-redux";
 
-export default class Header extends React.Component {
+import Button from "../library/Button";
+
+class Header extends React.Component {
   render() {
 
     return(
@@ -35,11 +38,12 @@ export default class Header extends React.Component {
 
           <div className="navbar-end">
             <div className="navbar-item">
-              <div className="buttons">
-                <a className="button is-light">
-                  Log in
-                </a>
-              </div>
+              <Button
+                additionalClassName="save-data"
+                onClick={this.props.saveData}
+              >
+                Save
+              </Button>
             </div>
           </div>
         </div>
@@ -47,3 +51,13 @@ export default class Header extends React.Component {
     )
   }
 }
+
+const mapDispatchToProps = (dispatch, props) => {
+  return {
+    saveData: () => dispatch({
+      type: 'SAVE_DATA'
+    })
+  }
+}
+
+export default connect(null, mapDispatchToProps)(Header);
