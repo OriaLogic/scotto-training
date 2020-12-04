@@ -1,7 +1,20 @@
 import { v4 as uuidv4 } from "uuid";
 import { omit } from "lodash";
 
-const initialState = {};
+const initialState = {
+  0: {
+    id: 0,
+    title: "A dumb note",
+    groupId: 0,
+    content: "A really uninteresting content"
+  },
+  1: {
+    id: 1,
+    title: "Another dumb note",
+    groupId: 0,
+    content: "Another really uninteresting content"
+  }
+};
 
 const notes = (state = initialState, { type, payload }) => {
   let id;
