@@ -37,15 +37,15 @@ class Header extends React.Component {
           </div>
 
           <div className="navbar-end">
-            <div className="navbar-item">
               <Button
+                className="navbar-item"
                 additionalClassName="save-data"
                 onClick={this.props.saveData}
               >
                 Save
               </Button>
-            </div>
           </div>
+
         </div>
       </nav>
     )
