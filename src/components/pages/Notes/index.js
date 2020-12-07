@@ -4,7 +4,9 @@ import NoteGroupNav from "./NoteGroupNav";
 export default function Notes({ props }) {
   return (
     <div className="notes-container">
-      <NoteGroupNav />
+      <NoteGroupNav>
+        “The notes of the group”
+      </NoteGroupNav>
     </div>
   )
 }
