@@ -15,7 +15,9 @@ export const getInitialState = () => {
   const initialState = {
     todoLists: todoListsState,
     userPreferences: storedState.userPreferences,
-    notifications: { }
+    notifications: { },
+    notes: storedState.notes,
+    noteGroup: storedState.noteGroup
   }
 
   return initialState
