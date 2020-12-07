@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function GroupNav({ children }) {
+export default function NoteGroupNav({ children }) {
   return (
     <div className="group-nav">
       <div className="columns">
