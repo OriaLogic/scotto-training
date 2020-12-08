@@ -1,16 +1,21 @@
 import React from "react";
 import { connect } from "react-redux";
 import { values } from "lodash";
+import { NavLink, Route } from 'react-router-dom';
 
-export function NoteGroupNav({ children }) {
+
+function NoteGroupNav({ children, noteGroups }) {
   return (
     <div className="group-nav">
       <div className="columns">
         <div className="column is-2">
           <aside class="menu">
             <ul class="menu-list">
-              <li><a>Notes</a></li>
-              <li><a>Personal notes</a></li>
+              {noteGroups.map(noteGroup => {
+                return(
+                  <li><NavLink to={`/notes/noteGroups/${noteGroup.id}`}>{noteGroup.name}</NavLink></li>
+                )
+              })}
             </ul>
           </aside>
         </div>
@@ -24,7 +29,7 @@ export function NoteGroupNav({ children }) {
 
 const mapStateToProps = (state, props) => {
   return {
-    noteGroup: values(state.noteGroup)
+    noteGroups: values(state.noteGroups)
   };
 };
 

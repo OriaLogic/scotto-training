@@ -24,7 +24,7 @@ export const getInitialState = () => {
 };
 
 export const afterStoreInitialization = store => {
-  setTimeout(() => triggerNotifications(store), 5000);
+  //setTimeout(() => triggerNotifications(store), 5000);
 };
 
 const triggerNotifications = store => {

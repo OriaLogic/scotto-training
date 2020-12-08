@@ -7,7 +7,7 @@ const initialState = {
   }
 };
 
-const noteGroup = (state = initialState, action) => {
+const noteGroups = (state = initialState, action) => {
 
   switch (action.type) {
     case 'ADD_NOTE_GROUP':
@@ -38,4 +38,4 @@ const noteGroup = (state = initialState, action) => {
   }
 }
 
-export default noteGroup;
+export default noteGroups;

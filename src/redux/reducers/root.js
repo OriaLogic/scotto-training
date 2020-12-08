@@ -3,14 +3,14 @@ import todoLists from "./todoLists";
 import userPreferences from "./userPreferences";
 import notifications from "./notifications"
 import notes from "./notes";
-import noteGroup from "./noteGroup";
+import noteGroups from "./noteGroups";
 
 const combinedReducer = combineReducers({
   todoLists,
   userPreferences,
   notifications,
   notes,
-  noteGroup
+  noteGroups
 })
 
 export default function rootReducer(state, action) {
@@ -19,7 +19,7 @@ export default function rootReducer(state, action) {
       todoLists: state.todoLists,
       userPreferences: state.userPreferences,
       notes: state.notes,
-      noteGroup: state.noteGroup
+      noteGroups: state.noteGroups
     }))
     return state
   }
