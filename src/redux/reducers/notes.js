@@ -27,9 +27,8 @@ const notes = (state = initialState, action) => {
         ...state,
         [id]: {
           id,
-          title: action.payload.title,
-          groupId: action.payload.groupId,
-          content: action.payload.content
+          title: "New note",
+          groupId: action.payload.groupId
         }
       }
 
