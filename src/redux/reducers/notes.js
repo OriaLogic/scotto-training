@@ -33,6 +33,19 @@ const notes = (state = initialState, action) => {
         }
       }
 
+    case 'UDPATE_NOTE':
+      return {
+        ...state,
+        [action.payload.id]: {
+          ...state[action.payload.id],
+          ...action.payload
+        }
+      }
+
+    case 'DELETE_NOTE':
+      delete state[action.payload.id]
+      return { ...state }
+
     default:
       return state
   }
