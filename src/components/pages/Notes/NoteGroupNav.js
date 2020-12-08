@@ -1,6 +1,8 @@
 import React from "react";
+import { connect } from "react-redux";
+import { values } from "lodash";
 
-export default function NoteGroupNav({ children }) {
+export function NoteGroupNav({ children }) {
   return (
     <div className="group-nav">
       <div className="columns">
@@ -19,3 +21,13 @@ export default function NoteGroupNav({ children }) {
     </div>
   )
 }
+
+const mapStateToProps = (state, props) => {
+  return {
+    noteGroup: values(state.noteGroup)
+  };
+};
+
+const mapDispatchToProps = () => { return{}; };
+
+export default connect(mapStateToProps, mapDispatchToProps)(NoteGroupNav);
