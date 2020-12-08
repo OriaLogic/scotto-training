@@ -10,7 +10,7 @@ const initialState = {
 const noteGroup = (state = initialState, action) => {
 
   switch (action.type) {
-    case 'ADD_NOTE_GROUP' :
+    case 'ADD_NOTE_GROUP':
       id = uuidv4();
       return {
         ...state,
@@ -20,8 +20,17 @@ const noteGroup = (state = initialState, action) => {
         }
       }
 
-    case 'DELETE_NOTE_GROUP' :
-      delete state[action.payload.noteGroupId]
+    case 'UPDATE_NOTE_GROUP':
+      return {
+        ...state,
+        [action.payload.id]: {
+          ...state[action.payload.id],
+          ...action.payload
+        }
+      }
+
+    case 'DELETE_NOTE_GROUP':
+      delete state[action.payload.id]
       return { ...state }
 
     default:
