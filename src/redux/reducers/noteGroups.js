@@ -4,6 +4,10 @@ const initialState = {
   0: {
     id: 0,
     name: "Notes"
+  },
+  1: {
+    id: 1,
+    name: "Notes 2"
   }
 };
 
