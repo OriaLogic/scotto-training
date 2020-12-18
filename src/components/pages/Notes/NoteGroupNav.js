@@ -16,7 +16,7 @@ function NoteGroupNav({ children, noteGroups, deleteNoteGroup }) {
               {noteGroups.map(noteGroup => {
                 return(
                     <li>
-                      <NavLink to={`/notes/noteGroups/${noteGroup.id}`}>
+                      <NavLink to={`/notes/noteGroups/${noteGroup.id}`} className="note-group">
                         {noteGroup.name}
                         <button
                           className="button is-text is-small"
