@@ -18,15 +18,18 @@ function NoteGroupNav({ children, noteGroups, addGroup, deleteGroup, updateGroup
                     <li>
                       <NavLink to={`/notes/noteGroups/${noteGroup.id}`} className="note-group">
                         {noteGroup.name}
-                        <button
-                          className="button is-text is-small"
-                          style={{ marginRight: 11 }}
-                          onClick={() => deleteGroup(noteGroup.id)}
-                        >
-                          <span className="icon has-text-danger">
-                            <i className="fas fa-trash"></i>
-                          </span>
-                        </button>
+                        <div classname="actions">
+                          <Button
+                            additionalClassName="is-text delete-button"
+                            color="white"
+                            size="small"
+                            onClick={() => deleteGroup(noteGroup.id)}
+                          >
+                            <span className="icon has-text-danger">
+                              <i className="fas fa-trash"></i>
+                            </span>
+                          </Button>
+                        </div>
                       </NavLink>
                     </li>
                 )
