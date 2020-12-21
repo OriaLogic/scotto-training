@@ -17,7 +17,7 @@ export const getInitialState = () => {
     userPreferences: storedState.userPreferences,
     notifications: { },
     notes: storedState.notes,
-    noteGroup: storedState.noteGroup
+    noteGroups: storedState.noteGroups
   }
 
   return initialState
