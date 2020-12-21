@@ -36,6 +36,7 @@ function NoteGroupNav({ children, noteGroups, addGroup, deleteGroup, updateGroup
               size="small"
               color="white"
               additionalClassName="is-fullwidth new-button"
+              onClick={addGroup}
             >
               New folder
             </Button>
@@ -57,8 +58,13 @@ const mapStateToProps = (state, props) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return{
-    addGroup: () => {
-
+    addGroup: (name) => {
+      dispatch({
+        type: 'ADD_NOTE_GROUP',
+        payload: {
+          name: "New folder"
+        }
+      })
     },
 
     deleteGroup: (id) => {

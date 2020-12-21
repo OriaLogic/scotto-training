@@ -12,6 +12,7 @@ const initialState = {
 };
 
 const noteGroups = (state = initialState, action) => {
+let id
 
   switch (action.type) {
     case 'ADD_NOTE_GROUP':
