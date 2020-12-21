@@ -6,7 +6,7 @@ import { NavLink, Route } from 'react-router-dom';
 import Button from "../../library/Button";
 
 
-function NoteGroupNav({ children, noteGroups, deleteNoteGroup }) {
+function NoteGroupNav({ children, noteGroups, addGroup, deleteGroup, updateGroupName }) {
   return (
     <div className="group-nav">
       <div className="columns">
@@ -21,7 +21,7 @@ function NoteGroupNav({ children, noteGroups, deleteNoteGroup }) {
                         <button
                           className="button is-text is-small"
                           style={{ marginRight: 11 }}
-                          onClick={() => deleteNoteGroup(noteGroup.id)}
+                          onClick={() => deleteGroup(noteGroup.id)}
                         >
                           <span className="icon has-text-danger">
                             <i className="fas fa-trash"></i>
@@ -32,6 +32,13 @@ function NoteGroupNav({ children, noteGroups, deleteNoteGroup }) {
                 )
               })}
             </ul>
+            <Button
+              size="small"
+              color="white"
+              additionalClassName="is-fullwidth new-button"
+            >
+              New folder
+            </Button>
           </aside>
         </div>
         <div className="column is-10">
@@ -50,13 +57,21 @@ const mapStateToProps = (state, props) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return{
-    deleteNoteGroup: (id) => {
+    addGroup: () => {
+
+    },
+
+    deleteGroup: (id) => {
       dispatch({
         type: 'DELETE_NOTE_GROUP',
         payload: {
           id
         }
       })
+    },
+
+    updateGroupName: () => {
+
     }
   };
  };
