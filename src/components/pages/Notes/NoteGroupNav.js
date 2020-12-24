@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from 'react';
 import { connect } from "react-redux";
 import { values } from "lodash";
 import { NavLink, Route } from 'react-router-dom';
@@ -7,6 +7,9 @@ import Button from "../../library/Button";
 
 
 function NoteGroupNav({ children, noteGroups, addGroup, deleteGroup, updateGroupName }) {
+  const [editedGroupId, setEditedGroupId] = useState(0);
+  const [editedGroupName, setEditedGroupName] = useState('note Group');
+
   return (
     <div className="group-nav">
       <div className="columns">
@@ -18,7 +21,17 @@ function NoteGroupNav({ children, noteGroups, addGroup, deleteGroup, updateGroup
                     <li>
                       <NavLink to={`/notes/noteGroups/${noteGroup.id}`} className="note-group">
                         {noteGroup.name}
-                        <div classname="actions">
+                        <div className="actions">
+                          <Button
+                            additionalClassName="is-text edit-button"
+                            color="white"
+                            size="small"
+                            onClick={() => setEditedGroupId(noteGroup.id), () => setEditedGroupName(noteGroup.name)}
+                          >
+                            <span className="icon">
+                              <i class="fas fa-edit"></i>
+                            </span>
+                          </Button>
                           <Button
                             additionalClassName="is-text delete-button"
                             color="white"
