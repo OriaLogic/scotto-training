@@ -8,7 +8,7 @@ import Button from "../../library/Button";
 
 function NoteGroupNav({ children, noteGroups, addGroup, deleteGroup, updateGroupName }) {
   const [editedGroupId, setEditedGroupId] = useState();
-  const [editedGroupName, setEditedGroupName] = useState('note Groups');
+  const [editedGroupName, setEditedGroupName] = useState('jeanPaulBelmondo');
 
   return (
     <div className="group-nav">
@@ -24,7 +24,7 @@ function NoteGroupNav({ children, noteGroups, addGroup, deleteGroup, updateGroup
                           className="input is-primary is-small"
                           autoFocus
                           value={editedGroupName}
-                          onChange={e => setEditedGroupName({ editedGroupName: e.target.value })}
+                          onChange={e => setEditedGroupName(e.target.value)}
                         />
                       ) : (
                         <NavLink to={`/notes/noteGroups/${noteGroup.id}`} className="note-group">
