@@ -7,8 +7,8 @@ import Button from "../../library/Button";
 
 
 function NoteGroupNav({ children, noteGroups, addGroup, deleteGroup, updateGroupName }) {
-  const [editedGroupId, setEditedGroupId] = useState(0);
-  const [editedGroupName, setEditedGroupName] = useState('note Group');
+  const [editedGroupId, setEditedGroupId] = useState();
+  const [editedGroupName, setEditedGroupName] = useState('note Groups');
 
   return (
     <div className="group-nav">
@@ -18,32 +18,44 @@ function NoteGroupNav({ children, noteGroups, addGroup, deleteGroup, updateGroup
             <ul className="menu-list">
               {noteGroups.map(noteGroup => {
                 return(
-                    <li>
-                      <NavLink to={`/notes/noteGroups/${noteGroup.id}`} className="note-group">
-                        {noteGroup.name}
-                        <div className="actions">
-                          <Button
-                            additionalClassName="is-text edit-button"
-                            color="white"
-                            size="small"
-                            onClick={() => setEditedGroupId(noteGroup.id), () => setEditedGroupName(noteGroup.name)}
-                          >
-                            <span className="icon">
-                              <i class="fas fa-edit"></i>
-                            </span>
-                          </Button>
-                          <Button
-                            additionalClassName="is-text delete-button"
-                            color="white"
-                            size="small"
-                            onClick={() => deleteGroup(noteGroup.id)}
-                          >
-                            <span className="icon has-text-danger">
-                              <i className="fas fa-trash"></i>
-                            </span>
-                          </Button>
-                        </div>
-                      </NavLink>
+                    <li key={noteGroup.id}>
+                      {editedGroupId === noteGroup.id ? (
+                        <input
+                          className="input is-primary is-small"
+                          autoFocus
+                          value={editedGroupName}
+                          onChange={e => setEditedGroupName({ editedGroupName: e.target.value })}
+                        />
+                      ) : (
+                        <NavLink to={`/notes/noteGroups/${noteGroup.id}`} className="note-group">
+                          {noteGroup.name}
+                          <div className="actions">
+                            <Button
+                              additionalClassName="is-text edit-button"
+                              color="white"
+                              size="small"
+                              onClick={() => {
+                                setEditedGroupName(noteGroup.name);
+                                setEditedGroupId(noteGroup.id);}
+                              }
+                            >
+                              <span className="icon">
+                                <i class="fas fa-edit"></i>
+                              </span>
+                            </Button>
+                            <Button
+                              additionalClassName="is-text delete-button"
+                              color="white"
+                              size="small"
+                              onClick={() => deleteGroup(noteGroup.id)}
+                            >
+                              <span className="icon has-text-danger">
+                                <i className="fas fa-trash"></i>
+                              </span>
+                            </Button>
+                          </div>
+                        </NavLink>
+                      )}
                     </li>
                 )
               })}
