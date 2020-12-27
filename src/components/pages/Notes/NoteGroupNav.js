@@ -7,8 +7,18 @@ import Button from "../../library/Button";
 
 
 function NoteGroupNav({ children, noteGroups, addGroup, deleteGroup, updateGroupName }) {
-  const [editedGroupId, setEditedGroupId] = useState();
-  const [editedGroupName, setEditedGroupName] = useState('jeanPaulBelmondo');
+  const [editedGroupId, setEditedGroupId] = useState(null);
+  const [editedGroupName, setEditedGroupName] = useState(null);
+  const onInputKeyDown = e => {
+    if (e.keyCode === 13) {
+      updateGroupName,
+      setEditedGroupId(null)
+    }
+
+    if (e.keyCode === 27) {
+      setEditedGroupId(null)
+    }
+  }
 
   return (
     <div className="group-nav">
@@ -25,6 +35,7 @@ function NoteGroupNav({ children, noteGroups, addGroup, deleteGroup, updateGroup
                           autoFocus
                           value={editedGroupName}
                           onChange={e => setEditedGroupName(e.target.value)}
+                          onKeyDown={onInputKeyDown}
                         />
                       ) : (
                         <NavLink to={`/notes/noteGroups/${noteGroup.id}`} className="note-group">
@@ -104,8 +115,14 @@ const mapDispatchToProps = (dispatch, ownProps) => {
       })
     },
 
-    updateGroupName: () => {
-
+    updateGroupName: (id, name) => {
+      dispatch({
+        type: 'UPDATE_NOTE_GROUP',
+        payload: {
+          id,
+          name: editedGroupName
+        }
+      })
     }
   };
  };
