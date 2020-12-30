@@ -11,7 +11,7 @@ function NoteGroupNav({ children, noteGroups, addGroup, deleteGroup, updateGroup
   const [editedGroupName, setEditedGroupName] = useState(null);
   const onInputKeyDown = e => {
     if (e.keyCode === 13) {
-      updateGroupName,
+      updateGroupName(editedGroupName, editedGroupId);
       setEditedGroupId(null)
     }
 
@@ -115,12 +115,12 @@ const mapDispatchToProps = (dispatch, ownProps) => {
       })
     },
 
-    updateGroupName: (id, name) => {
+    updateGroupName: (name, id) => {
       dispatch({
         type: 'UPDATE_NOTE_GROUP',
         payload: {
           id,
-          name: editedGroupName
+          name
         }
       })
     }
