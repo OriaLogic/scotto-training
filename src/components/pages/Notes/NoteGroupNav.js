@@ -28,7 +28,7 @@ function NoteGroupNav({ children, noteGroups, addGroup, deleteGroup, updateGroup
             <ul className="menu-list">
               {noteGroups.map(noteGroup => {
                 return(
-                    <li key={noteGroup.id}>
+                    <li key={noteGroup.id} className="note-group">
                       {editedGroupId === noteGroup.id ? (
                         <input
                           className="input is-primary is-small"
@@ -38,7 +38,7 @@ function NoteGroupNav({ children, noteGroups, addGroup, deleteGroup, updateGroup
                           onKeyDown={onInputKeyDown}
                         />
                       ) : (
-                        <NavLink to={`/notes/noteGroups/${noteGroup.id}`} className="note-group">
+                        <NavLink to={`/notes/noteGroups/${noteGroup.id}`} >
                           {noteGroup.name}
                           <div className="actions">
                             <Button
