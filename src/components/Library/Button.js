@@ -7,7 +7,8 @@ function Button({
   onClick,
   color,
   size,
-  style
+  style,
+  isText
 }) {
 
   let className = "button "
@@ -41,6 +42,8 @@ function Button({
       break
   }
 
+  if (isText) className += ' is-text'
+
   return (
     <button
       className={`${className} ${additionalClassName}`}
@@ -56,7 +59,8 @@ function Button({
 
 Button.defaultProps = {
   color: 'default',
-  size: 'normal'
+  size: 'normal',
+  isText: false
 };
 
 export default Button;

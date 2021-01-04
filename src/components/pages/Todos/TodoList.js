@@ -1,9 +1,11 @@
 import React from "react";
 import { values } from "lodash";
-import TodoCreationForm from "./TodoCreationForm";
-import Todo from "./Todo";
 import { connect } from "react-redux";
 import moment from 'moment';
+
+import TodoCreationForm from "./TodoCreationForm";
+import Todo from "./Todo";
+import Button from "../../library/Button";
 
 class TodoList extends React.Component {
   state = {
@@ -88,15 +90,16 @@ class TodoList extends React.Component {
           <p className="card-header-title">
             {this.props.name} ({this.props.todos.filter(todo => todo.active).length})
           </p>
-          <button
-            className="button is-text is-small"
+          <Button
+            isText
+            size="small"
             style={{ marginRight: 11 }}
             onClick={this.onDelete}
           >
             <span className="icon has-text-danger">
               <i className="fas fa-trash"></i>
             </span>
-          </button>
+          </Button>
         </header>
         <div className="card-content">
           <TodoCreationForm onCreate={this.props.addTodo}/>

@@ -42,7 +42,8 @@ function NoteGroupNav({ children, noteGroups, addGroup, deleteGroup, updateGroup
                           {noteGroup.name}
                           <div className="actions">
                             <Button
-                              additionalClassName="is-text edit-button"
+                              additionalClassName="edit-button"
+                              isText
                               color="white"
                               size="small"
                               onClick={() => {
@@ -55,7 +56,8 @@ function NoteGroupNav({ children, noteGroups, addGroup, deleteGroup, updateGroup
                               </span>
                             </Button>
                             <Button
-                              additionalClassName="is-text delete-button"
+                              additionalClassName="delete-button"
+                              isText
                               color="white"
                               size="small"
                               onClick={() => deleteGroup(noteGroup.id)}
