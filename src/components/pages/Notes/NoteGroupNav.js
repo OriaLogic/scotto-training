@@ -11,7 +11,7 @@ function NoteGroupNav({ children, noteGroups, addGroup, deleteGroup, updateGroup
   const [editedGroupName, setEditedGroupName] = useState(null);
   const onInputKeyDown = e => {
     if (e.keyCode === 13) {
-      updateGroupName(editedGroupName, editedGroupId);
+      updateGroupName(editedGroupId, editedGroupName);
       setEditedGroupId(null)
     }
 
@@ -93,7 +93,8 @@ function NoteGroupNav({ children, noteGroups, addGroup, deleteGroup, updateGroup
 
 const mapStateToProps = (state, props) => {
   return {
-    noteGroups: values(state.noteGroups)
+    noteGroups: values(state.noteGroups),
+
   };
 };
 
@@ -117,7 +118,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
       })
     },
 
-    updateGroupName: (name, id) => {
+    updateGroupName: (id, name) => {
       dispatch({
         type: 'UPDATE_NOTE_GROUP',
         payload: {
