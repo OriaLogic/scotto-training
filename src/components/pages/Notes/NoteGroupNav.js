@@ -40,6 +40,7 @@ function NoteGroupNav({ children, noteGroups, addGroup, deleteGroup, updateGroup
                       ) : (
                         <NavLink to={`/notes/noteGroups/${noteGroup.id}`} >
                           {noteGroup.name}
+                          <span className="noteCount tag is-rounded">2</span>
                           <div className="actions">
                             <Button
                               additionalClassName="edit-button"
@@ -93,8 +94,7 @@ function NoteGroupNav({ children, noteGroups, addGroup, deleteGroup, updateGroup
 
 const mapStateToProps = (state, props) => {
   return {
-    noteGroups: values(state.noteGroups),
-
+    noteGroups: values(state.noteGroups)
   };
 };
 
