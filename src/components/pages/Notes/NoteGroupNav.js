@@ -20,6 +20,12 @@ function NoteGroupNav({ children, noteGroups, addGroup, deleteGroup, updateGroup
     }
   }
 
+  const onDeleteGroup = noteGroup => {
+    if (window.confirm(`Are you sure you want to delete the note group "${noteGroup.name}" ?`)) {
+      deleteGroup(noteGroup.id)
+    }
+  }
+
   return (
     <div className="group-nav">
       <div className="columns">
@@ -61,7 +67,7 @@ function NoteGroupNav({ children, noteGroups, addGroup, deleteGroup, updateGroup
                               isText
                               color="white"
                               size="small"
-                              onClick={() => deleteGroup(noteGroup.id)}
+                              onClick={() => onDeleteGroup(noteGroup)}
                             >
                               <span className="icon has-text-danger">
                                 <i className="fas fa-trash"></i>
