@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { connect } from "react-redux";
-import { values } from "lodash";
+import { values, keys } from "lodash";
 import { NavLink, Route } from 'react-router-dom';
 
 import Button from "../../library/Button";
 
 
-function NoteGroupNav({ children, noteGroups, addGroup, deleteGroup, updateGroupName }) {
+function NoteGroupNav({ children, noteGroups, addGroup, deleteGroup, updateGroupName, groupNotesCount }) {
   const [editedGroupId, setEditedGroupId] = useState(null);
   const [editedGroupName, setEditedGroupName] = useState(null);
   const onInputKeyDown = e => {
@@ -46,7 +46,7 @@ function NoteGroupNav({ children, noteGroups, addGroup, deleteGroup, updateGroup
                       ) : (
                         <NavLink to={`/notes/noteGroups/${noteGroup.id}`} >
                           {noteGroup.name}
-                          <span className="noteCount tag is-rounded">2</span>
+                          <span className="noteCount tag is-rounded">{groupNotesCount[noteGroup.id]}</span>
                           <div className="actions">
                             <Button
                               additionalClassName="edit-button"
@@ -99,8 +99,18 @@ function NoteGroupNav({ children, noteGroups, addGroup, deleteGroup, updateGroup
 }
 
 const mapStateToProps = (state, props) => {
+  const groupNotesCount = { };
+  keys(state.noteGroups).forEach((groupId) => {
+    groupNotesCount[groupId] = 0
+  })
+  console.log(groupNotesCount)
+  values(state.notes).forEach((note) => {
+    groupNotesCount[note.groupId] += 1
+  })
+  console.log(groupNotesCount)
   return {
-    noteGroups: values(state.noteGroups)
+    noteGroups: values(state.noteGroups),
+    groupNotesCount
   };
 };
 
