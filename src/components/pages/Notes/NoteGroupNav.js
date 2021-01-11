@@ -21,8 +21,10 @@ function NoteGroupNav({ children, noteGroups, addGroup, deleteGroup, updateGroup
   }
 
   const onDeleteGroup = noteGroup => {
-    if (window.confirm(`Are you sure you want to delete the note group "${noteGroup.name}" ?
+    if (groupNotesCount[noteGroup.id]>0 && window.confirm(`Are you sure you want to delete the note group "${noteGroup.name}" ?
     It contains ${groupNotesCount[noteGroup.id]} that will also be deleted`)) {
+      deleteGroup(noteGroup.id)
+    } else if(groupNotesCount[noteGroup.id]==0){
       deleteGroup(noteGroup.id)
     }
   }
