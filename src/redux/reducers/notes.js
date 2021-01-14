@@ -11,7 +11,7 @@ const initialState = {
   1: {
     id: 1,
     title: "another not so dumb note",
-    groupId: 0,
+    groupId: 1,
     content: "this too"
   }
 }
