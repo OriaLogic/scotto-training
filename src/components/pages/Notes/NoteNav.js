@@ -25,6 +25,29 @@ function NoteNav({ children, notes, addNote, groupId, updateNoteTitle, deleteNot
     }
   }
 
+  if (notes.length===0) {
+    return(
+      <div className="note-nav">
+        <div className="no-note-placeholder">
+          <section className="hero-is-primary">
+            <div className="hero-body">
+              <div className="container">
+                <h1 className="title">Bonsoir</h1>
+                <h2 className="subtitle">Sous-titre la famille</h2>
+                <Button
+                  onClick={addNote}
+                  additionalClassName="is-full-width"
+                >
+                  Add One!
+                </Button>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    )
+  }
+
   return(
     <div className="note-nav">
       <div className="columns">
@@ -78,14 +101,6 @@ function NoteNav({ children, notes, addNote, groupId, updateNoteTitle, deleteNot
                 )
               })}
             </ul>
-            <Button
-              size="small"
-              color="white"
-              additionalClassName="is-fullwidth new-button"
-              onClick={addNote}
-            >
-              New Note
-            </Button>
           </aside>
 
         </div>
