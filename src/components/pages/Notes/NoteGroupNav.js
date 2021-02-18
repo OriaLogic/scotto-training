@@ -106,11 +106,9 @@ const mapStateToProps = (state, props) => {
   keys(state.noteGroups).forEach((groupId) => {
     groupNotesCount[groupId] = 0
   })
-  console.log(groupNotesCount)
   values(state.notes).forEach((note) => {
     groupNotesCount[note.groupId] += 1
   })
-  console.log(groupNotesCount)
   return {
     noteGroups: values(state.noteGroups),
     groupNotesCount

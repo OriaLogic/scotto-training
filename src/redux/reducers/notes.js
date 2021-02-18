@@ -17,12 +17,11 @@ const initialState = {
 }
 
 const notes = (state = initialState, action) => {
-
+  console.log("ACTION", action)
   switch (action.type) {
 
     case 'ADD_NOTE':
-      id: uuidv4();
-
+      const id = uuidv4();
       return {
         ...state,
         [id]: {
@@ -32,7 +31,7 @@ const notes = (state = initialState, action) => {
         }
       }
 
-    case 'UDPATE_NOTE':
+    case 'UPDATE_NOTE':
       return {
         ...state,
         [action.payload.id]: {
