@@ -8,10 +8,10 @@
 
       >.column
         height: 100%
-        &.is-2
+        &.is-2, .is-3
           border-right: 2px solid $grey-lightest
 
-          .note-group
+          .note-group, .note
             align-items: center
             position: relative
 
@@ -32,7 +32,10 @@
           .note-group:hover .actions
             display: block
 
-          .new-button
-            position: absolute
-            bottom: 5px
-            width: 210px
+          .note:hover .actions
+            display: block
+
+        .new-button
+          position: absolute
+          bottom: 5px
+          width: 210px
