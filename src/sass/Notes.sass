@@ -8,34 +8,37 @@
 
       >.column
         height: 100%
-        &.is-2, .is-3
+        &.is-2, &.is-3
           border-right: 2px solid $grey-lightest
 
-          .note-group, .note
-            align-items: center
+          .menu
             position: relative
+            height: 100%
 
-          .noteCount
-            position: absolute
-            right: 3px
-            top: 3px
+            .note-group, .note
+              align-items: center
+              position: relative
 
-          .actions
-            position: absolute
-            right: 3px
-            top: 3px
-            display: none
+            .noteCount
+              position: absolute
+              right: 3px
+              top: 3px
 
-          .note-group:hover .noteCount
-            display: none
+            .actions
+              position: absolute
+              right: 3px
+              top: 3px
+              display: none
 
-          .note-group:hover .actions
-            display: block
+            .note-group:hover .noteCount
+              display: none
 
-          .note:hover .actions
-            display: block
+            .note-group:hover .actions
+              display: block
 
-        .new-button
-          position: absolute
-          bottom: 5px
-          width: 210px
+            .note:hover .actions
+              display: block
+
+            .new-button
+              position: absolute
+              bottom: 5px

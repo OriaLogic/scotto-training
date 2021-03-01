@@ -104,6 +104,7 @@ function NoteNav({ children, notes, addNote, groupId, updateNoteTitle, deleteNot
             <Button
               size="small"
               color="white"
+              style={{ bottom: -19 }}
               additionalClassName="is-fullwidth new-button"
               onClick={addNote}
             >
