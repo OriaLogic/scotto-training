@@ -5,7 +5,7 @@ import { values, keys } from "lodash";
 
 import Button from "../../library/Button";
 
-function NoteNav({ children, notes, addNote, groupId, updateNoteTitle, deleteNote }) {
+function NoteNav({ children, notes, addNote, groupId, updateNoteTitle, deleteNote, noteGroup }) {
   const [editedNoteId, setEditedNoteId] = useState(null);
   const [editedNoteTitle, setEditedNoteTitle] = useState(null);
   const onInputKeyDown = e => {
@@ -32,13 +32,13 @@ function NoteNav({ children, notes, addNote, groupId, updateNoteTitle, deleteNot
           <section className="hero-is-primary">
             <div className="hero-body">
               <div className="container">
-                <h1 className="title">Bonsoir</h1>
-                <h2 className="subtitle">Sous-titre la famille</h2>
+                <h1 className="title">{noteGroup.name}</h1>
+                <h2 className="subtitle">This group does not contain any notes for now</h2>
                 <Button
                   onClick={addNote}
                   additionalClassName="is-full-width"
                 >
-                  Add One!
+                  Add a note
                 </Button>
               </div>
             </div>
@@ -101,6 +101,14 @@ function NoteNav({ children, notes, addNote, groupId, updateNoteTitle, deleteNot
                 )
               })}
             </ul>
+            <Button
+              size="small"
+              color="white"
+              additionalClassName="is-fullwidth new-button"
+              onClick={addNote}
+            >
+              New Note
+            </Button>
           </aside>
 
         </div>
@@ -115,7 +123,8 @@ function NoteNav({ children, notes, addNote, groupId, updateNoteTitle, deleteNot
 const mapStateToProps = (state, ownProps) => {
 
   return {
-    notes: values(state.notes).filter(note => note.groupId === ownProps.groupId)
+    notes: values(state.notes).filter(note => note.groupId === ownProps.groupId),
+    noteGroup: state.noteGroups[ownProps.groupId]
   }
 };
 
