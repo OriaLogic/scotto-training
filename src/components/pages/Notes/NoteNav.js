@@ -66,7 +66,7 @@ function NoteNav({ children, notes, addNote, groupId, updateNoteTitle, deleteNot
                           onKeyDown={onInputKeyDown}
                         />
                       ) : (
-                        <NavLink to={`/notes/noteGroups/${note.groupId}/${note.id}`} >
+                        <NavLink to={`/notes/${note.groupId}/${note.id}`} >
                           {note.title}
                           <div className="actions">
                             <Button

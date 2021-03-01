@@ -47,7 +47,7 @@ function NoteGroupNav({ children, noteGroups, addGroup, deleteGroup, updateGroup
                           onKeyDown={onInputKeyDown}
                         />
                       ) : (
-                        <NavLink to={`/notes/noteGroups/${noteGroup.id}`} >
+                        <NavLink to={`/notes/${noteGroup.id}`} >
                           {noteGroup.name}
                           <span className="noteCount tag is-rounded">{groupNotesCount[noteGroup.id]}</span>
                           <div className="actions">
