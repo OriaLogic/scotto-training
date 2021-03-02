@@ -4,7 +4,9 @@ import { connect } from "react-redux";
 function Note({ note }) {
   return (
     <div className="note">
-      {note.content}
+      <textarea className="textarea" placeholder="e.g. Hello world">
+        {note.content}
+      </textarea>
     </div>
   )
 }
