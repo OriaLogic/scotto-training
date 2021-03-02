@@ -135,8 +135,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
       dispatch({
         type: 'ADD_NOTE',
         payload: {
-          groupId: ownProps.groupId,
-          title: "New Note"
+          groupId: ownProps.groupId
         }
       })
     },

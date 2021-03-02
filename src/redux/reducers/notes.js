@@ -17,7 +17,7 @@ const initialState = {
 }
 
 const notes = (state = initialState, action) => {
-  
+
   switch (action.type) {
 
     case 'ADD_NOTE':
@@ -27,7 +27,8 @@ const notes = (state = initialState, action) => {
         [id]: {
           id,
           title: "New note",
-          groupId: action.payload.groupId
+          content: "allez paris",
+          ...action.payload
         }
       }
 
