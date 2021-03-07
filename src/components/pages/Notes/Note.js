@@ -6,6 +6,8 @@ function Note({ note, updateNoteContent }) {
   return (
     <div className="note">
       <textarea className="textarea" placeholder="Start typing here"
+        value={note.content}
+        onChange={e => updateNoteContent(note.id, e.target.value)}
       >
       </textarea>
     </div>
