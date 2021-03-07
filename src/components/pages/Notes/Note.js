@@ -1,11 +1,12 @@
 import React from 'react';
 import { connect } from "react-redux";
 
-function Note({ note }) {
+function Note({ note, updateNoteContent }) {
+
   return (
     <div className="note">
-      <textarea className="textarea" placeholder="e.g. Hello world">
-        {note.content}
+      <textarea className="textarea" placeholder="Start typing here"
+      >
       </textarea>
     </div>
   )
@@ -17,4 +18,19 @@ const mapStateToProps = (state, ownProps) => {
   }
 }
 
-export default connect(mapStateToProps)(Note);
+const mapDispatchToProps = (dispatch, ownProps) => {
+
+    return {
+      updateNoteContent: (id, content) => {
+        dispatch({
+          type: 'UPDATE_NOTE',
+          payload: {
+            id,
+            content
+          }
+        })
+      }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Note);
