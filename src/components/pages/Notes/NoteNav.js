@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from "react-redux";
-import { NavLink, Route } from 'react-router-dom';
+import { NavLink, Route, Redirect } from 'react-router-dom';
 import { values, keys } from "lodash";
 
 import Button from "../../library/Button";
@@ -25,6 +25,9 @@ function NoteNav({ children, notes, addNote, groupId, updateNoteTitle, deleteNot
     }
   }
 
+  if (!noteGroup) {
+    return <Redirect to="/notes"/>
+  }
   if (notes.length===0) {
     return(
       <div className="note-nav">
