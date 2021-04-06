@@ -11,6 +11,7 @@ export default function Notification({onDismiss, onDeactivate, notification, onS
 
           <button className="button snooze is-white is-small">
             <Dropdown
+              align="right"
               trigger={
                 (<React.Fragment>
                   <span className="icon is-small">

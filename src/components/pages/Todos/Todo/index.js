@@ -1,7 +1,7 @@
 import React from 'react';
 import EditionForm from './EditionForm';
 import DueDate from './DueDate';
-import Dropdown, { DropdownItem, DropdownDivider } from '../library/Dropdown';
+import Dropdown, { DropdownItem, DropdownDivider } from '../../../library/Dropdown';
 
 export default class Todo extends React.Component {
 

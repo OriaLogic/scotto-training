@@ -2,7 +2,6 @@ import React from "react";
 import { values } from "lodash";
 import { connect } from "react-redux";
 import Notification from "./Notification";
-import TodoList from "../TodoList";
 import moment from 'moment';
 import posed, { PoseGroup } from 'react-pose';
 
