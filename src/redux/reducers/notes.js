@@ -45,6 +45,15 @@ const notes = (state = initialState, action) => {
       delete state[action.payload.id]
       return { ...state }
 
+    case 'DELETE_NOTE_GROUP':
+      const newState = {};
+      for (const [id, note] of Object.entries(state)) {
+        if (note.groupId !== action.payload.id) {
+          newState[id] = note
+        }
+      }
+      return newState;
+
     default:
       return state
   }
