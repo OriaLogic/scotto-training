@@ -1,0 +1,55 @@
+$topbarHeight: 60px
+$weekdayHeaderHeight: 40px
+  
+.calendar
+  height: calc(100vh - #{$contentAvailableHeight})
+  display: flex
+  flex-direction: column
+
+
+  .topbar
+    height: $topbarHeight
+    display: flex
+    flex-direction: row
+    justify-content: space-between
+    > div.calendar-nav
+      display: flex;
+      align-items: center;
+      > div:not(:last-child)
+        margin-right: 20px;
+
+  .view
+    &.month-days
+      border: 1px solid $grey-light
+      font-size: 10px
+
+      .weekdays
+        display: flex
+        flex-direction: row
+        border-bottom: 1px solid $grey-light
+        .day
+          padding: 10px
+          @extend .has-text-grey
+          height: $weekdayHeaderHeight
+          flex-grow: 1
+          flex-basis: 0
+          text-align: center
+
+      .week
+        display: flex
+        flex-direction: row
+        &:not(:last-child) 
+          border-bottom: 1px solid $grey-light
+
+        .day
+          @extend .has-text-grey
+          height: calc((100vh - #{$contentAvailableHeight} - #{$weekdayHeaderHeight} - #{$topbarHeight}) / 5)
+          flex-grow: 1
+          flex-basis: 0
+          text-align: center
+
+          &:not(:last-child) 
+            border-right: 1px solid $grey-light
+          
+          
+
