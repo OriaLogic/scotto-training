@@ -1,11 +1,11 @@
 import React from "react";
 
+import Topbar from "./Topbar";
+
 export default function Calendar () {
   return(
     <div className="calendar-container">
-      <div className="header">
-        MAY
-      </div>
+      <Topbar />
       <div className="days">
         <div>Monday</div>
         <div>Tuesday</div>
