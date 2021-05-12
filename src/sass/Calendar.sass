@@ -1,12 +1,29 @@
-.main-container
-  height: 100%
+$topbarHeight: 6vh
+$weekdayHeaderHeight: 4vh
 
-  .calendar-container
-    height: 200
-    margin-right: 10px
-    margin-left: 10px
+.calendar-container
+  height: 100%
+  margin-right: 10px
+  margin-left: 10px
+  display: flex
+  flex-direction: column
+  justify-content: flex-start
+  align-items: stretch
+  border: 1px solid $green
+  background-color: $green
+
+  .header
+    background-color: $blue
+    text-align: center
+    border: 1px solid $blue
+    height: $topbarHeight
+
+  .days
+    background-color: $red
     display: flex
     flex-direction: row
-    justify-content: space-between
-    align-items: stretch
-    border: 1px solid $blue
+    justify-content: space-around
+    height: $weekdayHeaderHeight
+
+  .cells
+    background-color: $yellow

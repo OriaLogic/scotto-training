@@ -6,18 +6,19 @@ $family-sans-serif: "Nunito", sans-serif
 
 // Import the rest of Bulma
 @import "../../node_modules/bulma/bulma.sass"
+@import "./variables.sass"
 
 html
-  height: 100%
+  height: $contentAvailableHeight
   body
-    height: 100%
+    height: $contentAvailableHeight
     #root
-      height: 100%
+      height: $contentAvailableHeight
       .App
-        height: 100%
+        height: $contentAvailableHeight
         .app-container
           height: calc(100% - 56px)
-          margin-top: 12px
+          margin-top: $appContainerMarginTop
 
 .main-title
   @extend .title.is-2
@@ -27,7 +28,7 @@ html
   margin-bottom: 30px
 
 .app-container
-  padding: 10px
+  padding: $appContainerPadding
 
 .all-todoLists-container
   display: flex
