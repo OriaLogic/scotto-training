@@ -1,14 +1,8 @@
-$topbarHeight: 6vh
-$weekdayHeaderHeight: 4vh
+$topbarHeight: 60px
+$weekdayHeaderHeight: 40px
 
-.calendar-container
+.calendar
   height: 100%
-  margin-right: 10px
-  margin-left: 10px
-  display: flex
-  flex-direction: column
-  justify-content: flex-start
-  align-items: stretch
   border: 1px solid $green
   background-color: $green
 
@@ -18,12 +12,26 @@ $weekdayHeaderHeight: 4vh
     border: 1px solid $blue
     height: $topbarHeight
 
-  .days
-    background-color: $red
-    display: flex
-    flex-direction: row
-    justify-content: space-around
-    height: $weekdayHeaderHeight
+  .view
+    &.month-days
+      height: calc(100% - #{$topbarHeight})
+      .weekdays
+        background-color: $red
+        display: flex
+        flex-direction: row
+        justify-content: space-around
+        height: $weekdayHeaderHeight
 
-  .cells
-    background-color: $yellow
+        .day
+          color: $white
+
+      .week
+        height: calc((100% - #{$weekdayHeaderHeight}) / 5 )
+        background-color: $yellow
+        display: flex
+        flex-direction: row
+        justify-content: space-around
+
+        .day
+          flex-grow: 1
+          text-align: center
