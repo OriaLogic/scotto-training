@@ -11,7 +11,7 @@ export default function Calendar () {
   const firstSunday = moment().endOf('month').endOf('isoWeek');
   console.log(firstSunday)
 
-  const dataStructure = [
+  const weeksDataStructure = [
     [0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0],
@@ -19,7 +19,13 @@ export default function Calendar () {
     [0, 0, 0, 0, 0, 0, 0]
   ]
 
-  console.log(dataStructure)
+  const weeks = weeksDataStructure.map((week, weekIndex) => {
+    return week.map((day, dayIndex) => {
+      return firstMonday.clone().add(weekIndex*7 + dayIndex, 'days')
+    })
+  })
+
+  console.log(weeks)
 
   return(
     <div className="calendar">
@@ -34,12 +40,12 @@ export default function Calendar () {
           <div className="day">Saturday</div>
           <div className="day">Sunday</div>
         </div>
-        {dataStructure.map((weeks) => {
+        {weeks.map((week) => {
           return (
             <div className="week">
-              {weeks.map((days) => {
+              {week.map((day) => {
                 return (
-                  <div className="day">{firstMonday.format("DD")}</div>
+                  <div className="day">{day.format("DD")}</div>
                 )
               })}
             </div>
