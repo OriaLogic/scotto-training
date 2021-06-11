@@ -9,9 +9,11 @@ $weekdayHeaderHeight: 40px
   .header
     background-color: $blue
     color: $white
-    text-align: center
     border: 1px solid $blue
     height: $topbarHeight
+    display: flex
+    align-items: center
+    justify-content: center
 
   .view
     &.month-days
@@ -33,6 +35,7 @@ $weekdayHeaderHeight: 40px
         display: flex
         flex-direction: row
         justify-content: space-around
+        align-items: center
 
         .day
           flex-grow: 1
