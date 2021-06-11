@@ -2,7 +2,6 @@ import React from "react";
 import moment from 'moment';
 
 import Topbar from "./Topbar";
-import Days from "./Days";
 
 export default function Calendar () {
   const firstMonday = moment().startOf('month').startOf('isoWeek');
@@ -11,7 +10,7 @@ export default function Calendar () {
   const firstSunday = moment().endOf('month').endOf('isoWeek');
   console.log(firstSunday)
 
-  const dataStructure = [
+  const weeksDataStructure = [
     [0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0],
@@ -19,7 +18,13 @@ export default function Calendar () {
     [0, 0, 0, 0, 0, 0, 0]
   ]
 
-  console.log(dataStructure)
+  const weeks = weeksDataStructure.map((week, weekIndex) => {
+    return week.map((day, dayIndex) => {
+      return firstMonday.clone().add(weekIndex*7 + dayIndex, 'days')
+    })
+  })
+
+  console.log(weeks)
 
   return(
     <div className="calendar">
@@ -34,12 +39,12 @@ export default function Calendar () {
           <div className="day">Saturday</div>
           <div className="day">Sunday</div>
         </div>
-        {dataStructure.map((weeks) => {
+        {weeks.map((week, weekIndex) => {
           return (
-            <div className="week">
-              {weeks.map((days) => {
+            <div className="week" key={weekIndex}>
+              {week.map((day, dayIndex) => {
                 return (
-                  <div className="day">{firstMonday.format("DD")}</div>
+                  <div className="day" key={dayIndex}>{day.format("DD")}</div>
                 )
               })}
             </div>
