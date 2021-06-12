@@ -32,13 +32,13 @@ export default function Calendar () {
       <Topbar />
       <div className="view month-days">
         <div className="weekdays">
-          <div className="day">Monday</div>
-          <div className="day">Tuesday</div>
-          <div className="day">Wednesday</div>
-          <div className="day">Thursday</div>
-          <div className="day">Friday</div>
-          <div className="day">Saturday</div>
-          <div className="day">Sunday</div>
+          <div className="day">MON</div>
+          <div className="day">TUE</div>
+          <div className="day">WED</div>
+          <div className="day">THU</div>
+          <div className="day">FRI</div>
+          <div className="day">SAT</div>
+          <div className="day">SUN</div>
         </div>
         {weeks.map((week, weekIndex) => {
           return (
