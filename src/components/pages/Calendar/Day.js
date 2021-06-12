@@ -1,10 +1,10 @@
 import React from "react";
 import moment from 'moment';
 
-export default function Days ({day}) {
+export default function Day ({day}) {
   return (
     <div className="day">
-      {day.date()}
+      {day.format("DD")}
     </div>
   )
 }

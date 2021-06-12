@@ -2,6 +2,7 @@ import React from "react";
 import moment from 'moment';
 
 import Topbar from "./Topbar";
+import Day from "./Day";
 
 export default function Calendar () {
   const firstMonday = moment().startOf('month').startOf('isoWeek');
@@ -44,7 +45,10 @@ export default function Calendar () {
             <div className="week" key={weekIndex}>
               {week.map((day, dayIndex) => {
                 return (
-                  <div className="day" key={dayIndex}>{day.format("DD")}</div>
+                  <Day
+                    day={day}
+                    key={dayIndex}
+                  />
                 )
               })}
             </div>
