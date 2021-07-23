@@ -1,12 +1,36 @@
 import React from 'react';
 import moment from 'moment';
 
-export default function Topbar ({ }) {
-  const month = moment().format('MMMM');
+import Button from "../../library/Button";
 
+export default function Topbar ({ displayedMonth, setDisplayedMonth }) {
   return (
     <div className="header">
-      {month}
+      <div className="calendar-nav left-actions">
+      </div>
+      <div className="calendar-nav center-actions">
+        <Button
+          type="submit"
+          size="small"
+          onClick={() => setDisplayedMonth(displayedMonth)}
+        >
+        <span className="icon">
+          <i className="fas fa-angle-left"></i>
+        </span>
+        </Button>
+        <Button
+          type="submit"
+          size="small"
+          onClick={() => setDisplayedMonth(displayedMonth)}
+        >
+        <span className="icon">
+          <i className="fas fa-angle-right"></i>
+        </span>
+        </Button>
+        {displayedMonth}
+      </div>
+      <div className="calendar-nav right-actions">
+      </div>
     </div>
   )
 }
