@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import moment from 'moment';
 
 import Topbar from "./Topbar";
 import Day from "./Day";
 
 export default function Calendar () {
+  const [displayedMonth, setDisplayedMonth] = useState(moment().format('MMMM'));
+  console.log(displayedMonth)
+
   const firstMonday = moment().startOf('month').startOf('isoWeek');
   console.log(firstMonday)
 
@@ -29,7 +32,10 @@ export default function Calendar () {
 
   return(
     <div className="calendar">
-      <Topbar />
+      <Topbar
+        displayedMonth={displayedMonth}
+        setDisplayedMonth={setDisplayedMonth}
+      />
       <div className="view month-days">
         <div className="weekdays">
           <div className="day">MON</div>
