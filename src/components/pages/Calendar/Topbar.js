@@ -4,6 +4,14 @@ import moment from 'moment';
 import Button from "../../library/Button";
 
 export default function Topbar ({ displayedMonth, setDisplayedMonth }) {
+  const prevMonth = moment().subtract(1, 'month').format('MMMM');
+  console.log(prevMonth)
+
+  console.log(displayedMonth)
+
+  const nextMonth = moment().add(1, 'month').format('MMMM');
+  console.log(nextMonth)
+
   return (
     <div className="header">
       <div className="calendar-nav left-actions">
@@ -12,7 +20,7 @@ export default function Topbar ({ displayedMonth, setDisplayedMonth }) {
         <Button
           type="submit"
           size="small"
-          onClick={() => setDisplayedMonth(displayedMonth)}
+          onClick={() => setDisplayedMonth(prevMonth)}
         >
         <span className="icon">
           <i className="fas fa-angle-left"></i>
@@ -21,7 +29,7 @@ export default function Topbar ({ displayedMonth, setDisplayedMonth }) {
         <Button
           type="submit"
           size="small"
-          onClick={() => setDisplayedMonth(displayedMonth)}
+          onClick={() => setDisplayedMonth(nextMonth)}
         >
         <span className="icon">
           <i className="fas fa-angle-right"></i>
