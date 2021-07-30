@@ -10,11 +10,9 @@ class Header extends React.Component {
     return(
       <nav className="navbar is-primary" role="navigation" aria-label="main navigation">
         <div className="navbar-brand">
-          <a>
             <NavLink className="navbar-item" to="/" activeClassName="is-active">
               <img src="/app-logo.png" height="28"/>
             </NavLink>
-          </a>
 
           <a role="button" className="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
             <span aria-hidden="true"></span>
@@ -29,6 +27,8 @@ class Header extends React.Component {
               <NavLink to="/Todos" className="navbar-item" activeClassName="is-active">Todos</NavLink>
 
               <NavLink to="/Notes" className="navbar-item" activeClassName="is-active">Notes</NavLink>
+
+              <NavLink to="/Calendar" className="navbar-item" activeClassName="is-active">Calendar</NavLink>
 
           </div>
 

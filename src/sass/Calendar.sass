@@ -1,0 +1,42 @@
+$topbarHeight: 60px
+$weekdayHeaderHeight: 40px
+$calendarHeight: $contentAvailableHeight
+$rowHeight: calc((100% - #{$weekdayHeaderHeight}) / 5 )
+
+.calendar
+  height: 100%
+  border: 1px solid $grey
+
+  .header
+    color: $black
+    border-bottom: 0.5px solid $grey
+    height: $topbarHeight
+    display: flex
+    align-items: center
+    justify-content: center
+    background-color: $primary
+
+  .view
+    &.month-days
+      height: calc(100% - #{$topbarHeight})
+      .weekdays
+        display: flex
+        border-bottom: 0.5px solid $grey
+        flex-direction: row
+        justify-content: space-around
+        height: $weekdayHeaderHeight
+        align-items: center
+        background-color: lighten($primary, 50%)
+
+        .day
+          color: $black
+
+      .week
+        height: $rowHeight
+        display: flex
+        flex-direction: row
+        border-bottom: 0.5px solid $grey
+
+        .day
+          flex-grow: 1
+          text-align: center
